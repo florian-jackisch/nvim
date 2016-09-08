@@ -115,7 +115,7 @@ if executable('ag')
 endif
 
 " YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:acp_enableAtStartup = 1
 " enable completion from tags
