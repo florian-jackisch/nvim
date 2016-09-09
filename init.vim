@@ -46,6 +46,13 @@ imap <C-v> <C-r><C-o>+
 " Quickly open/reload vim
 nnoremap <leader>ve :edit $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
+" Enable folding with space
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+" Mark unnecessary whitespace 
+highlight BadWhitespace ctermbg=red guibg=darkred
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " Plugins
 " =======
@@ -175,18 +182,30 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 " Treat geany files like go files
 au BufNewFile,BufRead *.geany set filetype=go
 
-" Color scheme
-Plug 'fatih/molokai'
+" Python
+" PEP 8 indentation
+Plug 'vim-scripts/indentpython.vim'
+" PEP 8 checking
+Plug 'nvie/vim-flake8'
+" Pretty python
+let python_highlight_all=1
 
+" Syntax highlighting
 "Plug 'scrooloose/syntastic'
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
+
+" Color scheme
+Plug 'fatih/molokai'
+
+" Improved folding
+Plug 'tmhedberg/SimpylFold'
+let g:SimpylFold_docstring_preview=1
 
 call plug#end()
 
