@@ -50,7 +50,7 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 set foldmethod=indent
 set foldlevel=99
 nnoremap <space> za
-" Mark unnecessary whitespace 
+" Mark unnecessary whitespace
 highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
@@ -191,14 +191,9 @@ Plug 'nvie/vim-flake8'
 let python_highlight_all=1
 
 " Syntax highlighting
-"Plug 'scrooloose/syntastic'
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+Plug 'neomake/neomake'
+" run Neomake on the current file on every write:
+autocmd! BufWritePost * Neomake
 
 " Color scheme
 Plug 'fatih/molokai'
