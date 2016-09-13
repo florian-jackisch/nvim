@@ -19,6 +19,7 @@ map <C-H> <C-W>h<C-W>_
 map <Tab><Tab> <C-W>w
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+set splitright " open new vsplit right
 " Terminal emulation mappings
 tnoremap <Esc> <C-\><C-n>
 tnoremap <A-h> <C-\><C-n><C-w>h
