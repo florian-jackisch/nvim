@@ -135,7 +135,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-au FileType c,cpp,objc nmap gd :YcmCompleter GoTo<CR>
+au FileType c,cpp,objc,python nmap gd :YcmCompleter GoTo<CR>
 
 " YCM Generator
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
