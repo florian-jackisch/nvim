@@ -200,6 +200,7 @@ Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
 " Pretty python
 let python_highlight_all=1
+au FileType python setlocal formatprg=autopep8\ -
 
 " Syntax highlighting
 Plug 'neomake/neomake'
