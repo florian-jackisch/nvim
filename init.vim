@@ -204,7 +204,7 @@ Plug 'neomake/neomake'
 autocmd! BufWritePost * Neomake
 
 " Color scheme
-Plug 'fatih/molokai'
+Plug 'morhetz/gruvbox'
 
 " Improved folding
 Plug 'tmhedberg/SimpylFold'
@@ -212,6 +212,11 @@ let g:SimpylFold_docstring_preview=1
 
 call plug#end()
 
+" True color
+set termguicolors
 set background=dark
-colorscheme molokai
-
+map <Leader>bg :let &background = (&background == "dark"? "light" : "dark")<CR>
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_light = 'hard'
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
