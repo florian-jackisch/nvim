@@ -8,6 +8,7 @@ let mapleader = ','
 " Edit settings
 " -------------
 set relativenumber
+set number
 set nowrap
 " Tabs shall be 4 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
