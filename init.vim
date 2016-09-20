@@ -61,6 +61,8 @@ if exists('+colorcolumn')
 else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
+" Disable search highlight after search with <CR>
+nnoremap <CR> :noh<CR><CR>
 
 " Plugins
 " =======
