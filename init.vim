@@ -114,6 +114,7 @@ nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
+Plug 'airblade/vim-gitgutter'
 
 " Ack
 Plug 'mileszs/ack.vim'
