@@ -202,6 +202,10 @@ Plug 'nvie/vim-flake8'
 let python_highlight_all=1
 au FileType python setlocal formatprg=autopep8\ -
 
+" XML
+Plug 'alvan/vim-closetag'
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
+
 " Syntax highlighting
 Plug 'neomake/neomake'
 " run Neomake on the current file on every write:
