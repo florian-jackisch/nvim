@@ -193,6 +193,12 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 " Treat geany files like go files
 au BufNewFile,BufRead *.geany set filetype=go
 
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+set hidden
+let g:rustfmt_autosave = 1
+
 " Python
 " PEP 8 indentation
 Plug 'vim-scripts/indentpython.vim'
