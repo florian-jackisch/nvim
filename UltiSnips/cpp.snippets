@@ -1,0 +1,21 @@
+snippet benchmark "Google benchmark"
+static void BM_${1:BenchmarkName}(benchmark::State& state) {
+  while (state.KeepRunning()) {
+    $2
+  }
+}
+BENCHMARK(BM_$1);
+endsnippet
+
+snippet template "template definition"
+template<typename ${1:T}>
+$2
+endsnippet
+
+snippet namespace "new namespace"
+namespace ${1:name}{
+
+$2
+
+} // namespace $1
+endsnippet

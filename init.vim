@@ -143,15 +143,16 @@ au FileType c,cpp,objc,python nmap gd :YcmCompleter GoTo<CR>
 
 " YCM Generator
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+let g:ycm_python_binary_path = 'python3'
 
 " Snippet engine
 Plug 'SirVer/ultisnips'
-" Snippets
-Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
+" Snippets
+Plug 'honza/vim-snippets'
 
 " ClangFormat
 Plug 'rhysd/vim-clang-format'
@@ -200,14 +201,8 @@ Plug 'racer-rust/vim-racer'
 set hidden
 let g:rustfmt_autosave = 1
 
-" Python
-" PEP 8 indentation
-Plug 'vim-scripts/indentpython.vim'
-" PEP 8 checking
-Plug 'nvie/vim-flake8'
-" Pretty python
-let python_highlight_all=1
-au FileType python setlocal formatprg=autopep8\ -
+" Markdown
+Plug 'euclio/vim-markdown-composer'
 
 " XML
 Plug 'alvan/vim-closetag'

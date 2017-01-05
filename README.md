@@ -44,3 +44,8 @@ Edit your .bashrc to contain the following lines:
     cd ~/.config/nvim/plugged/YouCompleteMe
     # Select your completers
     ./install.py --clang-completer --omnisharp-completer --gocode-completer --tern-completer --racer-completer
+
+## Compile vim-mardown-preview
+
+    cd ~/.config/nvim/plugged/vim-mardown-composer
+    cargo build --release
