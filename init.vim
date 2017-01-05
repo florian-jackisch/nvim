@@ -104,8 +104,8 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 
 " Create closing braces
-Plug 'spf13/vim-autoclose' 
-let g:autoclose_vim_commentmode = 1 
+Plug 'spf13/vim-autoclose'
+let g:autoclose_vim_commentmode = 1
 
 " Git plugin
 Plug 'tpope/vim-fugitive'
