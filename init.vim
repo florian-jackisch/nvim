@@ -154,12 +154,10 @@ let g:UltiSnipsEditSplit="vertical"
 " Snippets
 Plug 'honza/vim-snippets'
 
-" ClangFormat
-Plug 'rhysd/vim-clang-format'
-" map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-autocmd FileType c,cpp,objc ClangFormatAutoEnable
+" vim-autoformat
+Plug 'Chiel92/vim-autoformat'
+noremap <c-i> :Autoformat<CR>
+au BufWrite *.py :Autoformat
 
 " Tagbar
 Plug 'majutsushi/tagbar'
