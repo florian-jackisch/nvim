@@ -157,7 +157,7 @@ Plug 'honza/vim-snippets'
 " vim-autoformat
 Plug 'Chiel92/vim-autoformat'
 noremap <c-i> :Autoformat<CR>
-au BufWrite *.py :Autoformat
+au BufWrite *.py,*.cpp,*.h,*.c,*.inl :Autoformat
 
 " Tagbar
 Plug 'majutsushi/tagbar'
