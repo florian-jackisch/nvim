@@ -63,6 +63,8 @@ else
 endif
 " Disable search highlight after search with <CR>
 nnoremap <CR> :noh<CR><CR>
+" Incremental search and replace
+set inccommand=nosplit
 
 " Plugins
 " =======
