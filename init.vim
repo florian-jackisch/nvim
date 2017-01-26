@@ -232,6 +232,10 @@ Plug 'neomake/neomake'
 " run Neomake on the current file on every write:
 autocmd! BufWritePost * Neomake
 
+" Rainbow paranthesis
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
+
 " Color scheme
 Plug 'cryptomilk/gruvbox'
 
