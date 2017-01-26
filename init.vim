@@ -216,7 +216,7 @@ Plug 'neomake/neomake'
 autocmd! BufWritePost * Neomake
 
 " Color scheme
-Plug 'morhetz/gruvbox'
+Plug 'cryptomilk/gruvbox'
 
 " Improved folding
 Plug 'tmhedberg/SimpylFold'
