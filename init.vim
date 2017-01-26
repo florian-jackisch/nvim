@@ -200,7 +200,7 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 au BufNewFile,BufRead *.geany set filetype=go
 
 " Rust
-Plug 'just-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 au FileType rust nmap <leader>r :RustRun<CR>
 set hidden
