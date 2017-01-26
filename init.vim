@@ -63,6 +63,8 @@ else
 endif
 " Disable search highlight after search with <CR>
 nnoremap <CR> :noh<CR><CR>
+" Incremental search and replace
+set inccommand=nosplit
 
 " Plugins
 " =======
@@ -86,6 +88,9 @@ let g:nerdtree_tabs_open_on_gui_startup=0
 
 " CtrlP
 Plug 'ctrlpvim/ctrlp.vim'
+" Search in directory, buffer, and most recently used
+let g:ctrlp_cmd = 'CtrlPMixed'
+" Search only in buffers
 nnoremap <C-b> :CtrlPBuffer<CR>
 
 " vim-airline
@@ -153,12 +158,12 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
 
-" ClangFormat
-Plug 'rhysd/vim-clang-format'
-" map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-autocmd FileType c,cpp,objc ClangFormatAutoEnable
+" vim-autoformat
+Plug 'sbdchd/neoformat'
+noremap <c-i> :Neoformat<CR>
+au BufWrite *.py,*.cpp,*.h,*.c,*.inl :Neoformat
+" Enable trimmming of trailing whitespace when a filetype is not found
+let g:neoformat_basic_format_trim = 1
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -220,7 +225,7 @@ Plug 'neomake/neomake'
 autocmd! BufWritePost * Neomake
 
 " Color scheme
-Plug 'morhetz/gruvbox'
+Plug 'cryptomilk/gruvbox'
 
 " Improved folding
 Plug 'tmhedberg/SimpylFold'
