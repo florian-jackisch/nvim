@@ -39,11 +39,13 @@ Edit your .bashrc to contain the following lines:
     export CARGO_HOME="$HOME/.cargo"
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
-## Compile YouCompleteMe
+## Setup clang completion for deoplete
 
-    cd ~/.config/nvim/plugged/YouCompleteMe
-    # Select your completers
-    ./install.py --clang-completer --omnisharp-completer --gocode-completer --tern-completer --racer-completer
+Edit your .bashrc to contain the following lines:
+
+    # Neovim C++ autocompletion
+    export LIBCLANG_PATH="/usr/local/Cellar/llvm/3.9.1/lib/libclang.dylib"
+    export CLANG_INCLUDE_PATH="/usr/local/Cellar/llvm/3.9.1/include/clang"
 
 ## Compile vim-mardown-preview
 

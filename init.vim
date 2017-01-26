@@ -131,23 +131,31 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-" YouCompleteMe
-Plug 'Valloric/YouCompleteMe'
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:acp_enableAtStartup = 1
-" enable completion from tags
-let g:ycm_collect_identifiers_from_tags_files = 1
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-au FileType c,cpp,objc,python nmap gd :YcmCompleter GoTo<CR>
+" Deoplete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
+" Let <Tab> also do completion
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ deoplete#mappings#manual_complete()
+inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+" Close the documentation window when completion is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" YCM Generator
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+" Deoplete for C++
+Plug 'zchee/deoplete-clang'
+" Deoplete-clang supports compiler-flags local to individual projects. It will
+" search the current working directory for a .clang file; if no such file is
+" found it will try searching the parent directory. The format of the .clang
+" file is either
+"     flags = <flags>
+" or
+"     compilation_database = <path to compilation_database>
+let g:deoplete#sources#clang#flags = [
+            \ "-std=c++14"
+            \ ]
+let g:deoplete#sources#clang#libclang_path = $LIBCLANG_PATH
+let g:deoplete#sources#clang#clang_header = $CLANG_INCLUDE_PATH
 
 " Snippet engine
 Plug 'SirVer/ultisnips'
