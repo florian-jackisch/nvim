@@ -88,6 +88,9 @@ let g:nerdtree_tabs_open_on_gui_startup=0
 
 " CtrlP
 Plug 'ctrlpvim/ctrlp.vim'
+" Search in directory, buffer, and most recently used
+let g:ctrlp_cmd = 'CtrlPMixed'
+" Search only in buffers
 nnoremap <C-b> :CtrlPBuffer<CR>
 
 " vim-airline
