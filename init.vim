@@ -143,21 +143,22 @@ au FileType c,cpp,objc,python nmap gd :YcmCompleter GoTo<CR>
 
 " YCM Generator
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-let g:ycm_python_binary_path = 'python3'
 
 " Snippet engine
 Plug 'SirVer/ultisnips'
+" Snippets
+Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
-" Snippets
-Plug 'honza/vim-snippets'
 
-" vim-autoformat
-Plug 'Chiel92/vim-autoformat'
-noremap <c-i> :Autoformat<CR>
-au BufWrite *.py,*.cpp,*.h,*.c,*.inl :Autoformat
+" ClangFormat
+Plug 'rhysd/vim-clang-format'
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -194,13 +195,20 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 au BufNewFile,BufRead *.geany set filetype=go
 
 " Rust
-Plug 'rust-lang/rust.vim'
+Plug 'just-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
+au FileType rust nmap <leader>r :RustRun<CR>
 set hidden
 let g:rustfmt_autosave = 1
 
-" Markdown
-Plug 'euclio/vim-markdown-composer'
+" Python
+" PEP 8 indentation
+Plug 'vim-scripts/indentpython.vim'
+" PEP 8 checking
+Plug 'nvie/vim-flake8'
+" Pretty python
+let python_highlight_all=1
+au FileType python setlocal formatprg=autopep8\ -
 
 " XML
 Plug 'alvan/vim-closetag'
