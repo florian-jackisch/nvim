@@ -13,11 +13,10 @@ set nowrap
 " Tabs shall be 4 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Easier moving in tabs and windows
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
-map <C-L> <C-W>l<C-W>_
-map <C-H> <C-W>h<C-W>_
-map <Tab><Tab> <C-W>w
+nnoremap <c-j> <C-w>j
+nnoremap <c-k> <C-w>k
+nnoremap <c-h> <C-w>h
+nnoremap <c-l> <C-w>l
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 set splitright " open new vsplit right
@@ -176,10 +175,6 @@ au BufWrite *.py,*.cpp,*.h,*.c,*.inl :Neoformat
 " Enable trimmming of trailing whitespace when a filetype is not found
 let g:neoformat_basic_format_trim = 1
 
-" Tagbar
-Plug 'majutsushi/tagbar'
-nnoremap <silent> <leader>tt :TagbarToggle<CR>
-
 " Exchange with cx
 Plug 'tommcdo/vim-exchange'
 
@@ -228,6 +223,15 @@ let g:neomake_cpp_enable_makers = ['clang']
 let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined","-g"]
 " run Neomake on the current file on every write:
 autocmd! BufWritePost * Neomake
+
+" Automatic tag creation
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+let g:easytags_async = 1
+
+" Tagbar
+Plug 'majutsushi/tagbar'
+nnoremap <silent> <leader>t :TagbarOpenAutoClose<CR>
 
 " Stop complaining that swap files can be deleted
 Plug 'gioele/vim-autoswap'

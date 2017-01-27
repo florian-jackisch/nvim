@@ -12,6 +12,9 @@
 
     curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+## Install the python dependencies
+    pip3 install neovim
+
 ## Start nvim and install plugins
 
     nvim
@@ -24,7 +27,7 @@
 Then follow the onscreen instructions (c.f. [rustup Readme](https://github.com/rust-lang-nursery/rustup.rs)).
 
 Install racer:
-    
+
     cargo install racer
 
 Install the source code for racer:
