@@ -180,15 +180,6 @@ nnoremap <silent> <leader>tt :TagbarToggle<CR>
 " Exchange with cx
 Plug 'tommcdo/vim-exchange'
 
-" Handy Pairs
-Plug 'tpope/vim-unimpaired'
-nmap < [
-nmap > ]
-omap < [
-omap > ]
-xmap < [
-xmap > ]
-
 " Repeat for plugins
 Plug 'tpope/vim-repeat'
 
