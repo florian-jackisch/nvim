@@ -157,6 +157,9 @@ let g:deoplete#sources#clang#flags = [
 let g:deoplete#sources#clang#libclang_path = $LIBCLANG_PATH
 let g:deoplete#sources#clang#clang_header = $CLANG_INCLUDE_PATH
 
+" Deoplete for include files
+Plug 'Shougo/neoinclude.vim'
+
 " Snippet engine
 Plug 'SirVer/ultisnips'
 " Snippets
