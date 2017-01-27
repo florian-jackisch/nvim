@@ -13,23 +13,13 @@ set nowrap
 " Tabs shall be 4 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Easier moving in tabs and windows
-nnoremap <c-j> <C-w>j
-nnoremap <c-k> <C-w>k
-nnoremap <c-h> <C-w>h
-nnoremap <c-l> <C-w>l
+nnoremap <a-j> <C-w>j
+nnoremap <a-k> <C-w>k
+nnoremap <a-h> <C-w>h
+nnoremap <a-l> <C-w>l
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 set splitright " open new vsplit right
-" Terminal emulation mappings
-tnoremap <Esc> <C-\><C-n>
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
@@ -246,6 +236,11 @@ Plug 'cryptomilk/gruvbox'
 " Improved folding
 Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1
+
+" Open neovim terminal with :Term (horizontal split) or :VTerm
+" <Esc> - Switch to normal mode (instead of <C-\><C-n>)
+" Alt+hjkl, Ctrl+arrows to navigate through windows
+Plug 'vimlab/split-term.vim'
 
 call plug#end()
 
