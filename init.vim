@@ -229,6 +229,9 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
 
 " Syntax highlighting
 Plug 'neomake/neomake'
+" let g:neomake_cpp_enable_markers=['clang']
+let g:neomake_cpp_enable_makers = ['clang']
+let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined","-g"]
 " run Neomake on the current file on every write:
 autocmd! BufWritePost * Neomake
 
