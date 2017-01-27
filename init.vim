@@ -232,6 +232,9 @@ Plug 'neomake/neomake'
 " run Neomake on the current file on every write:
 autocmd! BufWritePost * Neomake
 
+" Stop complaining that swap files can be deleted
+Plug 'gioele/vim-autoswap'
+
 " Rainbow paranthesis
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
