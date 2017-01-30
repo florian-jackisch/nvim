@@ -217,9 +217,9 @@ nnoremap <leader>m :Neomake!<CR>
 Plug 'c0r73x/neotags.nvim'
 let g:neotags_enabled = 1
 
-" Tagbar
-Plug 'majutsushi/tagbar'
-nnoremap <silent> <leader>t :TagbarOpenAutoClose<CR>
+"" Tagbar
+"Plug 'majutsushi/tagbar'
+"nnoremap <silent> <leader>t :TagbarOpenAutoClose<CR>
 
 " Stop complaining that swap files can be deleted
 Plug 'gioele/vim-autoswap'
