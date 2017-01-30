@@ -240,6 +240,14 @@ let g:SimpylFold_docstring_preview=1
 " Alt+hjkl, Ctrl+arrows to navigate through windows
 Plug 'vimlab/split-term.vim'
 
+" Markdown
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+  endif
+endfunction
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+
 call plug#end()
 
 " True color
