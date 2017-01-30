@@ -214,9 +214,8 @@ autocmd! BufWritePost * Neomake
 nnoremap <leader>m :Neomake!<CR>
 
 " Automatic tag creation
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
-let g:easytags_async = 1
+Plug 'c0r73x/neotags.nvim'
+let g:neotags_enabled = 1
 
 " Tagbar
 Plug 'majutsushi/tagbar'
