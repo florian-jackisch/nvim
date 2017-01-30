@@ -248,6 +248,10 @@ function! BuildComposer(info)
 endfunction
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
+" Tabular
+" Call `Tabularize /<search expression>` to align at the search expression
+Plug 'godlygeek/tabular'
+
 call plug#end()
 
 " True color
