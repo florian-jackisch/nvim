@@ -54,6 +54,7 @@ endif
 nnoremap <CR> :noh<CR><CR>
 " Incremental search and replace
 set inccommand=nosplit
+set cursorline
 
 " Plugins
 " =======
@@ -251,6 +252,17 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 " Tabular
 " Call `Tabularize /<search expression>` to align at the search expression
 Plug 'godlygeek/tabular'
+
+" Handy combinations with `[` and `]`
+" b - buffer
+" q - quickfix
+" f - file in directory
+" y - en/decode C strings
+" ob - background
+" oi - ignorecase
+" os - spell
+" ow - wrap
+Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 
