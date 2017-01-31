@@ -157,7 +157,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 " vim-autoformat
 Plug 'sbdchd/neoformat'
-noremap <c-i> :Neoformat<CR>
 au BufWrite *.py,*.cpp,*.h,*.c,*.inl :Neoformat
 " Enable trimmming of trailing whitespace when a filetype is not found
 let g:neoformat_basic_format_trim = 1
