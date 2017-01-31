@@ -38,8 +38,7 @@ imap <C-v> <C-r><C-o>+
 nnoremap <leader>ve :edit $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 " Enable folding with space
-set foldmethod=indent
-set foldlevel=99
+set foldmethod=syntax
 nnoremap <space> za
 " Mark unnecessary whitespace
 highlight BadWhitespace ctermbg=red guibg=darkred
