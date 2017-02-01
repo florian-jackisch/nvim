@@ -82,6 +82,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_cmd = 'CtrlPMixed'
 " Search only in buffers
 nnoremap <C-b> :CtrlPBuffer<CR>
+nnoremap <C-g> :CtrlPTag<CR>
 
 " vim-airline
 Plug 'vim-airline/vim-airline'
@@ -212,8 +213,7 @@ autocmd! BufWritePost * Neomake
 nnoremap <leader>m :Neomake!<CR>
 
 " Automatic tag creation (disabled because it causes freezes)
-"Plug 'c0r73x/neotags.nvim'
-"let g:neotags_enabled = 1
+Plug 'ludovicchabant/vim-gutentags'
 
 "" Tagbar
 "Plug 'majutsushi/tagbar'
