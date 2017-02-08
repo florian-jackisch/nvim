@@ -18,3 +18,9 @@ $2
 
 } // namespace $1
 endsnippet
+
+snippet ostream "ostream definition" 
+std::ostream &operator<<(std::ostream &o, const ${1:T} &${2:t}) {
+  return o << $2;
+}
+endsnippet
