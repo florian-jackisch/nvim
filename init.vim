@@ -82,6 +82,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_cmd = 'CtrlPMixed'
 " Search only in buffers
 nnoremap <C-b> :CtrlPBuffer<CR>
+nnoremap <C-g> :CtrlPTag<CR>
 
 " vim-airline
 Plug 'vim-airline/vim-airline'
@@ -216,8 +217,8 @@ nnoremap <leader>m :Neomake!<CR>
 "let g:neotags_enabled = 1
 
 "" Tagbar
-"Plug 'majutsushi/tagbar'
-"nnoremap <silent> <leader>t :TagbarOpenAutoClose<CR>
+Plug 'majutsushi/tagbar'
+nnoremap <silent> <leader>t :TagbarOpenAutoClose<CR>
 
 " Stop complaining that swap files can be deleted
 Plug 'gioele/vim-autoswap'
