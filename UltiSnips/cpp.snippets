@@ -22,5 +22,10 @@ endsnippet
 snippet copyright "IfN copyright"
 // Copyright `date +%Y`, Institut fuer Nachrichtentechnik, TU Braunschweig
 // All rights reserved.
+endsnippet
 
+snippet ostream "ostream definition" 
+std::ostream &operator<<(std::ostream &o, const ${1:T} &${2:t}) {
+  return o << $2;
+}
 endsnippet
