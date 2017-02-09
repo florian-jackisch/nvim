@@ -160,6 +160,12 @@ let g:UltiSnipsEditSplit="vertical"
 " vim-autoformat
 Plug 'sbdchd/neoformat'
 au BufWrite *.py,*.cpp,*.h,*.c,*.inl :Neoformat
+" Set clang-format to search for a file
+let g:neoformat_enabled_c = ['clang-format']
+let g:neoformat_c_clangformat = {
+            \ 'exe': 'clang-format',
+            \ 'args': ['-style=file'],
+            \ }
 " Enable trimmming of trailing whitespace when a filetype is not found
 let g:neoformat_basic_format_trim = 1
 
