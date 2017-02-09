@@ -133,20 +133,8 @@ inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 " Close the documentation window when completion is done
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" Deoplete for C++
-Plug 'zchee/deoplete-clang'
-" Deoplete-clang supports compiler-flags local to individual projects. It will
-" search the current working directory for a .clang file; if no such file is
-" found it will try searching the parent directory. The format of the .clang
-" file is either
-"     flags = <flags>
-" or
-"     compilation_database = <path to compilation_database>
-let g:deoplete#sources#clang#flags = [
-            \ "-std=c++14"
-            \ ]
-let g:deoplete#sources#clang#libclang_path = $LIBCLANG_PATH
-let g:deoplete#sources#clang#clang_header = $CLANG_INCLUDE_PATH
+" YCM
+Plug 'Valloric/YouCompleteMe'
 
 " Snippet engine
 Plug 'SirVer/ultisnips'
