@@ -239,12 +239,9 @@ let g:SimpylFold_docstring_preview=1
 Plug 'vimlab/split-term.vim'
 
 " Markdown
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    !cargo build --release
-  endif
-endfunction
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'shime/vim-livedown'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Tabular
 " Call `Tabularize /<search expression>` to align at the search expression

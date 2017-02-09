@@ -50,7 +50,6 @@ Edit your .bashrc to contain the following lines:
     export LIBCLANG_PATH="/usr/local/Cellar/llvm/3.9.1/lib/libclang.dylib"
     export CLANG_INCLUDE_PATH="/usr/local/Cellar/llvm/3.9.1/include/clang"
 
-## Compile vim-mardown-preview
+## Install livedown
 
-    cd ~/.config/nvim/plugged/vim-mardown-composer
-    cargo build --release
+    npm install -g livedown
