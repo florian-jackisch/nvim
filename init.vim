@@ -223,8 +223,6 @@ Plug 'vimlab/split-term.vim'
 
 " Markdown
 Plug 'shime/vim-livedown'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Tabular
 " Call `Tabularize /<search expression>` to align at the search expression
