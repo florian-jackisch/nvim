@@ -122,17 +122,6 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-" Deoplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
-" Let <Tab> also do completion
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ deoplete#mappings#manual_complete()
-inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-" Close the documentation window when completion is done
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
 " YCM
 Plug 'Valloric/YouCompleteMe'
 
