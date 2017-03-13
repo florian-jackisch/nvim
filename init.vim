@@ -187,13 +187,10 @@ au FileType python setlocal formatprg=autopep8\ -
 Plug 'alvan/vim-closetag'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
 
-" Syntax highlighting
-Plug 'neomake/neomake'
-let g:neomake_cpp_enable_makers = ['clang']
-let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined","-g"]
-" run Neomake on the current file on every write:
-autocmd! BufWritePost * Neomake
-nnoremap <leader>m :Neomake!<CR>
+" Linting
+Plug 'w0rp/ale'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Automatic tag creation (disabled because it causes freezes)
 Plug 'ludovicchabant/vim-gutentags'
