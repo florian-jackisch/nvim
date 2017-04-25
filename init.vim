@@ -214,10 +214,10 @@ Plug 'cryptomilk/gruvbox'
 Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1
 
-" Open neovim terminal with :Term (horizontal split) or :VTerm
-" <Esc> - Switch to normal mode (instead of <C-\><C-n>)
-" Alt+hjkl, Ctrl+arrows to navigate through windows
-Plug 'vimlab/split-term.vim'
+" Open neovim terminal with :T <command>
+" Map to ,tt with :Tmap <command>
+" Send to REPL with TREPLSendFile, TREPLSend
+Plug 'kassio/neoterm'
 
 " Markdown
 Plug 'shime/vim-livedown'
