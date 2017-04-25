@@ -4,6 +4,7 @@
 " Leader shall be comma
 " ---------------------
 let mapleader = ','
+let maplocalleader = ';'
 
 " Edit settings
 " -------------
@@ -86,7 +87,7 @@ nnoremap <C-g> :CtrlPTag<CR>
 
 " vim-airline
 Plug 'vim-airline/vim-airline'
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 
 " Undotree
 Plug 'mbbill/undotree'
@@ -238,9 +239,8 @@ Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 
-" True color
-set termguicolors
+" Color scheme
+"set termguicolors " true color
 set background=dark
-map <Leader>bg :let &background = (&background == "dark"? "light" : "dark")<CR>
 let g:gruvbox_italic=1
 colorscheme gruvbox
