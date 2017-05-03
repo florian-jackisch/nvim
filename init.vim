@@ -77,8 +77,8 @@ Plug 'tpope/vim-sensible'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
-map <C-e> :NERDTreeToggle<CR>
-map <leader>e :NERDTreeFind<CR>
+map <leader>e : NERDTreeToggle<CR>
+map <C-e>     : NERDTreeFind<CR>
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
 let NERDTreeChDirMode=0
@@ -148,7 +148,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " vim-autoformat
 Plug 'sbdchd/neoformat'
-au BufWrite *.py,*.cpp,*.h,*.c,*.inl :Neoformat
+nnoremap <silent> <leader>f :Neoformat<CR>
 " Set clang-format to search for a file
 let g:neoformat_enabled_c = ['clang-format']
 let g:neoformat_c_clangformat = {
@@ -209,7 +209,7 @@ Plug 'ludovicchabant/vim-gutentags'
 
 "" Tagbar
 Plug 'majutsushi/tagbar'
-nnoremap <silent> <leader>t :TagbarOpenAutoClose<CR>
+nnoremap <silent> <leader>r :TagbarToggle<CR>
 
 " Stop complaining that swap files can be deleted
 Plug 'gioele/vim-autoswap'
@@ -229,6 +229,11 @@ let g:SimpylFold_docstring_preview=1
 " Map to ,tt with :Tmap <command>
 " Send to REPL with TREPLSendFile, TREPLSend
 Plug 'kassio/neoterm'
+let g:neoterm_automap_keys = ',b'
+nnoremap <silent> <f10> :TREPLSendFile<cr>
+nnoremap <silent> <f9> :TREPLSendLine<cr>
+vnoremap <silent> <f9> :TREPLSendSelection<cr>
+nnoremap <silent> <leader>t :call neoterm#toggle()<cr>
 
 " Markdown
 Plug 'shime/vim-livedown'
