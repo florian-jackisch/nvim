@@ -65,14 +65,21 @@ set inccommand=nosplit
 set cursorline
 " Terminal window ESC and navigation
 tnoremap <Esc> <C-\><C-n>
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+if has("macunix")
+    nnoremap º <C-w>j
+    nnoremap ∆ <C-w>k
+    nnoremap ª <C-w>h
+    nnoremap @ <C-w>l
+else
+    nnoremap <a-j> <C-w>j
+    nnoremap <a-k> <C-w>k
+    nnoremap <a-h> <C-w>h
+    nnoremap <a-l> <C-w>l
+    tnoremap <a-j> <C-\><C-n><C-w>j
+    tnoremap <a-k> <C-\><C-n><C-w>k
+    tnoremap <a-h> <C-\><C-n><C-w>h
+    tnoremap <a-l> <C-\><C-n><C-w>l
+endif
 
 
 " Plugins
@@ -94,6 +101,7 @@ let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=0
+Plug 'ivalkeen/nerdtree-execute'
 
 " CtrlP
 Plug 'ctrlpvim/ctrlp.vim'
