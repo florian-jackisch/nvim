@@ -14,10 +14,17 @@ set nowrap
 " Tabs shall be 4 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Easier moving in tabs and windows
-nnoremap <a-j> <C-w>j
-nnoremap <a-k> <C-w>k
-nnoremap <a-h> <C-w>h
-nnoremap <a-l> <C-w>l
+if has("macunix")
+    nnoremap º <C-w>j
+    nnoremap ∆ <C-w>k
+    nnoremap ª <C-w>h
+    nnoremap @ <C-w>l
+else
+    nnoremap <a-j> <C-w>j
+    nnoremap <a-k> <C-w>k
+    nnoremap <a-h> <C-w>h
+    nnoremap <a-l> <C-w>l
+endif
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 set splitright " open new vsplit right
