@@ -132,6 +132,7 @@ endif
 
 " YCM
 Plug 'Valloric/YouCompleteMe'
+Plug 'rdnetto/YCM-Generator'
 
 " Snippet engine
 Plug 'SirVer/ultisnips'
