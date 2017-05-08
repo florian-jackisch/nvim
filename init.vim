@@ -4,7 +4,7 @@
 " Leader shall be comma
 " ---------------------
 let mapleader = ','
-let maplocalleader = ';'
+let maplocalleader = '_'
 
 " Edit settings
 " -------------
@@ -13,18 +13,6 @@ set number
 set nowrap
 " Tabs shall be 4 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
-" Easier moving in tabs and windows
-if has("macunix")
-    nnoremap º <C-w>j
-    nnoremap ∆ <C-w>k
-    nnoremap ª <C-w>h
-    nnoremap @ <C-w>l
-else
-    nnoremap <a-j> <C-w>j
-    nnoremap <a-k> <C-w>k
-    nnoremap <a-h> <C-w>h
-    nnoremap <a-l> <C-w>l
-endif
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 set splitright " open new vsplit right
@@ -46,7 +34,7 @@ imap <C-v> <C-r><C-o>+
 nnoremap <leader>ve :edit $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 " Enable folding with space
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevelstart=99
 nnoremap <space> za
 " Mark unnecessary whitespace
@@ -63,6 +51,24 @@ nnoremap <CR> :noh<CR><CR>
 " Incremental search and replace
 set inccommand=nosplit
 set cursorline
+" Terminal window ESC and navigation
+tnoremap <Esc> <C-\><C-n>
+if has("macunix")
+    nnoremap º <C-w>j
+    nnoremap ∆ <C-w>k
+    nnoremap ª <C-w>h
+    nnoremap @ <C-w>l
+else
+    nnoremap <a-j> <C-w>j
+    nnoremap <a-k> <C-w>k
+    nnoremap <a-h> <C-w>h
+    nnoremap <a-l> <C-w>l
+    tnoremap <a-j> <C-\><C-n><C-w>j
+    tnoremap <a-k> <C-\><C-n><C-w>k
+    tnoremap <a-h> <C-\><C-n><C-w>h
+    tnoremap <a-l> <C-\><C-n><C-w>l
+endif
+
 
 " Plugins
 " =======
@@ -73,8 +79,8 @@ Plug 'tpope/vim-sensible'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
-map <C-e> :NERDTreeToggle<CR>
-map <leader>e :NERDTreeFind<CR>
+map <leader>e : NERDTreeToggle<CR>
+map <C-e>     : NERDTreeFind<CR>
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
 let NERDTreeChDirMode=0
@@ -83,6 +89,7 @@ let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=0
+Plug 'ivalkeen/nerdtree-execute'
 
 " CtrlP
 Plug 'ctrlpvim/ctrlp.vim'
@@ -145,7 +152,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " vim-autoformat
 Plug 'sbdchd/neoformat'
-au BufWrite *.py,*.cpp,*.h,*.c,*.inl :Neoformat
+nnoremap <silent> <leader>f :Neoformat<CR>
 " Set clang-format to search for a file
 let g:neoformat_enabled_c = ['clang-format']
 let g:neoformat_c_clangformat = {
@@ -206,7 +213,7 @@ Plug 'ludovicchabant/vim-gutentags'
 
 "" Tagbar
 Plug 'majutsushi/tagbar'
-nnoremap <silent> <leader>t :TagbarOpenAutoClose<CR>
+nnoremap <silent> <leader>r :TagbarToggle<CR>
 
 " Stop complaining that swap files can be deleted
 Plug 'gioele/vim-autoswap'
@@ -226,6 +233,11 @@ let g:SimpylFold_docstring_preview=1
 " Map to ,tt with :Tmap <command>
 " Send to REPL with TREPLSendFile, TREPLSend
 Plug 'kassio/neoterm'
+let g:neoterm_automap_keys = ',b'
+nnoremap <silent> <f10> :TREPLSendFile<cr>
+nnoremap <silent> <f9> :TREPLSendLine<cr>
+vnoremap <silent> <f9> :TREPLSendSelection<cr>
+nnoremap <silent> <leader>t :call neoterm#toggle()<cr>
 
 " Markdown
 Plug 'shime/vim-livedown'
@@ -267,7 +279,7 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " Color scheme
-"set termguicolors " true color
+set termguicolors " true color
 set background=dark
 let g:gruvbox_italic=1
 colorscheme gruvbox
