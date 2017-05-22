@@ -247,15 +247,17 @@ Plug 'cryptomilk/gruvbox'
 Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1
 
-" Open neovim terminal with :T <command>
-" Map to ,tt with :Tmap <command>
-" Send to REPL with TREPLSendFile, TREPLSend
-Plug 'kassio/neoterm'
-let g:neoterm_automap_keys = ',b'
-nnoremap <silent> <f10> :TREPLSendFile<cr>
-nnoremap <silent> <f9> :TREPLSendLine<cr>
-vnoremap <silent> <f9> :TREPLSendSelection<cr>
-nnoremap <silent> <leader>t :call neoterm#toggle()<cr>
+if has("nvim")
+    " Open neovim terminal with :T <command>
+    " Map to ,tt with :Tmap <command>
+    " Send to REPL with TREPLSendFile, TREPLSend
+    Plug 'kassio/neoterm'
+    let g:neoterm_automap_keys = ',b'
+    nnoremap <silent> <f10> :TREPLSendFile<cr>
+    nnoremap <silent> <f9> :TREPLSendLine<cr>
+    vnoremap <silent> <f9> :TREPLSendSelection<cr>
+    nnoremap <silent> <leader>t :call neoterm#toggle()<cr>
+endif
 
 " Markdown
 Plug 'shime/vim-livedown'
@@ -263,7 +265,7 @@ Plug 'shime/vim-livedown'
 " LaTeX
 Plug 'lervag/vimtex'
 if !exists('g:ycm_semantic_triggers')
-  let g:ycm_semantic_triggers = {}
+    let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers.tex = [
       \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
