@@ -61,10 +61,14 @@ endif
 " Disable search highlight after search with <CR>
 nnoremap <CR> :noh<CR><CR>
 " Incremental search and replace
-set inccommand=nosplit
+if has("nvim")
+    set inccommand=nosplit
+endif
 set cursorline
 " Terminal window ESC and navigation
-tnoremap <Esc> <C-\><C-n>
+if has("nvim")
+    tnoremap <Esc> <C-\><C-n>
+endif
 if has("macunix")
     nnoremap º <C-w>j
     nnoremap ∆ <C-w>k
@@ -75,10 +79,12 @@ else
     nnoremap <a-k> <C-w>k
     nnoremap <a-h> <C-w>h
     nnoremap <a-l> <C-w>l
-    tnoremap <a-j> <C-\><C-n><C-w>j
-    tnoremap <a-k> <C-\><C-n><C-w>k
-    tnoremap <a-h> <C-\><C-n><C-w>h
-    tnoremap <a-l> <C-\><C-n><C-w>l
+    if has("nvim")
+        tnoremap <a-j> <C-\><C-n><C-w>j
+        tnoremap <a-k> <C-\><C-n><C-w>k
+        tnoremap <a-h> <C-\><C-n><C-w>h
+        tnoremap <a-l> <C-\><C-n><C-w>l
+    endif
 endif
 
 
@@ -293,5 +299,7 @@ call plug#end()
 " Color scheme
 set termguicolors " true color
 set background=dark
-let g:gruvbox_italic=1
 colorscheme gruvbox
+if has("nvim")
+    let g:gruvbox_italic=1
+endif
