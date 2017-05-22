@@ -291,7 +291,7 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " Color scheme
-"set termguicolors " true color
+set termguicolors " true color
 set background=dark
 let g:gruvbox_italic=1
 colorscheme gruvbox
