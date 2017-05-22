@@ -13,6 +13,18 @@ set number
 set nowrap
 " Tabs shall be 4 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+" Easier moving in tabs and windows
+if has("macunix")
+    nnoremap º <C-w>j
+    nnoremap ∆ <C-w>k
+    nnoremap ª <C-w>h
+    nnoremap @ <C-w>l
+else
+    nnoremap <a-j> <C-w>j
+    nnoremap <a-k> <C-w>k
+    nnoremap <a-h> <C-w>h
+    nnoremap <a-l> <C-w>l
+endif
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 set splitright " open new vsplit right
@@ -112,7 +124,7 @@ let g:undotree_SetFocusWhenToggle=1
 Plug 'tpope/vim-surround'
 
 " NERDCommenter
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 
 " Create closing braces
 Plug 'spf13/vim-autoclose'
@@ -279,7 +291,7 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " Color scheme
-set termguicolors " true color
+"set termguicolors " true color
 set background=dark
 let g:gruvbox_italic=1
 colorscheme gruvbox
