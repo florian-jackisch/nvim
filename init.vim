@@ -299,7 +299,7 @@ call plug#end()
 " Color scheme
 set termguicolors " true color
 set background=dark
-colorscheme gruvbox
 if has("nvim")
     let g:gruvbox_italic=1
 endif
+colorscheme gruvbox
