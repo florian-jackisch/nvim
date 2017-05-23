@@ -222,9 +222,11 @@ Plug 'alvan/vim-closetag'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
 
 " Linting
-Plug 'w0rp/ale'
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+if has("nvim") || version >= 800
+    Plug 'w0rp/ale'
+    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    nmap <silent> <C-j> <Plug>(ale_next_wrap)
+endif
 
 " Automatic tag creation (disabled because it causes freezes)
 Plug 'ludovicchabant/vim-gutentags'
@@ -299,7 +301,9 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " Color scheme
-set termguicolors " true color
+if has("nvim") || version >= 800
+    set termguicolors " true color
+endif
 set background=dark
 if has("nvim")
     let g:gruvbox_italic=1
