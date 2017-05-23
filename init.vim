@@ -153,7 +153,7 @@ Plug 'airblade/vim-gitgutter'
 " Ack
 Plug 'mileszs/ack.vim'
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+    let g:ackprg = 'ag --vimgrep'
 endif
 
 " YCM
@@ -226,6 +226,8 @@ if has("nvim") || version >= 800
     Plug 'w0rp/ale'
     nmap <silent> <C-k> <Plug>(ale_previous_wrap)
     nmap <silent> <C-j> <Plug>(ale_next_wrap)
+    let g:ale_sign_error = '⨉'
+    let g:ale_sign_warning = '⚠'
 endif
 
 " Automatic tag creation (disabled because it causes freezes)
