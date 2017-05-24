@@ -246,6 +246,7 @@ let g:rainbow_active = 1
 
 " Color scheme
 Plug 'cryptomilk/gruvbox'
+Plug 'rakr/vim-one'
 
 " Improved folding
 Plug 'tmhedberg/SimpylFold'
@@ -303,11 +304,13 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " Color scheme
-if has("nvim") || version >= 800
+if has("termguicolors")
     set termguicolors " true color
 endif
 set background=dark
+let g:airline_theme='one'
 if has("nvim")
     let g:gruvbox_italic=1
+    let g:one_allow_italics=1
 endif
-colorscheme gruvbox
+colorscheme one
