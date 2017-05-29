@@ -120,6 +120,7 @@ nnoremap <C-g> :CtrlPTag<CR>
 
 " vim-airline
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 "let g:airline_powerline_fonts = 1
 
 " Undotree
@@ -245,8 +246,7 @@ Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 
 " Color scheme
-Plug 'cryptomilk/gruvbox'
-Plug 'rakr/vim-one'
+Plug 'chriskempson/base16-vim'
 
 " Improved folding
 Plug 'tmhedberg/SimpylFold'
@@ -308,9 +308,5 @@ if has("termguicolors")
     set termguicolors " true color
 endif
 set background=dark
-let g:airline_theme='one'
-if has("nvim")
-    let g:gruvbox_italic=1
-    let g:one_allow_italics=1
-endif
-colorscheme one
+colorscheme base16-tomorrow-night
+
