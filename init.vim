@@ -129,7 +129,7 @@ endif
 " Search plugins
 " --------------
 " Fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :History<CR>
@@ -261,6 +261,6 @@ call plug#end()
 if has("termguicolors")
     set termguicolors " true color
 endif
-set background=dark
-colorscheme base16-tomorrow-night
+set background=light
+colorscheme base16-solarized-light
 
