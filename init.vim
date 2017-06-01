@@ -85,6 +85,9 @@ Plug 'tpope/vim-repeat'
 " os - spell
 " ow - wrap
 Plug 'tpope/vim-unimpaired'
+" :Make and :Dispatch
+Plug 'tpope/vim-dispatch'
+nmap <leader>b :Make<cr>
 
 " UI plugins
 " ----------
@@ -113,10 +116,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Open neovim terminal with :T <command>
 if has("nvim")
-    " Map to ,tt with :Tmap <command>
     " Send to REPL with TREPLSendFile, TREPLSend
     Plug 'kassio/neoterm'
-    let g:neoterm_automap_keys = ',b'
+    " Open terminal and execute the command stored with Tmap
+    nnoremap <silent> <leader>x :Topen <bar> normal ,tt<cr>
     nnoremap <silent> <f10> :TREPLSendFile<cr>
     nnoremap <silent> <f9> :TREPLSendLine<cr>
     vnoremap <silent> <f9> :TREPLSendSelection<cr>
@@ -173,6 +176,8 @@ Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 " Tabular - call `Tabularize /<search expression>` to align at the search expression
 Plug 'godlygeek/tabular'
+" Change working directory to the project root
+Plug 'airblade/vim-rooter'
 
 " Completion plugins
 " ------------------
@@ -211,9 +216,6 @@ Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'calincru/qml.vim'
 " Go
 Plug 'fatih/vim-go'
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
 " Treat geany files like go files
 au BufNewFile,BufRead *.geany set filetype=go
 " Rust
