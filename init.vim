@@ -171,9 +171,6 @@ Plug 'gioele/vim-autoswap'
 " Improved folding
 Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1
-" Rainbow paranthesis
-Plug 'luochen1990/rainbow'
-let g:rainbow_active = 1
 " Tabular - call `Tabularize /<search expression>` to align at the search expression
 Plug 'godlygeek/tabular'
 " Change working directory to the project root
@@ -253,14 +250,15 @@ let g:ycm_semantic_triggers.tex = [
 " Color schemes
 " -------------
 Plug 'chriskempson/base16-vim'
+Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
 " Set color scheme
 " ----------------
-if has("termguicolors")
-    set termguicolors " true color
-endif
+" if has("termguicolors")
+"     set termguicolors " true color
+" endif
 set background=light
-colorscheme base16-solarized-light
+colorscheme solarized
 
