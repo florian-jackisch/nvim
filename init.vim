@@ -180,8 +180,6 @@ Plug 'airblade/vim-rooter'
 " ------------------
 " YCM
 Plug 'Valloric/YouCompleteMe'
-let g:ycm_error_symbol = '⨉'
-let g:ycm_warning_symbol = '⚠'
 let g:ycm_complete_in_comments = 1
 let g:ycm_server_python_interpreter = 'python3'
 let g:ycm_add_preview_to_completeopt = 1
