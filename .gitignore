@@ -1,5 +1,4 @@
 autoload/*
 plugged/*
 tags*
-spell/de.utf-8.spl
-spell/de.utf-8.add.spl
+*.spl
