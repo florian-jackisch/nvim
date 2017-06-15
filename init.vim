@@ -88,6 +88,8 @@ Plug 'tpope/vim-unimpaired'
 " :Make and :Dispatch
 Plug 'tpope/vim-dispatch'
 nmap <leader>b :Make<cr>
+" Detect indentation automatically
+Plug 'tpope/vim-sleuth'
 
 " UI plugins
 " ----------
