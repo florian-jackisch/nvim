@@ -179,6 +179,8 @@ Plug 'godlygeek/tabular'
 Plug 'airblade/vim-rooter'
 " Use a golden ratio for vim splits, <c-l> opens a new split
 Plug 'zhaocai/GoldenView.Vim'
+let g:goldenview__enable_default_mapping = 0
+nmap <silent> <C-L>  <Plug>GoldenViewSplit
 
 " Completion plugins
 " ------------------
