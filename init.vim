@@ -177,6 +177,8 @@ let g:SimpylFold_docstring_preview=1
 Plug 'godlygeek/tabular'
 " Change working directory to the project root
 Plug 'airblade/vim-rooter'
+" Use a golden ratio for vim splits, <c-l> opens a new split
+Plug 'zhaocai/GoldenView.Vim'
 
 " Completion plugins
 " ------------------
