@@ -3,8 +3,8 @@
 
 " Leaders
 " -------
-let mapleader = '-'
-let maplocalleader = '_'
+let mapleader = ' '
+let maplocalleader = ' '
 
 " Editor settings
 " ---------------
@@ -90,22 +90,11 @@ Plug 'tpope/vim-dispatch'
 nmap <leader>b :Make<cr>
 " Detect indentation automatically
 Plug 'tpope/vim-sleuth'
+" Better netrw
+Plug 'tpope/vim-vinegar'
 
 " UI plugins
 " ----------
-" NERDTree
-Plug 'scrooloose/nerdtree'
-map <leader>e : NERDTreeToggle<CR>
-map <C-e>     : NERDTreeFind<CR>
-let NERDTreeShowBookmarks=1
-let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-let NERDTreeChDirMode=0
-let NERDTreeQuitOnOpen=1
-let NERDTreeMouseMode=2
-let NERDTreeShowHidden=1
-let NERDTreeKeepTreeInNewTab=1
-let g:nerdtree_tabs_open_on_gui_startup=0
-Plug 'ivalkeen/nerdtree-execute'
 " Undotree
 Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
@@ -250,15 +239,19 @@ let g:ycm_semantic_triggers.tex = [
 " Color schemes
 " -------------
 Plug 'chriskempson/base16-vim'
+Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 
 call plug#end()
 
 " Set color scheme
 " ----------------
-" if has("termguicolors")
-"     set termguicolors " true color
-" endif
 set background=light
-colorscheme solarized
+if has("termguicolors")
+    set termguicolors " true color
+    colorscheme solarized8_light
+else
+    colorscheme solarized
+endif
 
