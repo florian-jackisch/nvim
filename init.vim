@@ -117,9 +117,8 @@ if has("nvim")
     Plug 'kassio/neoterm'
     " Open terminal and execute the command stored with Tmap
     nnoremap <silent> <leader>x :Topen <bar> normal ,tt<cr>
-    nnoremap <silent> <f10> :TREPLSendFile<cr>
-    nnoremap <silent> <f9> :TREPLSendLine<cr>
-    vnoremap <silent> <f9> :TREPLSendSelection<cr>
+    nnoremap <silent> <leader>s :TREPLSendLine<cr>
+    vnoremap <silent> <leader>s :TREPLSendSelection<cr>
     nnoremap <silent> <leader>t :call neoterm#toggle()<cr>
 endif
 
