@@ -192,6 +192,7 @@ if has("nvim") || version >= 800
 endif
 " Automatic tag creation
 Plug 'ludovicchabant/vim-gutentags'
+let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 
 " Language plugins
 " ----------------
