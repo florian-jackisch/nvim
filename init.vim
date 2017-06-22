@@ -124,25 +124,18 @@ endif
 
 " Search plugins
 " --------------
-" Fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-nnoremap <C-p> :Files<CR>
-nnoremap <C-b> :History<CR>
-nnoremap <C-t> :Tags<CR>
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" CtrlP
+Plug 'ctrlpvim/ctrlp.vim'
+" Search in directory, buffer, and most recently used
+let g:ctrlp_cmd = 'CtrlPMixed'
+" Search only in buffers
+nnoremap <C-b> :CtrlPBuffer<CR>
+nnoremap <C-g> :CtrlPTag<CR>
+" Ack
+Plug 'mileszs/ack.vim'
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
 
 " Editor plugins
 " --------------
@@ -198,6 +191,7 @@ if has("nvim") || version >= 800
 endif
 " Automatic tag creation
 Plug 'ludovicchabant/vim-gutentags'
+let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 
 " Language plugins
 " ----------------
@@ -244,18 +238,17 @@ let g:ycm_semantic_triggers.tex = [
 " Color schemes
 " -------------
 Plug 'chriskempson/base16-vim'
-Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
-Plug 'lifepillar/vim-solarized8'
 
 call plug#end()
 
 " Set color scheme
 " ----------------
-set background=light
+set background=dark
 if has("termguicolors")
     set termguicolors " true color
-    colorscheme solarized8_light
+    let base16colorspace=256  " Access colors present in 256 colorspace
+    colorscheme base16-tomorrow-night
 else
     colorscheme solarized
 endif

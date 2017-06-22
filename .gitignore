@@ -3,3 +3,4 @@ plugged/*
 tags*
 *.spl
 .netrwhist
+gutentags_cache_dir
