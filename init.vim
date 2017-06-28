@@ -85,12 +85,6 @@ Plug 'tpope/vim-repeat'
 " os - spell
 " ow - wrap
 Plug 'tpope/vim-unimpaired'
-nmap < [
-nmap > ]
-omap < [
-omap > ]
-xmap < [
-xmap > ]
 " :Make and :Dispatch
 Plug 'tpope/vim-dispatch'
 nmap <leader>b :Make<cr>
