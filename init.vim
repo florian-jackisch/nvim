@@ -49,6 +49,8 @@ nnoremap <leader>ve :edit $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 " Disable search highlight after search with <CR>
 nnoremap <CR> :noh<CR><CR>
+" Toggle wrapping and linebreak
+nnoremap gw :set wrap! <bar> :set linebreak!<CR>
 
 " Plugins
 " =======
