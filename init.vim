@@ -85,12 +85,6 @@ Plug 'tpope/vim-repeat'
 " os - spell
 " ow - wrap
 Plug 'tpope/vim-unimpaired'
-nmap < [
-nmap > ]
-omap < [
-omap > ]
-xmap < [
-xmap > ]
 " :Make and :Dispatch
 Plug 'tpope/vim-dispatch'
 nmap <leader>b :Make<cr>
@@ -235,22 +229,29 @@ let g:ycm_semantic_triggers.tex = [
       \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
       \ 're!\\[A-Za-z]*',
       \ ]
+" C++
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Color schemes
 " -------------
 Plug 'chriskempson/base16-vim'
+let base16colorspace=256  " Access colors present in 256 colorspace
 Plug 'altercation/vim-colors-solarized'
+Plug 'saghul/vim-colortoggle'
+let g:default_background_type = "dark"
+let g:dark_colorscheme = "base16-tomorrow-night"
+let g:light_colorscheme = "base16-solarized-light"
+nmap <silent>gb :ToggleBg<CR>
 
 call plug#end()
 
 " Set color scheme
 " ----------------
-set background=dark
 if has("termguicolors")
+    set background=dark
     set termguicolors " true color
-    let base16colorspace=256  " Access colors present in 256 colorspace
-    colorscheme base16-tomorrow-night
 else
+    set background=light
     colorscheme solarized
 endif
 
