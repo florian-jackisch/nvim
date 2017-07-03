@@ -110,11 +110,13 @@ if has("nvim")
     " Send to REPL with TREPLSendFile, TREPLSend
     Plug 'kassio/neoterm'
     " Open terminal and execute the command stored with Tmap
-    nnoremap <silent> <leader>x :Topen <bar> normal ,tt<cr>
-    nnoremap <silent> <f10> :TREPLSendFile<cr>
-    nnoremap <silent> <f9> :TREPLSendLine<cr>
-    vnoremap <silent> <f9> :TREPLSendSelection<cr>
-    nnoremap <silent> <leader>' :call neoterm#toggle()<cr>
+    " Toggle the terminal
+    nnoremap <silent> <leader>tt :Ttoggle<cr>
+    " Run the mapped command
+    nnoremap <silent> <leader>tr :Topen <bar> normal ,tt<cr>
+    " Send to the REPL
+    nnoremap <silent> <leader>ts :TREPLSendLine<cr>
+    vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
 endif
 
 " Search plugins
@@ -155,8 +157,12 @@ Plug 'gioele/vim-autoswap'
 " Improved folding
 Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1
-" Tabular - call `Tabularize /<search expression>` to align at the search expression
-Plug 'godlygeek/tabular'
+" Align with ga
+Plug 'junegunn/vim-easy-align'
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 " Change working directory to the project root
 Plug 'airblade/vim-rooter'
 
