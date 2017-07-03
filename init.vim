@@ -114,7 +114,7 @@ if has("nvim")
     nnoremap <silent> <f10> :TREPLSendFile<cr>
     nnoremap <silent> <f9> :TREPLSendLine<cr>
     vnoremap <silent> <f9> :TREPLSendSelection<cr>
-    nnoremap <silent> <leader>t :call neoterm#toggle()<cr>
+    nnoremap <silent> <leader>' :call neoterm#toggle()<cr>
 endif
 
 " Search plugins
