@@ -64,6 +64,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 " Comments with gc
 Plug 'tpope/vim-commentary'
+autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 " Git
 Plug 'tpope/vim-fugitive'
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -87,9 +88,6 @@ Plug 'tpope/vim-repeat'
 " os - spell
 " ow - wrap
 Plug 'tpope/vim-unimpaired'
-" :Make and :Dispatch
-Plug 'tpope/vim-dispatch'
-nmap <leader>b :Make<cr>
 " Detect indentation automatically
 Plug 'tpope/vim-sleuth'
 " Better netrw
@@ -177,6 +175,7 @@ let g:ycm_server_python_interpreter = 'python3'
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_show_diagnostics_ui = 0 " provided by neomake
 
 " Snippet engine
 Plug 'SirVer/ultisnips'
@@ -187,12 +186,18 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
 " Linting
-if has("nvim") || version >= 800
-    Plug 'w0rp/ale'
-    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-    nmap <silent> <C-j> <Plug>(ale_next_wrap)
-    let g:ale_sign_column_always = 1
-endif
+Plug 'neomake/neomake'
+let g:neomake_cpp_enabled_makers = ["clang"]
+let g:neomake_cpp_clang_args = [
+      \ "-std=c++14",
+      \ "-xc++",
+      \ "-Weverything",
+      \ "-Wno-c++98-compat",
+      \ "-Wno-c++98-compat-pedantic",
+      \ "-Wno-missing-braces",
+      \ ]
+nmap <leader>c :Neomake!<cr>
+let g:neomake_open_list = 2
 " Automatic tag creation
 Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
