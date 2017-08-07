@@ -93,9 +93,13 @@ Plug 'tpope/vim-sleuth'
 
 " UI plugins
 " ----------
-" Nerdtree
+" NERDTree
 Plug 'scrooloose/nerdtree'
-nnoremap <C-n> :NERDTreeToggle<CR>
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ivalkeen/nerdtree-execute'
+nnoremap <leader>e :NERDTreeToggle<CR>
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
 " Undotree
 Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
