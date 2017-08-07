@@ -90,11 +90,12 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 " Detect indentation automatically
 Plug 'tpope/vim-sleuth'
-" Better netrw
-Plug 'tpope/vim-vinegar'
 
 " UI plugins
 " ----------
+" Nerdtree
+Plug 'scrooloose/nerdtree'
+nnoremap <C-n> :NERDTreeToggle<CR>
 " Undotree
 Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
