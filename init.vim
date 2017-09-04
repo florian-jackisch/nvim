@@ -18,7 +18,7 @@ set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Open new vsplit right
 set splitright
 " Enable folding with space
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevelstart=99
 " 80 columns is the target width
 set colorcolumn=80
@@ -127,18 +127,26 @@ endif
 
 " Search plugins
 " --------------
-" CtrlP
-Plug 'ctrlpvim/ctrlp.vim'
-" Search in directory, buffer, and most recently used
-let g:ctrlp_cmd = 'CtrlPMixed'
-" Search only in buffers
-nnoremap <C-b> :CtrlPBuffer<CR>
-nnoremap <C-g> :CtrlPTag<CR>
-" Ack
-Plug 'mileszs/ack.vim'
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
+" FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+nnoremap <C-p> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-g> :Tags<CR>
 
 " Editor plugins
 " --------------
@@ -160,7 +168,7 @@ let g:neoformat_c_clangformat = {
 let g:neoformat_basic_format_trim = 1
 " Stop complaining that swap files can be deleted
 Plug 'gioele/vim-autoswap'
-" Improved folding
+" Improved folding for python
 Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1
 " Align with ga
@@ -244,24 +252,16 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Color schemes
 " -------------
-Plug 'chriskempson/base16-vim'
-let base16colorspace=256  " Access colors present in 256 colorspace
-Plug 'altercation/vim-colors-solarized'
+" Plug 'chriskempson/base16-vim'
+" let base16colorspace=256  " Access colors present in 256 colorspace
+Plug 'lifepillar/vim-solarized8'
+
 Plug 'saghul/vim-colortoggle'
-let g:default_background_type = "dark"
-let g:dark_colorscheme = "base16-tomorrow-night"
-let g:light_colorscheme = "base16-solarized-light"
+let g:light_colorscheme = "solarized8_light"
+let g:dark_colorscheme = "solarized8_dark"
+let g:default_background_type = "light"
 nmap <silent>gb :ToggleBg<CR>
+set termguicolors " true color
 
 call plug#end()
-
-" Set color scheme
-" ----------------
-if has("termguicolors")
-    set background=dark
-    set termguicolors " true color
-else
-    set background=light
-    colorscheme solarized
-endif
 

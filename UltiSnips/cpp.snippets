@@ -38,3 +38,12 @@ $1($1 &&) noexcept = default;
 $1 &operator=($1 &&) noexcept = default;
 ~$1() noexcept = default;
 endsnippet
+
+snippet get_set "getter, setter"
+const ${1:Class}& ${2:value}() {
+  return $2_;
+}
+void set_$2($1 &&$2) {
+  $2_ = std::move($2);
+}
+endsnippet
