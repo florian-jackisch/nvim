@@ -175,7 +175,6 @@ let g:ycm_server_python_interpreter = 'python3'
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
-let g:ycm_show_diagnostics_ui = 0 " provided by neomake
 
 " Snippet engine
 Plug 'SirVer/ultisnips'
@@ -187,15 +186,6 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
 " Linting
 Plug 'neomake/neomake'
-let g:neomake_cpp_enabled_makers = ["clang"]
-let g:neomake_cpp_clang_args = [
-      \ "-std=c++14",
-      \ "-xc++",
-      \ "-Weverything",
-      \ "-Wno-c++98-compat",
-      \ "-Wno-c++98-compat-pedantic",
-      \ "-Wno-missing-braces",
-      \ ]
 nmap <leader>c :Neomake!<cr>
 let g:neomake_open_list = 2
 " Automatic tag creation
