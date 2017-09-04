@@ -90,11 +90,16 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 " Detect indentation automatically
 Plug 'tpope/vim-sleuth'
-" Better netrw
-Plug 'tpope/vim-vinegar'
 
 " UI plugins
 " ----------
+" NERDTree
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ivalkeen/nerdtree-execute'
+nnoremap <leader>e :NERDTreeToggle<CR>
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
 " Undotree
 Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
@@ -117,6 +122,7 @@ if has("nvim")
     " Send to the REPL
     nnoremap <silent> <leader>ts :TREPLSendLine<cr>
     vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
+    nnoremap <silent> <leader>tf :TREPLSendFile<cr>
 endif
 
 " Search plugins
