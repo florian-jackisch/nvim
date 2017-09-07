@@ -77,7 +77,9 @@ nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
 Plug 'airblade/vim-gitgutter'
-autocmd BufRead,BufNewFile * setlocal signcolumn="yes"
+" Always show the gutter
+autocmd BufEnter * sign define dummy
+autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 " Repeat for plugins
 Plug 'tpope/vim-repeat'
 " Handy combinations with `[` and `]`
@@ -108,7 +110,7 @@ nnoremap <leader>u :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle=1
 " Tagbar
 Plug 'majutsushi/tagbar'
-nnoremap <silent> <leader>r :TagbarToggle<CR>
+nnoremap <silent> <leader>rr :TagbarToggle<CR>
 " vim-airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
