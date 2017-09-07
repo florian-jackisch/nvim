@@ -110,7 +110,7 @@ nnoremap <leader>u :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle=1
 " Tagbar
 Plug 'majutsushi/tagbar'
-nnoremap <silent> <leader>rr :TagbarToggle<CR>
+nnoremap <silent> <leader>gg :TagbarToggle<CR>
 " vim-airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
