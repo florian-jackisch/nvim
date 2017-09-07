@@ -77,6 +77,7 @@ nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
 Plug 'airblade/vim-gitgutter'
+autocmd BufRead,BufNewFile * setlocal signcolumn="yes"
 " Repeat for plugins
 Plug 'tpope/vim-repeat'
 " Handy combinations with `[` and `]`
@@ -97,7 +98,8 @@ Plug 'tpope/vim-sleuth'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ivalkeen/nerdtree-execute'
-nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>ee :NERDTreeToggle<CR>
+nnoremap <leader>ef :NERDTreeFind<CR>
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 " Undotree
@@ -200,8 +202,12 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
 " Linting
 Plug 'neomake/neomake'
+" Use the makeprg, eg. let &makeprg = 'build -C -j ./build'
 nmap <leader>c :Neomake!<cr>
-let g:neomake_open_list = 2
+" Automatically run the linter on save
+autocmd! BufWritePost * Neomake
+let g:neomake_cpp_enabled_makers = ['clangtidy']
+let g:neomake_cpp_clangtidy_args = ['-checks=\*']
 " Automatic tag creation
 Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
