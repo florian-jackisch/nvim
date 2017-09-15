@@ -257,6 +257,8 @@ let g:ycm_semantic_triggers.tex = [
       \ ]
 " C++
 Plug 'octol/vim-cpp-enhanced-highlight'
+" Scratchpad for multiple languages
+Plug 'metakirby5/codi.vim'
 
 " Color schemes
 " -------------
