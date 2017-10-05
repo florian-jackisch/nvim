@@ -4,7 +4,6 @@
 " Leaders
 " -------
 let mapleader = ' '
-let maplocalleader = ' '
 
 " Editor settings
 " ---------------
@@ -128,6 +127,8 @@ if has("nvim")
     vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
     nnoremap <silent> <leader>tf :TREPLSendFile<cr>
 endif
+" Toggle the quick and location list
+Plug 'Valloric/ListToggle'
 
 " Search plugins
 " --------------
@@ -186,13 +187,17 @@ Plug 'airblade/vim-rooter'
 
 " Completion plugins
 " ------------------
-" YCM
-Plug 'Valloric/YouCompleteMe'
-let g:ycm_complete_in_comments = 1
-let g:ycm_server_python_interpreter = 'python3'
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+Plug 'Shougo/deoplete.nvim'
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
+Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-clang'
+" Set the environment variables, e.g. in ~/.bashrc:
+"   export LIBCLANG_PATH='/usr/lib/libclang.so'
+"   export CLANG_PATH='/usr/lib/llvm-5.0/lib/clang'
+let g:deoplete#sources#clang#libclang_path = $LIBCLANG_PATH
+let g:deoplete#sources#clang#clang_header = $CLANG_PATH
 
 " Snippet engine
 Plug 'SirVer/ultisnips'
@@ -239,22 +244,6 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
 Plug 'shime/vim-livedown'
 " LaTeX
 Plug 'lervag/vimtex'
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers.tex = [
-      \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-      \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-      \ 're!\\hyperref\[[^]]*',
-      \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-      \ 're!\\(include(only)?|input){[^}]*',
-      \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-      \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-      \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-      \ 're!\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
-      \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
-      \ 're!\\[A-Za-z]*',
-      \ ]
 " C++
 Plug 'octol/vim-cpp-enhanced-highlight'
 " Scratchpad for multiple languages
