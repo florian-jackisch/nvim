@@ -1,0 +1,7 @@
+snippet cxxstandard "Set C++ version"
+set_target_properties(${1:project} PROPERTIES
+    CXX_STANDARD ${2:14}
+    CXX_STANDARD_REQUIRED YES
+    CXX_EXTENSIONS NO
+)$3
+endsnippet
