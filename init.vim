@@ -64,6 +64,7 @@ Plug 'tpope/vim-surround'
 " Comments with gc
 Plug 'tpope/vim-commentary'
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+autocmd FileType cmake set commentstring=#\ %s
 " Git
 Plug 'tpope/vim-fugitive'
 nnoremap <silent> <leader>gs :Gstatus<CR>
