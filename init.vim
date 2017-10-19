@@ -195,7 +195,6 @@ Plug 'Valloric/YouCompleteMe'
 let g:ycm_complete_in_comments = 1
 let g:ycm_server_python_interpreter = 'python3'
 let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 
 " Snippet engine
@@ -259,7 +258,6 @@ let g:ycm_semantic_triggers.tex = [
       \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
       \ 're!\\[A-Za-z]*',
       \ ]
-
 " C++
 Plug 'octol/vim-cpp-enhanced-highlight'
 " Scratchpad for multiple languages
