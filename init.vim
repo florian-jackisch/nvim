@@ -258,7 +258,6 @@ let g:ycm_semantic_triggers.tex = [
       \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
       \ 're!\\[A-Za-z]*',
       \ ]
-
 " C++
 Plug 'octol/vim-cpp-enhanced-highlight'
 " Scratchpad for multiple languages
