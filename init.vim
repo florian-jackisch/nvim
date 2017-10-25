@@ -16,24 +16,17 @@ set smartcase
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Open new vsplit right
 set splitright
-" Enable folding with space
+" Enable folding by syntax
 set foldmethod=syntax
 set foldlevelstart=99
 " 80 columns is the target width
 set colorcolumn=80
-" Incremental search and replace
-if has("nvim")
-    set inccommand=nosplit
-endif
 " Highlight the current line
 set cursorline
+set noswapfile
 
 " Keyboard maps
 " -------------
-" Terminal window ESC
-if has("nvim")
-    tnoremap <Esc> <C-\><C-n>
-endif
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
@@ -41,7 +34,6 @@ noremap k gk
 vnoremap < <gv
 vnoremap > >gv
 " Allow using the repeat operator with a visual selection (!)
-" " http://stackoverflow.com/a/8064607/127816
 vnoremap . :normal .<CR>
 " Quickly open/reload vim
 nnoremap <leader>ve :edit $MYVIMRC<CR>
@@ -50,6 +42,14 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 nnoremap <CR> :noh<CR><CR>
 " Toggle wrapping and linebreak
 nnoremap gw :set wrap! <bar> :set linebreak!<CR>
+
+" Neovim specific settings
+if has("nvim")
+  " Incremental search and replace
+  set inccommand=nosplit
+  " terminal escape
+  tnoremap <Esc> <C-\><C-n>
+endif
 
 " Plugins
 " =======
@@ -106,7 +106,7 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 " Undotree
 Plug 'mbbill/undotree'
-nnoremap <leader>u :UndotreeToggle<cr>
+nnoremap <leader>uu :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle=1
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -114,20 +114,6 @@ nnoremap <silent> <leader>gg :TagbarToggle<CR>
 " vim-airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Open neovim terminal with :T <command>
-if has("nvim")
-    " Send to REPL with TREPLSendFile, TREPLSend
-    Plug 'kassio/neoterm'
-    " Open terminal and execute the command stored with Tmap
-    " Toggle the terminal
-    nnoremap <silent> <leader>tt :Ttoggle<cr>
-    " Run the mapped command
-    nnoremap <silent> <leader>tr :Topen <bar> normal ,tt<cr>
-    " Send to the REPL
-    nnoremap <silent> <leader>ts :TREPLSendLine<cr>
-    vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
-    nnoremap <silent> <leader>tf :TREPLSendFile<cr>
-endif
 " Toggle the quick and location list
 Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>ll'
@@ -191,12 +177,11 @@ Plug 'airblade/vim-rooter'
 " Completion plugins
 " ------------------
 " YCM
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': 'python3 ./install.py --clang-completer'}
 let g:ycm_complete_in_comments = 1
 let g:ycm_server_python_interpreter = 'python3'
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
-
 " Snippet engine
 Plug 'SirVer/ultisnips'
 " Snippets
@@ -206,23 +191,17 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
 " Linting
-Plug 'neomake/neomake'
-" Use the makeprg, eg. let &makeprg = 'build -C -j ./build'
-nmap <leader>c :Neomake!<cr>
-" Automatically run the linter on save
-autocmd! BufWritePost * Neomake
-let g:neomake_cpp_enabled_makers = ['clangtidy']
-let g:neomake_cpp_clangtidy_args = ['-checks=\*']
+Plug 'w0rp/ale'
+" Use the makeprg, eg. let &makeprg = 'make -C build -j'
+nmap <leader>c :make<cr>
 " Automatic tag creation
 Plug 'ludovicchabant/vim-gutentags'
-let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+let g:gutentags_cache_dir = '~/.gutentags_cache_dir'
 
 " Language plugins
 " ----------------
-" Doxygen
-Plug 'vim-scripts/DoxygenToolkit.vim'
-" QML
-Plug 'calincru/qml.vim'
+" Multiple languages
+Plug 'sheerun/vim-polyglot'
 " Go
 Plug 'fatih/vim-go'
 " Treat geany files like go files
@@ -233,13 +212,6 @@ Plug 'racer-rust/vim-racer'
 au FileType rust nmap <leader>r :RustRun<CR>
 set hidden
 let g:rustfmt_autosave = 1
-" Python
-Plug 'vim-scripts/indentpython.vim'
-" XML
-Plug 'alvan/vim-closetag'
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
-" Markdown
-Plug 'shime/vim-livedown'
 " LaTeX
 Plug 'lervag/vimtex'
 if !exists('g:ycm_semantic_triggers')
@@ -258,23 +230,36 @@ let g:ycm_semantic_triggers.tex = [
       \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
       \ 're!\\[A-Za-z]*',
       \ ]
-" C++
-Plug 'octol/vim-cpp-enhanced-highlight'
 " Scratchpad for multiple languages
 Plug 'metakirby5/codi.vim'
 
 " Color schemes
 " -------------
-" Plug 'chriskempson/base16-vim'
-" let base16colorspace=256  " Access colors present in 256 colorspace
-Plug 'lifepillar/vim-solarized8'
-
+Plug 'morhetz/gruvbox'
 Plug 'saghul/vim-colortoggle'
-let g:light_colorscheme = "solarized8_light"
-let g:dark_colorscheme = "solarized8_dark"
-let g:default_background_type = "light"
-nmap <leader>b :ToggleBg<CR>
-set termguicolors " true color
+
+" Neovim plugins
+" --------------
+if has("nvim")
+  " open neovim terminal with :t <command>
+  " send to repl with treplsendfile, treplsend
+  Plug 'kassio/neoterm'
+  " open terminal and execute the command stored with tmap
+  " toggle the terminal
+  nnoremap <silent> <leader>tt :Ttoggle<cr>
+  " run the mapped command
+  nnoremap <silent> <leader>tr :Topen <bar> normal ,tt<cr>
+  " send to the repl
+  nnoremap <silent> <leader>ts :TREPLSendLine<cr>
+  vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
+  nnoremap <silent> <leader>tf :TREPLSendFile<cr>
+endif
 
 call plug#end()
 
+" Color Scheme
+" ------------
+let g:default_background_type = 'dark'
+nmap <leader>b :ToggleBg<CR>
+let g:gruvbox_contrast_light = 'hard'
+colorscheme gruvbox

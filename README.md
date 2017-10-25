@@ -1,53 +1,11 @@
-# My neovim settings
+# My config for vim8 and neovim
 
-## Installing neovim
-[Link](https://github.com/neovim/neovim/wiki/Installing-Neovim)
+## Installation
 
-## Checking out this repository
+Clone the repository into the neovim config directory:
 
-    cd ~/.config
-    git clone https://github.com/thedarksideofthemoon/nvim.git
+```bash
+git clone https://github.com/florian-jackisch/nvim.git ~/.config/nvim
+```
 
-## Install Plugin Manager
-
-    curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-## Install the python dependencies
-    pip3 install neovim
-
-## Start nvim and install plugins
-
-    nvim
-    :PlugInstall
-
-## Install Rust
-
-    curl https://sh.rustup.rs -sSf | sh
-
-Then follow the onscreen instructions (c.f. [rustup Readme](https://github.com/rust-lang-nursery/rustup.rs)).
-
-Install racer:
-
-    cargo install racer
-
-Install the source code for racer:
-
-    rustup component add rust-src
-
-Edit your .bashrc to contain the following lines:
-
-    # Rust
-    export PATH="$HOME/.cargo/bin:$PATH"
-    # For Racer
-    export CARGO_HOME="$HOME/.cargo"
-    export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-
-## Compile YouCompleteMe
-
-    cd ~/.config/nvim/plugged/YouCompleteMe
-    # Select your completers
-    ./install.py --clang-completer --omnisharp-completer --gocode-completer --tern-completer --racer-completer
-
-## Install livedown
-
-    npm install -g livedown
+Install with the script `install_vim.sh` or `install_nvim.sh`.
