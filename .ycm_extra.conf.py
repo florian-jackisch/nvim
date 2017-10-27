@@ -9,16 +9,11 @@ has flags, those flags are used. If no entry can be found,  will be
 used.
 """
 
-import os
-import ycm_core
-
-
 flags = [
     '-x',
     'c++',
     '-DNDEBUG',
     '-Wall',
-    '-Werror',
     '-Wextra',
     '-std=c++14',
 ]

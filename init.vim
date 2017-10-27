@@ -111,9 +111,6 @@ let g:undotree_SetFocusWhenToggle=1
 " Tagbar
 Plug 'majutsushi/tagbar'
 nnoremap <silent> <leader>gg :TagbarToggle<CR>
-" vim-airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 " Toggle the quick and location list
 Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>ll'
@@ -235,8 +232,12 @@ Plug 'metakirby5/codi.vim'
 
 " Color schemes
 " -------------
-Plug 'morhetz/gruvbox'
 Plug 'saghul/vim-colortoggle'
+Plug 'lifepillar/vim-solarized8'
+let g:default_background_type = 'light'
+let g:dark_colorscheme = 'solarized8_dark'
+let g:light_colorscheme = 'solarized8_light'
+nmap <leader>b :ToggleBg<CR>
 
 " Neovim plugins
 " --------------
@@ -256,10 +257,3 @@ if has("nvim")
 endif
 
 call plug#end()
-
-" Color Scheme
-" ------------
-let g:default_background_type = 'dark'
-nmap <leader>b :ToggleBg<CR>
-let g:gruvbox_contrast_light = 'hard'
-colorscheme gruvbox

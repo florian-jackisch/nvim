@@ -9,8 +9,3 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 
 # Install the plugins
 vim +PlugInstall +qall
-
-# Link the color scheme
-ln -s ~/.config/nvim/fzf_gruvbox.bash ~/.fzf_gruvbox.bash
-echo "Please add the following line to your .bashrc or .fzf.bash:"
-echo "source $HOME/.fzf_gruvbox.bash"
