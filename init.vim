@@ -42,8 +42,13 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 nnoremap <CR> :noh<CR><CR>
 " Toggle wrapping and linebreak
 nnoremap gw :set wrap! <bar> :set linebreak!<CR>
+nnoremap <silent> <up> :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <down> :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
-" Neovim specific settings
+" Neovim settings
+" ---------------
 if has("nvim")
   " Incremental search and replace
   set inccommand=nosplit
