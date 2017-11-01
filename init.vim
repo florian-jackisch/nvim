@@ -250,6 +250,18 @@ let g:dark_colorscheme = 'solarized8_dark'
 let g:light_colorscheme = 'solarized8_light'
 nmap <leader>b :ToggleBg<CR>
 
+" Fonts
+" -----
+" The installed font is called 'FuraMono Nerd Font'
+set encoding=utf8
+Plug 'ryanoasis/nerd-fonts', {'do': './install.sh FiraMono'}
+if has('unix')
+  set guifont=FuraMono\ Nerd\ Font\ Regular\ 11
+else
+  set guifont=FuraMono\ Nerd\ Font\ Regular:11
+endif
+Plug 'ryanoasis/vim-devicons'
+
 " Neovim plugins
 " --------------
 if has("nvim")
