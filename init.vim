@@ -120,6 +120,12 @@ nnoremap <silent> <leader>gg :TagbarToggle<CR>
 Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>ll'
 let g:lt_quickfix_list_toggle_map = '<leader>qq'
+" Airline
+Plug 'vim-airline/vim-airline'
+let g:airline_powerline_fonts = 1
+Plug 'vim-airline/vim-airline-themes'
+" Goyo distraction-free writing
+Plug 'junegunn/goyo.vim'
 
 " Search plugins
 " --------------
