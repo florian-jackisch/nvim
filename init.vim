@@ -252,16 +252,13 @@ nmap <leader>b :ToggleBg<CR>
 " Fonts
 " -----
 if $USE_NERDFONT
-  set encoding=utf8
-  let g:airline_powerline_fonts = 1
-  " The installed font is called 'FuraMono Nerd Font' from
-  " `https://github.com/ryanoasis/nerd-fonts`
-  if has('unix')
-    set guifont=FuraMonoForPowerline\ Nerd\ Font\ Regular\ 11
+  if has('gui_running')
+    " do not use the fancy icons in the GUI
   else
-    set guifont=FuraMonoForPowerline\ Nerd\ Font\ Regular:11
+    set encoding=utf8
+    let g:airline_powerline_fonts = 1
+    Plug 'ryanoasis/vim-devicons'
   endif
-  Plug 'ryanoasis/vim-devicons'
 endif
 
 " Neovim plugins
