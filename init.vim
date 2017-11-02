@@ -122,6 +122,7 @@ let g:lt_location_list_toggle_map = '<leader>ll'
 let g:lt_quickfix_list_toggle_map = '<leader>qq'
 " Airline
 Plug 'vim-airline/vim-airline'
+let g:airline#extensions#tabline#enabled = 1
 Plug 'vim-airline/vim-airline-themes'
 " Goyo distraction-free writing
 Plug 'junegunn/goyo.vim'
