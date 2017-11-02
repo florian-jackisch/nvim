@@ -9,7 +9,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 
 # Install the plugins
 nvim +PlugInstall +qall
-nvim +PlugUpgrade +PlugUpdate +PromptlineSnapshot ~/.shell_prompt.sh airline +qall
 
 # Install the font
 unamestr=`uname`
@@ -25,7 +24,3 @@ echo "To use a font with advanced glyphs, set your terminal to use the Font Fura
 echo "    export USE_NERDFONT=1"
 echo "to your bashrc."
 echo "Vim will detect the environment variable and load additional plugins after another :PlugUpdate"
-echo ""
-echo "You might also want to use the airline prompt in your terminal. To do so, add"
-echo "    source ~/.shell_prompt.sh"
-echo "to your bashrc."
