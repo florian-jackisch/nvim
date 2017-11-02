@@ -124,6 +124,11 @@ let g:lt_quickfix_list_toggle_map = '<leader>qq'
 Plug 'vim-airline/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 Plug 'vim-airline/vim-airline-themes'
+" Using promptline: 
+" :PromptlineSnapshot ~/.shell_prompt.sh airline
+" In ~/.bashrc:
+" source ~/.shell_prompt.sh
+Plug 'edkolev/promptline.vim'
 " Goyo distraction-free writing
 Plug 'junegunn/goyo.vim'
 

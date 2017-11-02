@@ -2,7 +2,8 @@
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install the plugins
-nvim +PlugUpdate +qall
+nvim +PlugInstall +qall
+nvim +PlugUpgrade +PlugUpdate +PromptlineSnapshot ~/.shell_prompt.sh airline +qall
 
 # Install the font
 unamestr=`uname`
@@ -15,6 +16,10 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
 fi
 
 echo "To use a font with advanced glyphs, set your terminal to use the Font FuraMonoForPowerline Nerd Font and add"
-echo "export USE_NERDFONT=1"
+echo "    export USE_NERDFONT=1"
 echo "to your bashrc."
-echo "Neovim will detect the environment variable and load additional plugins after another :PlugUpdate".
+echo "Neovim will detect the environment variable and load additional plugins after another :PlugUpdate"
+echo ""
+echo "You might also want to use the airline prompt in your terminal. To do so, add"
+echo "    source ~/.shell_prompt.sh"
+echo "to your bashrc."
