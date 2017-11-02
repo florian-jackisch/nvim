@@ -122,7 +122,6 @@ let g:lt_location_list_toggle_map = '<leader>ll'
 let g:lt_quickfix_list_toggle_map = '<leader>qq'
 " Airline
 Plug 'vim-airline/vim-airline'
-let g:airline_powerline_fonts = 1
 Plug 'vim-airline/vim-airline-themes'
 " Goyo distraction-free writing
 Plug 'junegunn/goyo.vim'
@@ -252,15 +251,18 @@ nmap <leader>b :ToggleBg<CR>
 
 " Fonts
 " -----
-" The installed font is called 'FuraMono Nerd Font'
-set encoding=utf8
-Plug 'ryanoasis/nerd-fonts', {'do': './install.sh FiraMono'}
-if has('unix')
-  set guifont=FuraMono\ Nerd\ Font\ Regular\ 11
-else
-  set guifont=FuraMono\ Nerd\ Font\ Regular:11
+if $USE_NERDFONT
+  set encoding=utf8
+  let g:airline_powerline_fonts = 1
+  " The installed font is called 'FuraMono Nerd Font' from
+  " `https://github.com/ryanoasis/nerd-fonts`
+  if has('unix')
+    set guifont=FuraMonoForPowerline\ Nerd\ Font\ Regular\ 11
+  else
+    set guifont=FuraMonoForPowerline\ Nerd\ Font\ Regular:11
+  endif
+  Plug 'ryanoasis/vim-devicons'
 endif
-Plug 'ryanoasis/vim-devicons'
 
 " Neovim plugins
 " --------------
