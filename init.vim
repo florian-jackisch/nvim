@@ -63,6 +63,7 @@ if exists('*minpac#init')
 
   " tpope plugins
   call minpac#add('tpope/vim-commentary')
+  call minpac#add('tpope/vim-dispatch')
   call minpac#add('tpope/vim-fugitive')
   call minpac#add('tpope/vim-repeat')
   call minpac#add('tpope/vim-sensible')
@@ -116,7 +117,8 @@ if exists('*minpac#init')
 
   " Neovim
   if has("nvim")
-    call minpac#add( 'kassio/neoterm')
+    call minpac#add('kassio/neoterm')
+    call minpac#add('radenling/vim-dispatch-neovim')
   endif
 endif
 
@@ -124,10 +126,14 @@ command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
 " Plugin settings
+" ---------------
 
 " Comments for C++ and CMake
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
+
+" Dispatch
+nmap <leader>c :Make<cr>
 
 " Git
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -208,7 +214,6 @@ let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 
 " Ale
-nmap <leader>c :make<cr>
 let g:ale_linters = {
 \   'c': ['clangtidy'],
 \   'cpp': ['clangtidy'],
