@@ -53,6 +53,8 @@ nnoremap <M-k> <c-w>k
 nnoremap <M-l> <c-w>l
 nnoremap <M-v> <c-w>v
 nnoremap <M-s> <c-w>s
+nnoremap <M-r> <c-w>r
+nnoremap <M-t> <c-w>T
 vnoremap <M-h> <c-w>h
 vnoremap <M-j> <c-w>j
 vnoremap <M-k> <c-w>k
