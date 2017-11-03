@@ -46,6 +46,17 @@ nnoremap <silent> <up> :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <down> :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
 nnoremap <silent> <right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+" Move to different windows
+nnoremap <M-h> <c-w>h
+nnoremap <M-j> <c-w>j
+nnoremap <M-k> <c-w>k
+nnoremap <M-l> <c-w>l
+nnoremap <M-v> <c-w>v
+nnoremap <M-s> <c-w>s
+vnoremap <M-h> <c-w>h
+vnoremap <M-j> <c-w>j
+vnoremap <M-k> <c-w>k
+vnoremap <M-l> <c-w>l
 
 " Neovim settings
 " ---------------
@@ -53,7 +64,12 @@ if has("nvim")
   " Incremental search and replace
   set inccommand=nosplit
   " terminal escape
-  tnoremap <Esc> <C-\><C-n>
+  tnoremap <Esc> <c-\><C-n>
+  tnoremap <c-v> <Esc><Esc>
+  tnoremap <M-h> <c-\><c-n><c-w>h
+  tnoremap <M-j> <c-\><c-n><c-w>j
+  tnoremap <M-k> <c-\><c-n><c-w>k
+  tnoremap <M-l> <c-\><c-n><c-w>l
 endif
 
 " Plugins
@@ -133,8 +149,10 @@ autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
 
 " Dispatch
+nmap <leader>c :Make<CR>
+nmap <leader>d :Dispatch<CR>
 autocmd FileType c,cpp compiler make
-nmap <leader>c :Make<cr>
+autocmd FileType c,cpp let b:dispatch='make -C build test'
 
 " Git
 nnoremap <silent> <leader>gs :Gstatus<CR>
