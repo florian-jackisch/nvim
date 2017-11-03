@@ -24,8 +24,6 @@ set colorcolumn=80
 " Highlight the current line
 set cursorline
 set noswapfile
-" Persistent undo
-set undofile
 
 " Keyboard maps
 " -------------
