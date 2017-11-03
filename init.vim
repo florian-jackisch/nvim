@@ -133,6 +133,7 @@ autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
 
 " Dispatch
+autocmd FileType c,cpp compiler make
 nmap <leader>c :Make<cr>
 
 " Git
