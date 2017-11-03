@@ -24,6 +24,8 @@ set colorcolumn=80
 " Highlight the current line
 set cursorline
 set noswapfile
+" Persistent undo
+set undofile
 
 " Keyboard maps
 " -------------
@@ -81,6 +83,7 @@ if exists('*minpac#init')
   call minpac#add('tpope/vim-commentary')
   call minpac#add('tpope/vim-dispatch')
   call minpac#add('tpope/vim-fugitive')
+  call minpac#add('tpope/vim-obsession')
   call minpac#add('tpope/vim-repeat')
   call minpac#add('tpope/vim-sensible')
   call minpac#add('tpope/vim-sleuth')
