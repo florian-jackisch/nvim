@@ -155,10 +155,6 @@ omap ä ]
 xmap ö [
 xmap ä ]
 
-" Always show the gutter
-autocmd BufEnter * sign define dummy
-autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-
 " NERDTree
 nnoremap <leader>ee :NERDTreeToggle<CR>
 nnoremap <leader>ef :NERDTreeFind<CR>
@@ -223,15 +219,16 @@ let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 
 " Ale
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> [w <Plug>(ale_previous)
+nmap <silent> ]w <Plug>(ale_next)
+nmap <silent> ]W <Plug>(ale_last)
 let g:ale_linters = {
 \   'c': ['clangtidy'],
 \   'cpp': ['clangtidy'],
 \   'python': ['pylint'],
 \}
-nmap <silent> [W <Plug>(ale_first)
-nmap <silent> [w <Plug>(ale_previous)
-nmap <silent> ]w <Plug>(ale_next)
-nmap <silent> ]W <Plug>(ale_last)
+let g:ale_sign_column_always=1
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
