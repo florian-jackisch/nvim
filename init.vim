@@ -95,7 +95,7 @@ if exists('*minpac#init')
   call minpac#add('vim-airline/vim-airline-themes')
 
   " Code completion
-  call minpac#add('Valloric/YouCompleteMe', {'do': 'cd ~/.config/nvim/pack/minpac/start/YouCompleteMe; python3 ./install.py --clang-completer'})
+  call minpac#add('Valloric/YouCompleteMe', {'do': '!~/.config/nvim/build_ycm.sh'})
   call minpac#add('SirVer/ultisnips')
   call minpac#add('ludovicchabant/vim-gutentags')
   call minpac#add('w0rp/ale')
