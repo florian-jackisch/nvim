@@ -1,12 +1,3 @@
-# Symlink vimrc
-ln -s ~/.config/nvim/init.vim ~/.vimrc
-mkdir -p ~/.vim
-ln -s ~/.config/nvim/UltiSnips ~/.vim
-ln -s ~/.config/nvim/spell ~/.vim
-
-# Install the plugins
-nvim +PackUpdate +qall
-
 # Install the font
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
@@ -20,4 +11,4 @@ fi
 echo "To use a font with advanced glyphs, set your terminal to use the Font FuraMonoForPowerline Nerd Font and add"
 echo "    export USE_NERDFONT=1"
 echo "to your bashrc."
-echo "Vim will detect the environment variable and load additional plugins after another :PlugUpdate"
+echo "Neovim will detect the environment variable and load additional plugins after another :PlugUpdate"

@@ -5,7 +5,7 @@
 Clone the repository into the neovim config directory:
 
 ```bash
-git clone https://github.com/florian-jackisch/nvim.git ~/.config/nvim
+git clone https://github.com/florian-jackisch/nvim.git ~/.config/nvim --recursive
 ```
 
 Install with the script `install_vim.sh` or `install_nvim.sh`.
