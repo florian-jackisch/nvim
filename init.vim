@@ -147,6 +147,14 @@ nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
 
+" Unimpaired mappings without []
+nmap ö [
+nmap ä ]
+omap ö [
+omap ä ]
+xmap ö [
+xmap ä ]
+
 " Always show the gutter
 autocmd BufEnter * sign define dummy
 autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
@@ -220,6 +228,10 @@ let g:ale_linters = {
 \   'cpp': ['clangtidy'],
 \   'python': ['pylint'],
 \}
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> [w <Plug>(ale_previous)
+nmap <silent> ]w <Plug>(ale_next)
+nmap <silent> ]W <Plug>(ale_last)
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
