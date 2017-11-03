@@ -268,7 +268,11 @@ let g:ycm_error_symbol = '•'
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 
 " Color scheme
-let g:default_background_type = 'light'
+if $BACKGROUND_TYPE == 'dark'
+  let g:default_background_type = 'dark'
+else
+  let g:default_background_type = 'light'
+endif
 let g:dark_colorscheme = 'solarized8_dark'
 let g:light_colorscheme = 'solarized8_light'
 nmap <leader>b :ToggleBg<CR>
