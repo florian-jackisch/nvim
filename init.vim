@@ -141,6 +141,7 @@ nmap <leader>c :Make<CR>
 nmap <leader>d :Dispatch<CR>
 autocmd FileType c,cpp compiler make
 autocmd FileType c,cpp let b:dispatch='make -C build test'
+autocmd FileType python let b:dispatch='python %'
 
 " Git
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -275,3 +276,4 @@ if has("nvim")
   vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
   nnoremap <silent> <leader>tf :TREPLSendFile<cr>
 endif
+
