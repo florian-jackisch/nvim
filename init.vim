@@ -55,6 +55,8 @@ if has("nvim")
   " terminal escape
   tnoremap <Esc> <c-\><C-n>
   tnoremap <c-v> <Esc><Esc>
+  " Disable sensible - not necessary with nvim
+  let g:loaded_sensible=0
 endif
 
 " Plugins
