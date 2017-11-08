@@ -99,7 +99,11 @@ if exists('*minpac#init')
   call minpac#add('vim-airline/vim-airline-themes')
 
   " Code completion
-  call minpac#add('Valloric/YouCompleteMe', {'do': '!~/.config/nvim/build_ycm.sh'})
+  if !has('nvim')
+    call minpac#add('roxma/vim-hug-neovim-rpc')
+  endif
+  call minpac#add('roxma/nvim-completion-manager')
+  call minpac#add('roxma/ncm-clang')
   call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
   call minpac#add('ludovicchabant/vim-gutentags')
@@ -125,6 +129,7 @@ if exists('*minpac#init')
   if has("nvim")
     call minpac#add('kassio/neoterm')
     call minpac#add('radenling/vim-dispatch-neovim')
+    call minpac#add('roxma/python-support.nvim')
   endif
 endif
 
@@ -225,12 +230,6 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
 
-" Completion
-let g:ycm_complete_in_comments = 1
-let g:ycm_server_python_interpreter = 'python3'
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
-
 " Ale
 nmap <silent> [W <Plug>(ale_first)
 nmap <silent> [w <Plug>(ale_previous)
@@ -241,7 +240,7 @@ let g:ale_linters = {
 \   'cpp': ['clangtidy'],
 \   'python': ['pylint'],
 \}
-let g:ale_cpp_clangtidy_checks = ['cppcoreguidelines*', 'misc*', 'modernize*', 'performance*', 'readability*']
+let g:ale_cpp_clangtidy_checks = ['cppcoreguidelines-*', 'misc-*', 'modernize-*', 'performance-*', 'readability-*', 'bugprone-*', 'clang-analyzer-']
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -249,9 +248,16 @@ let g:ale_lint_on_file_type_changed = 0
 let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 
-" YouCompleteMe
-let g:ycm_warning_symbol = '•'
-let g:ycm_error_symbol = '•'
+" Completion
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
+" Add preview to see docstrings in the complete window.
+let g:cm_completeopt = 'menu,menuone,noinsert,noselect,preview'
+" Close the prevew window automatically on InsertLeave
+" https://github.com/davidhalter/jedi-vim/blob/eba90e615d73020365d43495fca349e5a2d4f995/ftplugin/python/jedi.vim#L44
+augroup ncm_preview
+    autocmd! InsertLeave <buffer> if pumvisible() == 0|pclose|endif
+augroup END
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
@@ -262,7 +268,7 @@ let g:pymode_warnings = 0         " handled by ale
 let g:pymode_trim_whitespaces = 0 " handled by neoformat
 let g:pymode_run = 0              " handled by dispatch
 let g:pymode_lint = 0             " handled by ale
-let g:pymode_rope = 0             " handled by YouCompleteMe
+let g:pymode_rope = 0             " handled by tags
 let g:pymode_rope_completion = 0
 
 " Color scheme
@@ -282,10 +288,17 @@ endif
 
 " Neovim plugins
 if has("nvim")
+  " For the terminal
   nnoremap <silent> <leader>tt :Ttoggle<cr>
   nnoremap <silent> <leader>tr :Topen <bar> normal ,tt<cr>
   nnoremap <silent> <leader>ts :TREPLSendLine<cr>
   vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
   nnoremap <silent> <leader>tf :TREPLSendFile<cr>
+
+  " For python dependencies
+  let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
+  let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'pylint')
+  let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'jedi')
+  let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'pylint')
 endif
 
