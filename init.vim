@@ -109,6 +109,8 @@ if exists('*minpac#init')
   call minpac#add('fatih/vim-go')
   call minpac#add('lervag/vimtex')
   call minpac#add('metakirby5/codi.vim')
+  call minpac#add('octol/vim-cpp-enhanced-highlight')
+  call minpac#add('python-mode/python-mode')
   call minpac#add('racer-rust/vim-racer')
   call minpac#add('rust-lang/rust.vim')
 
@@ -141,7 +143,7 @@ nmap <leader>c :Make<CR>
 nmap <leader>d :Dispatch<CR>
 autocmd FileType c,cpp compiler make
 autocmd FileType c,cpp let b:dispatch='make -C build test'
-autocmd FileType python let b:dispatch='python %'
+autocmd FileType python compiler pyrun
 
 " Git
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -239,6 +241,7 @@ let g:ale_linters = {
 \   'cpp': ['clangtidy'],
 \   'python': ['pylint'],
 \}
+let g:ale_cpp_clangtidy_checks = ['cppcoreguidelines*', 'misc*', 'modernize*', 'performance*', 'readability*']
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -252,6 +255,15 @@ let g:ycm_error_symbol = '•'
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+
+" Python
+let g:pymode_python = 'python3'
+let g:pymode_warnings = 0         " handled by ale
+let g:pymode_trim_whitespaces = 0 " handled by neoformat
+let g:pymode_run = 0              " handled by dispatch
+let g:pymode_lint = 0             " handled by ale
+let g:pymode_rope = 0             " handled by YouCompleteMe
+let g:pymode_rope_completion = 0
 
 " Color scheme
 if $BACKGROUND_TYPE == 'dark'
