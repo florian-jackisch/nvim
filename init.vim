@@ -111,7 +111,6 @@ if exists('*minpac#init')
   call minpac#add('metakirby5/codi.vim')
   call minpac#add('racer-rust/vim-racer')
   call minpac#add('rust-lang/rust.vim')
-  call minpac#add('sheerun/vim-polyglot')
 
   " Design
   call minpac#add('lifepillar/vim-solarized8', {'type': 'opt'})
@@ -253,7 +252,6 @@ let g:ycm_error_symbol = '•'
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
-let g:gutentags_exclude_project_root = ['~/.config/nvim']
 
 " Color scheme
 if $BACKGROUND_TYPE == 'dark'
