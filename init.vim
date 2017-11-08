@@ -115,6 +115,7 @@ if exists('*minpac#init')
   call minpac#add('metakirby5/codi.vim')
   call minpac#add('octol/vim-cpp-enhanced-highlight')
   call minpac#add('python-mode/python-mode')
+  call minpac#add('fisadev/vim-isort')
   call minpac#add('racer-rust/vim-racer')
   call minpac#add('rust-lang/rust.vim')
 
@@ -270,6 +271,7 @@ let g:pymode_run = 0              " handled by dispatch
 let g:pymode_lint = 0             " handled by ale
 let g:pymode_rope = 0             " handled by tags
 let g:pymode_rope_completion = 0
+let g:vim_isort_map = ''
 
 " Color scheme
 if $BACKGROUND_TYPE == 'dark'
@@ -298,7 +300,9 @@ if has("nvim")
   " For python dependencies
   let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
   let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'pylint')
+  let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'isort')
   let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'jedi')
   let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'pylint')
+  let g:python_support_python2_requirements = add(get(g:,'python_support_python3_requirements',[]),'isort')
 endif
 
