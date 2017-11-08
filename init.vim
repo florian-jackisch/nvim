@@ -99,7 +99,9 @@ if exists('*minpac#init')
   call minpac#add('vim-airline/vim-airline-themes')
 
   " Code completion
-  call minpac#add('Valloric/YouCompleteMe', {'do': '!~/.config/nvim/build_ycm.sh'})
+  call minpac#add('Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'})
+  call minpac#add('tweekmonster/deoplete-clang2')
+  call minpac#add('zchee/deoplete-jedi')
   call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
   call minpac#add('ludovicchabant/vim-gutentags')
@@ -225,12 +227,6 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
 
-" Completion
-let g:ycm_complete_in_comments = 1
-let g:ycm_server_python_interpreter = 'python3'
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
-
 " Ale
 nmap <silent> [W <Plug>(ale_first)
 nmap <silent> [w <Plug>(ale_previous)
@@ -249,9 +245,10 @@ let g:ale_lint_on_file_type_changed = 0
 let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 
-" YouCompleteMe
-let g:ycm_warning_symbol = '•'
-let g:ycm_error_symbol = '•'
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
@@ -262,7 +259,7 @@ let g:pymode_warnings = 0         " handled by ale
 let g:pymode_trim_whitespaces = 0 " handled by neoformat
 let g:pymode_run = 0              " handled by dispatch
 let g:pymode_lint = 0             " handled by ale
-let g:pymode_rope = 0             " handled by YouCompleteMe
+let g:pymode_rope = 0             " handled by tags
 let g:pymode_rope_completion = 0
 
 " Color scheme
