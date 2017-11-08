@@ -252,6 +252,7 @@ let g:ycm_error_symbol = '•'
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+let g:gutentags_exclude_project_root = '~/.config/nvim'
 
 " Color scheme
 if $BACKGROUND_TYPE == 'dark'
