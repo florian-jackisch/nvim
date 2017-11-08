@@ -99,9 +99,11 @@ if exists('*minpac#init')
   call minpac#add('vim-airline/vim-airline-themes')
 
   " Code completion
-  call minpac#add('Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'})
-  call minpac#add('tweekmonster/deoplete-clang2')
-  call minpac#add('zchee/deoplete-jedi')
+  if !has('nvim')
+    call minpac#add('roxma/vim-hug-neovim-rpc')
+  endif
+  call minpac#add('roxma/nvim-completion-manager')
+  call minpac#add('roxma/ncm-clang')
   call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
   call minpac#add('ludovicchabant/vim-gutentags')
@@ -127,6 +129,7 @@ if exists('*minpac#init')
   if has("nvim")
     call minpac#add('kassio/neoterm')
     call minpac#add('radenling/vim-dispatch-neovim')
+    call minpac#add('roxma/python-support.nvim')
   endif
 endif
 
@@ -237,7 +240,7 @@ let g:ale_linters = {
 \   'cpp': ['clangtidy'],
 \   'python': ['pylint'],
 \}
-let g:ale_cpp_clangtidy_checks = ['cppcoreguidelines*', 'misc*', 'modernize*', 'performance*', 'readability*']
+let g:ale_cpp_clangtidy_checks = ['cppcoreguidelines-*', 'misc-*', 'modernize-*', 'performance-*', 'readability-*', 'bugprone-*', 'clang-analyzer-']
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -245,10 +248,16 @@ let g:ale_lint_on_file_type_changed = 0
 let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
+" Completion
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
+" Add preview to see docstrings in the complete window.
+let g:cm_completeopt = 'menu,menuone,noinsert,noselect,preview'
+" Close the prevew window automatically on InsertLeave
+" https://github.com/davidhalter/jedi-vim/blob/eba90e615d73020365d43495fca349e5a2d4f995/ftplugin/python/jedi.vim#L44
+augroup ncm_preview
+    autocmd! InsertLeave <buffer> if pumvisible() == 0|pclose|endif
+augroup END
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
@@ -279,10 +288,17 @@ endif
 
 " Neovim plugins
 if has("nvim")
+  " For the terminal
   nnoremap <silent> <leader>tt :Ttoggle<cr>
   nnoremap <silent> <leader>tr :Topen <bar> normal ,tt<cr>
   nnoremap <silent> <leader>ts :TREPLSendLine<cr>
   vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
   nnoremap <silent> <leader>tf :TREPLSendFile<cr>
+
+  " For python dependencies
+  let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
+  let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'pylint')
+  let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'jedi')
+  let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'pylint')
 endif
 
