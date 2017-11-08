@@ -101,6 +101,7 @@ if exists('*minpac#init')
   " Code completion
   call minpac#add('Valloric/YouCompleteMe', {'do': '!~/.config/nvim/build_ycm.sh'})
   call minpac#add('SirVer/ultisnips')
+  call minpac#add('honza/vim-snippets')
   call minpac#add('ludovicchabant/vim-gutentags')
   call minpac#add('w0rp/ale')
 
