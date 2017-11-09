@@ -67,6 +67,7 @@ if exists('*minpac#init')
   " tpope plugins
   call minpac#add('tpope/vim-commentary')
   call minpac#add('tpope/vim-dispatch')
+  call minpac#add('tpope/vim-eunuch')
   call minpac#add('tpope/vim-fugitive')
   call minpac#add('tpope/vim-obsession')
   call minpac#add('tpope/vim-repeat')
