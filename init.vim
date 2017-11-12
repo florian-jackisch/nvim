@@ -121,8 +121,7 @@ if exists('*minpac#init')
   call minpac#add('rust-lang/rust.vim')
 
   " Design
-  call minpac#add('lifepillar/vim-solarized8', {'type': 'opt'})
-  call minpac#add('saghul/vim-colortoggle')
+  call minpac#add('altercation/vim-colors-solarized', {'type': 'opt'})
   if $USE_NERDFONT && !has('gui_running')
     call minpac#add('ryanoasis/vim-devicons')
   endif
@@ -276,13 +275,11 @@ let g:vim_isort_map = ''
 
 " Color scheme
 if $BACKGROUND_TYPE == 'dark'
-  let g:default_background_type = 'dark'
+  set background=dark
 else
-  let g:default_background_type = 'light'
+  set background=light
 endif
-let g:dark_colorscheme = 'solarized8_dark'
-let g:light_colorscheme = 'solarized8_light'
-nmap <leader>b :ToggleBg<CR>
+colorscheme solarized
 
 " Fonts
 if $USE_NERDFONT && !has('gui_running')
