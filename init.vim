@@ -206,8 +206,13 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 nnoremap <C-p> :Files<CR>
+nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :Tags<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
 
 " Neoformat
 nnoremap <silent> <leader>f :Neoformat<CR>
