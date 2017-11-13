@@ -100,11 +100,7 @@ if exists('*minpac#init')
   call minpac#add('vim-airline/vim-airline-themes')
 
   " Code completion
-  if !has('nvim')
-    call minpac#add('roxma/vim-hug-neovim-rpc')
-  endif
-  call minpac#add('roxma/nvim-completion-manager')
-  call minpac#add('roxma/ncm-clang')
+  call minpac#add('Valloric/YouCompleteMe', {'do': '!~/.config/nvim/build_ycm.sh'})
   call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
   call minpac#add('ludovicchabant/vim-gutentags')
@@ -250,15 +246,12 @@ let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 
 " Completion
-inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
-" Add preview to see docstrings in the complete window.
-let g:cm_completeopt = 'menu,menuone,noinsert,noselect,preview'
-" Close the prevew window automatically on InsertLeave
-" https://github.com/davidhalter/jedi-vim/blob/eba90e615d73020365d43495fca349e5a2d4f995/ftplugin/python/jedi.vim#L44
-augroup ncm_preview
-    autocmd! InsertLeave <buffer> if pumvisible() == 0|pclose|endif
-augroup END
+let g:ycm_complete_in_comments = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_error_symbol = '•'
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_server_python_interpreter = 'python3'
+let g:ycm_warning_symbol = '•'
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
@@ -269,7 +262,7 @@ let g:pymode_warnings = 0         " handled by ale
 let g:pymode_trim_whitespaces = 0 " handled by neoformat
 let g:pymode_run = 0              " handled by dispatch
 let g:pymode_lint = 0             " handled by ale
-let g:pymode_rope = 0             " handled by tags
+let g:pymode_rope = 0             " handled by YouCompleteMe
 let g:pymode_rope_completion = 0
 let g:vim_isort_map = ''
 
