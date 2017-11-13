@@ -1,6 +1,6 @@
 autoload/*
 pack/minpac/start
-pack/minpac/opt/vim-solarized8
+pack/minpac/opt/vim-colors-solarized
 tags*
 *.spl
 .netrwhist

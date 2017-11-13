@@ -100,11 +100,7 @@ if exists('*minpac#init')
   call minpac#add('vim-airline/vim-airline-themes')
 
   " Code completion
-  if !has('nvim')
-    call minpac#add('roxma/vim-hug-neovim-rpc')
-  endif
-  call minpac#add('roxma/nvim-completion-manager')
-  call minpac#add('roxma/ncm-clang')
+  call minpac#add('Valloric/YouCompleteMe', {'do': '!~/.config/nvim/build_ycm.sh'})
   call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
   call minpac#add('ludovicchabant/vim-gutentags')
@@ -119,10 +115,10 @@ if exists('*minpac#init')
   call minpac#add('fisadev/vim-isort')
   call minpac#add('racer-rust/vim-racer')
   call minpac#add('rust-lang/rust.vim')
+  call minpac#add('pboettch/vim-cmake-syntax')
 
   " Design
-  call minpac#add('lifepillar/vim-solarized8', {'type': 'opt'})
-  call minpac#add('saghul/vim-colortoggle')
+  call minpac#add('altercation/vim-colors-solarized', {'type': 'opt'})
   if $USE_NERDFONT && !has('gui_running')
     call minpac#add('ryanoasis/vim-devicons')
   endif
@@ -148,8 +144,8 @@ autocmd FileType cmake set commentstring=#\ %s
 " Dispatch
 nmap <leader>c :Make<CR>
 nmap <leader>d :Dispatch<CR>
-autocmd FileType c,cpp compiler make
-autocmd FileType c,cpp let b:dispatch='make -C build test'
+autocmd FileType c,cpp,cmake compiler make
+autocmd FileType c,cpp,cmake let b:dispatch='make -C build test'
 autocmd FileType python compiler pyrun
 
 " Git
@@ -210,8 +206,13 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 nnoremap <C-p> :Files<CR>
+nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :Tags<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
 
 " Neoformat
 nnoremap <silent> <leader>f :Neoformat<CR>
@@ -251,15 +252,12 @@ let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 
 " Completion
-inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
-" Add preview to see docstrings in the complete window.
-let g:cm_completeopt = 'menu,menuone,noinsert,noselect,preview'
-" Close the prevew window automatically on InsertLeave
-" https://github.com/davidhalter/jedi-vim/blob/eba90e615d73020365d43495fca349e5a2d4f995/ftplugin/python/jedi.vim#L44
-augroup ncm_preview
-    autocmd! InsertLeave <buffer> if pumvisible() == 0|pclose|endif
-augroup END
+let g:ycm_complete_in_comments = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_error_symbol = '•'
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_server_python_interpreter = 'python3'
+let g:ycm_warning_symbol = '•'
 
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
@@ -270,19 +268,17 @@ let g:pymode_warnings = 0         " handled by ale
 let g:pymode_trim_whitespaces = 0 " handled by neoformat
 let g:pymode_run = 0              " handled by dispatch
 let g:pymode_lint = 0             " handled by ale
-let g:pymode_rope = 0             " handled by tags
+let g:pymode_rope = 0             " handled by YouCompleteMe
 let g:pymode_rope_completion = 0
 let g:vim_isort_map = ''
 
 " Color scheme
 if $BACKGROUND_TYPE == 'dark'
-  let g:default_background_type = 'dark'
+  set background=dark
 else
-  let g:default_background_type = 'light'
+  set background=light
 endif
-let g:dark_colorscheme = 'solarized8_dark'
-let g:light_colorscheme = 'solarized8_light'
-nmap <leader>b :ToggleBg<CR>
+colorscheme solarized
 
 " Fonts
 if $USE_NERDFONT && !has('gui_running')
