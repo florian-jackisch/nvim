@@ -115,6 +115,7 @@ if exists('*minpac#init')
   call minpac#add('fisadev/vim-isort')
   call minpac#add('racer-rust/vim-racer')
   call minpac#add('rust-lang/rust.vim')
+  call minpac#add('pboettch/vim-cmake-syntax')
 
   " Design
   call minpac#add('altercation/vim-colors-solarized', {'type': 'opt'})
@@ -143,8 +144,8 @@ autocmd FileType cmake set commentstring=#\ %s
 " Dispatch
 nmap <leader>c :Make<CR>
 nmap <leader>d :Dispatch<CR>
-autocmd FileType c,cpp compiler make
-autocmd FileType c,cpp let b:dispatch='make -C build test'
+autocmd FileType c,cpp,cmake compiler make
+autocmd FileType c,cpp,cmake let b:dispatch='make -C build test'
 autocmd FileType python compiler pyrun
 
 " Git
