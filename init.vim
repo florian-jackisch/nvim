@@ -57,6 +57,8 @@ if has("nvim")
   tnoremap <c-v> <Esc><Esc>
   " Disable sensible - not necessary with nvim
   let g:loaded_sensible=0
+  " Disable line numbers in the terminal
+  au TermOpen * setlocal nonumber norelativenumber
 endif
 
 " Plugins
