@@ -17,3 +17,34 @@ ${5:name} : ${6:type}
     ${7:description}
 """$0
 endsnippet
+
+snippet ycm_extra "Generate .ycm_extra_conf.py"
+import os
+
+flags = [
+    '-Wall',
+    '-Wextra',
+    '-pedantic',
+    '-DNDEBUG',
+    '-std=c++14',
+    '-x',
+    'c++',
+    $0# '-isystem',
+    # './path/to/system/include',
+    # '-I',
+    # './path/to/normal/include',
+]
+
+
+def DirectoryOfThisScript():
+    """ Return the path of this script from the __file__ variable.  """
+    return os.path.dirname(os.path.abspath(__file__))
+
+
+def FlagsForFile(filename, **kwargs):
+    """ Return the flags for the given file. """
+    return {
+        'flags': flags,
+        'include_paths_relative_to_dir': DirectoryOfThisScript()
+    }
+endsnippet
