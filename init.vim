@@ -144,8 +144,8 @@ autocmd FileType cmake set commentstring=#\ %s
 " Dispatch
 nmap <leader>c :Make<CR>
 nmap <leader>d :Dispatch<CR>
-autocmd FileType c,cpp,cmake compiler make
-autocmd FileType c,cpp,cmake let b:dispatch='make -C build test'
+autocmd FileType c,cpp,cmake compiler ninja
+autocmd FileType c,cpp,cmake let b:dispatch='ninja -C build test'
 autocmd FileType python compiler pyrun
 
 " Git
