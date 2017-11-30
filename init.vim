@@ -57,6 +57,8 @@ if has("nvim")
   tnoremap <c-v> <Esc><Esc>
   " Disable sensible - not necessary with nvim
   let g:loaded_sensible=0
+  " Disable line numbers in the terminal
+  au TermOpen * setlocal nonumber norelativenumber
 endif
 
 " Plugins
@@ -241,7 +243,7 @@ nmap <silent> ]W <Plug>(ale_last)
 let g:ale_linters = {
 \   'c': ['clangtidy'],
 \   'cpp': ['clangtidy'],
-\   'python': ['pylint'],
+\   'python': ['pylint', 'pycodestyle'],
 \}
 let g:ale_cpp_clangtidy_checks = ['cppcoreguidelines-*', 'misc-*', 'modernize-*', 'performance-*', 'readability-*', 'bugprone-*', 'clang-analyzer-']
 let g:ale_lint_on_text_changed = 'never'
