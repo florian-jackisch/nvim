@@ -105,8 +105,6 @@ if exists('*minpac#init')
   call minpac#add('lervag/vimtex')
   call minpac#add('octol/vim-cpp-enhanced-highlight')
   call minpac#add('pboettch/vim-cmake-syntax')
-  call minpac#add('racer-rust/vim-racer')
-  call minpac#add('rust-lang/rust.vim')
   call minpac#add('tmhedberg/SimpylFold')
 
   " Design
