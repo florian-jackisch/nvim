@@ -78,6 +78,7 @@ if exists('*minpac#init')
   call minpac#add('sbdchd/neoformat')
   call minpac#add('spf13/vim-autoclose')
   call minpac#add('tommcdo/vim-exchange')
+  call minpac#add('skywind3000/asyncrun.vim')
 
   " UI plugins
   call minpac#add('Valloric/ListToggle')
@@ -218,6 +219,10 @@ let g:ale_lint_on_enter = 0
 let g:ale_lint_on_file_type_changed = 0
 let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
+
+" AsyncRun
+autocmd FileType cpp nmap <leader>c :AsyncRun make -C build -j all<CR>
+autocmd FileType cpp nmap <leader>t :AsyncRun make -C build test<CR>
 
 " Completion
 let g:ycm_complete_in_comments = 1
