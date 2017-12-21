@@ -77,7 +77,6 @@ if exists('*minpac#init')
   call minpac#add('junegunn/vim-easy-align')
   call minpac#add('sbdchd/neoformat')
   call minpac#add('spf13/vim-autoclose')
-  call minpac#add('tmhedberg/SimpylFold')
   call minpac#add('tommcdo/vim-exchange')
 
   " UI plugins
@@ -103,14 +102,15 @@ if exists('*minpac#init')
 
   " Languages
   call minpac#add('fatih/vim-go')
+  call minpac#add('fisadev/vim-isort')
   call minpac#add('lervag/vimtex')
   call minpac#add('metakirby5/codi.vim')
   call minpac#add('octol/vim-cpp-enhanced-highlight')
+  call minpac#add('pboettch/vim-cmake-syntax')
   call minpac#add('python-mode/python-mode')
-  call minpac#add('fisadev/vim-isort')
   call minpac#add('racer-rust/vim-racer')
   call minpac#add('rust-lang/rust.vim')
-  call minpac#add('pboettch/vim-cmake-syntax')
+  call minpac#add('tmhedberg/SimpylFold')
 
   " Design
   call minpac#add('morhetz/gruvbox')
@@ -253,7 +253,7 @@ let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 let g:pymode_python = 'python3'
 let g:pymode_warnings = 0         " handled by ale
 let g:pymode_trim_whitespaces = 0 " handled by neoformat
-let g:pymode_run = 0              " handled by dispatch
+let g:pymode_run = 0
 let g:pymode_lint = 0             " handled by ale
 let g:pymode_rope = 0             " handled by YouCompleteMe
 let g:pymode_rope_completion = 0
