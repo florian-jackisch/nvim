@@ -53,8 +53,6 @@ if has("nvim")
   " terminal escape
   tnoremap <Esc> <c-\><C-n>
   tnoremap <c-v> <Esc><Esc>
-  " Disable sensible - not necessary with nvim
-  let g:loaded_sensible=0
   " Disable line numbers in the terminal
   au TermOpen * setlocal nonumber norelativenumber
 endif
@@ -71,7 +69,6 @@ if exists('*minpac#init')
   call minpac#add('tpope/vim-fugitive')
   call minpac#add('tpope/vim-obsession')
   call minpac#add('tpope/vim-repeat')
-  call minpac#add('tpope/vim-sensible')
   call minpac#add('tpope/vim-sleuth')
   call minpac#add('tpope/vim-surround')
   call minpac#add('tpope/vim-unimpaired')
