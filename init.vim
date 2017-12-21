@@ -120,7 +120,7 @@ if exists('*minpac#init')
   call minpac#add('pboettch/vim-cmake-syntax')
 
   " Design
-  call minpac#add('altercation/vim-colors-solarized', {'type': 'opt'})
+  call minpac#add('morhetz/gruvbox')
   if $USE_NERDFONT && !has('gui_running')
     call minpac#add('ryanoasis/vim-devicons')
   endif
@@ -194,19 +194,19 @@ let g:lt_quickfix_list_toggle_map = '<leader>qq'
 let g:airline#extensions#tabline#enabled = 1
 
 " FZF
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
 nnoremap <C-p> :Files<CR>
 nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
@@ -275,12 +275,8 @@ let g:pymode_rope_completion = 0
 let g:vim_isort_map = ''
 
 " Color scheme
-if $BACKGROUND_TYPE == 'dark'
-  set background=dark
-else
-  set background=light
-endif
-colorscheme solarized
+set background=dark
+colorscheme gruvbox
 
 " Fonts
 if $USE_NERDFONT && !has('gui_running')
