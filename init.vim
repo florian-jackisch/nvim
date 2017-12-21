@@ -40,8 +40,6 @@ nnoremap <leader>ve :edit $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 " Disable search highlight after search with <CR>
 nnoremap <CR> :noh<CR><CR>
-" Toggle wrapping and linebreak
-nnoremap gw :set wrap! <bar> :set linebreak!<CR>
 nnoremap <silent> <up> :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <down> :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
