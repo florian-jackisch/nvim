@@ -153,21 +153,21 @@ autocmd BufEnter * sign define dummy
 autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' .  bufnr('')
 
 " NERDTree
-nnoremap <leader>ee :NERDTreeToggle<CR>
-nnoremap <leader>ef :NERDTreeFind<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <c-e> :NERDTreeFind<CR>
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 
 " Undotree
-nnoremap <leader>uu :UndotreeToggle<cr>
+nnoremap <leader>u :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle=1
 
 " Tagbar
-nnoremap <silent> <leader>gg :TagbarToggle<CR>
+nnoremap <silent> <leader>g :TagbarToggle<CR>
 
 " Toggle the quick and location list
-let g:lt_location_list_toggle_map = '<leader>ll'
-let g:lt_quickfix_list_toggle_map = '<leader>qq'
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -261,14 +261,3 @@ colorscheme gruvbox
 if $USE_NERDFONT && !has('gui_running')
   let g:airline_powerline_fonts = 1
 endif
-
-" Neovim plugins
-if has("nvim")
-  " For the terminal
-  nnoremap <silent> <leader>tt :Ttoggle<cr>
-  nnoremap <silent> <leader>tr :Topen <bar> normal ,tt<cr>
-  nnoremap <silent> <leader>ts :TREPLSendLine<cr>
-  vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
-  nnoremap <silent> <leader>tf :TREPLSendFile<cr>
-endif
-
