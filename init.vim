@@ -243,16 +243,6 @@ let g:ycm_warning_symbol = '•'
 " Tags
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 
-" Python
-let g:pymode_python = 'python3'
-let g:pymode_warnings = 0         " handled by ale
-let g:pymode_trim_whitespaces = 0 " handled by neoformat
-let g:pymode_run = 0
-let g:pymode_lint = 0             " handled by ale
-let g:pymode_rope = 0             " handled by YouCompleteMe
-let g:pymode_rope_completion = 0
-let g:vim_isort_map = ''
-
 " Color scheme
 set background=dark
 colorscheme gruvbox
