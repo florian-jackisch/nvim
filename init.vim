@@ -64,7 +64,6 @@ if exists('*minpac#init')
 
   " tpope plugins
   call minpac#add('tpope/vim-commentary')
-  call minpac#add('tpope/vim-dispatch')
   call minpac#add('tpope/vim-eunuch')
   call minpac#add('tpope/vim-fugitive')
   call minpac#add('tpope/vim-repeat')
@@ -122,7 +121,6 @@ if exists('*minpac#init')
   " Neovim
   if has("nvim")
     call minpac#add('kassio/neoterm')
-    call minpac#add('radenling/vim-dispatch-neovim')
     call minpac#add('roxma/python-support.nvim')
   endif
 endif
@@ -136,13 +134,6 @@ command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 " Comments for C++ and CMake
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
-
-" Dispatch
-nmap <leader>c :Make<CR>
-nmap <leader>d :Dispatch<CR>
-autocmd FileType c,cpp,cmake compiler ninja
-autocmd FileType c,cpp,cmake let b:dispatch='ninja -C build test'
-autocmd FileType python compiler pyrun
 
 " Git
 nnoremap <silent> <leader>gs :Gstatus<CR>
