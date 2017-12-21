@@ -116,7 +116,6 @@ if exists('*minpac#init')
   " Neovim
   if has("nvim")
     call minpac#add('kassio/neoterm')
-    call minpac#add('roxma/python-support.nvim')
   endif
 endif
 
@@ -271,15 +270,5 @@ if has("nvim")
   nnoremap <silent> <leader>ts :TREPLSendLine<cr>
   vnoremap <silent> <leader>ts :TREPLSendSelection<cr>
   nnoremap <silent> <leader>tf :TREPLSendFile<cr>
-
-  " For python dependencies
-  let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'jedi')
-  let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'pylint')
-  let g:python_support_python2_requirements = add(get(g:,'python_support_python3_requirements',[]),'isort')
-  let g:python_support_python2_requirements = add(get(g:,'python_support_python3_requirements',[]),'yapf')
-  let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'isort')
-  let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
-  let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'pylint')
-  let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'yapf')
 endif
 
