@@ -175,6 +175,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " FZF
 nnoremap <C-p> :GFiles<CR>
+nnoremap <C-s-p> :Files<CR>
 nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :Tags<CR>
