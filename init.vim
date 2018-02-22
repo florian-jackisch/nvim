@@ -197,52 +197,6 @@ Plug 'tpope/vim-dispatch' | Plug 'tpope/vim-projectionist'
 nnoremap <leader>m :Make<cr>
 nnoremap <leader>d :Dispatch<cr>
 
-" Ale linting
-Plug 'w0rp/ale'
-nmap <silent> [W <Plug>(ale_first)
-nmap <silent> [w <Plug>(ale_previous)
-nmap <silent> ]w <Plug>(ale_next)
-nmap <silent> ]W <Plug>(ale_last)
-let g:ale_linters = {
-    \ 'c': ['clangtidy'],
-    \ 'cpp': ['clangtidy'],
-    \ 'python': ['pylint', 'pycodestyle']
-    \}
-let g:ale_cpp_clangtidy_checks = [
-    \ 'cppcoreguidelines-*',
-    \ 'misc-*',
-    \ 'modernize-*',
-    \ 'performance-*',
-    \ 'readability-*',
-    \ 'bugprone-*',
-    \ 'clang-analyzer-'
-    \]
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_file_type_changed = 0
-let g:ale_sign_warning = '•'
-let g:ale_sign_error = '•'
-
-" Autocompletion
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --clang-completer' }
-let g:ycm_complete_in_comments = 1
-let g:ycm_error_symbol = '•'
-let g:ycm_warning_symbol = '•'
-let g:ycm_global_ycm_extra_conf = '$HOME/.config/nvim/.ycm_extra_conf.py'
-let g:ycm_server_python_interpreter = 'python3'
-
-" Snippets
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips']
-
-" Dispatch and Projectionist
-Plug 'tpope/vim-dispatch' | Plug 'tpope/vim-projectionist'
-
 " Airline
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#ale#enabled = 1
