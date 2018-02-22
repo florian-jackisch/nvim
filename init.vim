@@ -149,6 +149,9 @@ Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle = 1
 
+" Better syntax for many languages
+Plug 'sheerun/vim-polyglot'
+
 " Ale linting
 Plug 'w0rp/ale'
 nmap <silent> [W <Plug>(ale_first)
@@ -203,6 +206,7 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 
 " Color schemes, switch with F8
+Plug 'lifepillar/vim-solarized8'
 Plug 'romainl/flattened' | Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
 let g:colorscheme_switcher_exclude_builtins = 1
 
@@ -210,5 +214,4 @@ call plug#end()
 
 " Color scheme settings
 set termguicolors
-let g:lightline = { 'colorscheme': 'solarized' }
-colorscheme flattened_light
+colorscheme solarized8
