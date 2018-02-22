@@ -1,8 +1,2 @@
-autoload/*
-pack/minpac/start
-pack/minpac/opt/vim-colors-solarized
-tags*
-*.spl
-.netrwhist
 gutentags_cache_dir
-spell
+plugged

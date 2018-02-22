@@ -7,22 +7,23 @@ let mapleader = ' '
 
 " Editor settings
 " ---------------
-set relativenumber
-set number
+" Relative line numbers
+set relativenumber number
+" Search
+set ignorecase smartcase
+" Line wrapping is not the default
 set nowrap
-set ignorecase
-set smartcase
 " Tabs shall be 4 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Open new vsplit right
 set splitright
 " Enable folding by syntax
-set foldmethod=syntax
-set foldlevelstart=99
+set foldmethod=syntax foldlevelstart=99
 " 80 columns is the target width
 set colorcolumn=80
 " Highlight the current line
 set cursorline
+" Disable swap files
 set noswapfile
 
 " Keyboard maps
@@ -55,82 +56,28 @@ if has("nvim")
   tnoremap <c-v> <Esc><Esc>
   " Disable line numbers in the terminal
   au TermOpen * setlocal nonumber norelativenumber
+  " Open terminal in new tab
+  nnoremap <leader>t :tabe <bar> :term<CR>
 endif
 
 " Plugins
-" =======
-if exists('*minpac#init')
-  call minpac#init()
+call plug#begin('~/.config/nvim/plugged')
 
-  " tpope plugins
-  call minpac#add('tpope/vim-commentary')
-  call minpac#add('tpope/vim-eunuch')
-  call minpac#add('tpope/vim-fugitive')
-  call minpac#add('tpope/vim-repeat')
-  call minpac#add('tpope/vim-sleuth')
-  call minpac#add('tpope/vim-surround')
-  call minpac#add('tpope/vim-unimpaired')
+" Plugins without settings
+Plug 'airblade/vim-rooter'   " `cwd` to project dir
+Plug 'tpope/vim-eunuch'      " :Delete etc.
+Plug 'tpope/vim-repeat'      " Repeat surround etc.
+Plug 'tpope/vim-sleuth'      " Detect indentation
+Plug 'tpope/vim-surround'    " Surround words
+Plug 'jiangmiao/auto-pairs'  " Insert brackets etc.
 
-  " Editor plugins
-  call minpac#add('airblade/vim-rooter')
-  call minpac#add('gioele/vim-autoswap')
-  call minpac#add('junegunn/vim-easy-align')
-  call minpac#add('sbdchd/neoformat')
-  call minpac#add('spf13/vim-autoclose')
-  call minpac#add('tommcdo/vim-exchange')
-  call minpac#add('skywind3000/asyncrun.vim')
-
-  " UI plugins
-  call minpac#add('Valloric/ListToggle')
-  call minpac#add('Xuyuanp/nerdtree-git-plugin')
-  call minpac#add('airblade/vim-gitgutter')
-  call minpac#add('ivalkeen/nerdtree-execute')
-  call minpac#add('junegunn/fzf', { 'do': '~/.fzf/install --all' })
-  call minpac#add('junegunn/fzf.vim')
-  call minpac#add('majutsushi/tagbar')
-  call minpac#add('mbbill/undotree')
-  call minpac#add('scrooloose/nerdtree')
-  call minpac#add('vim-airline/vim-airline')
-  call minpac#add('vim-airline/vim-airline-themes')
-
-  " Code completion
-  call minpac#add('Valloric/YouCompleteMe', {'do': '!~/.config/nvim/build_ycm.sh'})
-  call minpac#add('SirVer/ultisnips')
-  call minpac#add('honza/vim-snippets')
-  call minpac#add('ludovicchabant/vim-gutentags')
-  call minpac#add('w0rp/ale')
-
-  " Languages
-  call minpac#add('fatih/vim-go')
-  call minpac#add('fisadev/vim-isort')
-  call minpac#add('lervag/vimtex')
-  call minpac#add('octol/vim-cpp-enhanced-highlight')
-  call minpac#add('pboettch/vim-cmake-syntax')
-  call minpac#add('tmhedberg/SimpylFold')
-
-  " Design
-  call minpac#add('morhetz/gruvbox')
-  if $USE_NERDFONT && !has('gui_running')
-    call minpac#add('ryanoasis/vim-devicons')
-  endif
-
-  " Neovim
-  if has("nvim")
-    call minpac#add('kassio/neoterm')
-  endif
-endif
-
-command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
-command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
-
-" Plugin settings
-" ---------------
-
-" Comments for C++ and CMake
+" Comments
+Plug 'tpope/vim-commentary'
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
 
 " Git
+Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -139,81 +86,89 @@ nnoremap <silent> <leader>gl :Glog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>ge :Gedit<CR>
 
-" Unimpaired mappings without []
+" Unimpaired settings
+Plug 'tpope/vim-unimpaired'
 nmap ö [
 nmap ä ]
 omap ö [
 omap ä ]
 xmap ö [
-xmap ä ]
+xmap ä ]noremap <silent> <leader>ge :Gedit<CR>
 
-" Always show the gutter
-autocmd BufEnter * sign define dummy
-autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' .  bufnr('')
-
-" NERDTree
-nnoremap <leader>e :NERDTreeToggle<CR>
-nnoremap <c-e> :NERDTreeFind<CR>
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMinimalUI = 1
-
-" Undotree
-nnoremap <leader>u :UndotreeToggle<cr>
-let g:undotree_SetFocusWhenToggle=1
-
-" Tagbar
-nnoremap <silent> <leader>g :TagbarToggle<CR>
-
-" Toggle the quick and location list
-let g:lt_location_list_toggle_map = '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<leader>q'
-
-" Airline
-let g:airline#extensions#tabline#enabled = 1
+" Align with ga, e.g.
+Plug 'junegunn/vim-easy-align'
+xmap ga <Plug>(EasyAlign)  " e.g. vipga
+nmap ga <Plug>(EasyAlign)  " e.g. gaip
 
 " FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-s-p> :Files<CR>
 nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :Tags<CR>
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-x': 'split',
+    \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
 
-" Neoformat
+" Format
+Plug 'sbdchd/neoformat'
 nnoremap <silent> <leader>f :Neoformat<CR>
 let g:neoformat_enabled_c = ['clang-format']
 let g:neoformat_c_clangformat = {
-            \ 'exe': 'clang-format',
-            \ 'args': ['-style=file'],
-            \ }
+    \ 'exe': 'clang-format',
+    \ 'args': ['-style=file'],
+    \ }
+let g:neoformat_cmake_cmakeformat = {
+    \ 'exe': 'cmake-format'
+    \ }
+let g:neoformat_enabled_cmake = ['cmakeformat']
 let g:neoformat_basic_format_trim = 1
 
-" Align
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+" Toggle Lists with <leader>l and <leader>g
+Plug 'Valloric/ListToggle'
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
 
-" Snippets
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-let g:UltiSnipsEditSplit="vertical"
+" NERDTree
+Plug 'scrooloose/nerdtree' | Plug 'ivalkeen/nerdtree-execute' | Plug 'Xuyuanp/nerdtree-git-plugin'
+nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <c-e> :NERDTreeFind<CR>
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
 
-" Ale
+" Tags
+Plug 'majutsushi/tagbar' | Plug 'ludovicchabant/vim-gutentags'
+nnoremap <silent> <leader>g :TagbarToggle<CR>
+let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+
+" Undotree
+Plug 'mbbill/undotree'
+nnoremap <leader>u :UndotreeToggle<cr>
+let g:undotree_SetFocusWhenToggle = 1
+
+" Ale linting
+Plug 'w0rp/ale'
 nmap <silent> [W <Plug>(ale_first)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 nmap <silent> ]W <Plug>(ale_last)
 let g:ale_linters = {
-\   'c': ['clangtidy'],
-\   'cpp': ['clangtidy'],
-\   'python': ['pylint', 'pycodestyle'],
-\}
-let g:ale_cpp_clangtidy_checks = ['cppcoreguidelines-*', 'misc-*', 'modernize-*', 'performance-*', 'readability-*', 'bugprone-*', 'clang-analyzer-']
+    \ 'c': ['clangtidy'],
+    \ 'cpp': ['clangtidy'],
+    \ 'python': ['pylint', 'pycodestyle']
+    \}
+let g:ale_cpp_clangtidy_checks = [
+    \ 'cppcoreguidelines-*',
+    \ 'misc-*',
+    \ 'modernize-*',
+    \ 'performance-*',
+    \ 'readability-*',
+    \ 'bugprone-*',
+    \ 'clang-analyzer-'
+    \]
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -221,26 +176,85 @@ let g:ale_lint_on_file_type_changed = 0
 let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 
-" AsyncRun
-autocmd FileType cpp nmap <leader>c :AsyncRun make -C build -j all<CR>
-autocmd FileType cpp nmap <leader>t :AsyncRun make -C build test<CR>
-
-" Completion
+" Autocompletion
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --clang-completer' }
 let g:ycm_complete_in_comments = 1
-let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_error_symbol = '•'
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
-let g:ycm_server_python_interpreter = 'python3'
 let g:ycm_warning_symbol = '•'
+let g:ycm_global_ycm_extra_conf = '$HOME/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_server_python_interpreter = 'python3'
 
-" Tags
-let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+" Snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips']
 
-" Color scheme
-set background=dark
-colorscheme gruvbox
+" Dispatch and Projectionist
+Plug 'tpope/vim-dispatch' | Plug 'tpope/vim-projectionist'
+nnoremap <leader>m :Make<cr>
+nnoremap <leader>d :Dispatch<cr>
 
-" Fonts
-if $USE_NERDFONT && !has('gui_running')
-  let g:airline_powerline_fonts = 1
-endif
+" Ale linting
+Plug 'w0rp/ale'
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> [w <Plug>(ale_previous)
+nmap <silent> ]w <Plug>(ale_next)
+nmap <silent> ]W <Plug>(ale_last)
+let g:ale_linters = {
+    \ 'c': ['clangtidy'],
+    \ 'cpp': ['clangtidy'],
+    \ 'python': ['pylint', 'pycodestyle']
+    \}
+let g:ale_cpp_clangtidy_checks = [
+    \ 'cppcoreguidelines-*',
+    \ 'misc-*',
+    \ 'modernize-*',
+    \ 'performance-*',
+    \ 'readability-*',
+    \ 'bugprone-*',
+    \ 'clang-analyzer-'
+    \]
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_file_type_changed = 0
+let g:ale_sign_warning = '•'
+let g:ale_sign_error = '•'
+
+" Autocompletion
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --clang-completer' }
+let g:ycm_complete_in_comments = 1
+let g:ycm_error_symbol = '•'
+let g:ycm_warning_symbol = '•'
+let g:ycm_global_ycm_extra_conf = '$HOME/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_server_python_interpreter = 'python3'
+
+" Snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips']
+
+" Dispatch and Projectionist
+Plug 'tpope/vim-dispatch' | Plug 'tpope/vim-projectionist'
+
+" Airline
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" Color schemes, switch with F8
+Plug 'romainl/flattened' | Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
+let g:colorscheme_switcher_exclude_builtins = 1
+
+call plug#end()
+
+" Color scheme settings
+set termguicolors
+let g:lightline = { 'colorscheme': 'solarized' }
+colorscheme flattened_light
