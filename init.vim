@@ -25,6 +25,13 @@ set colorcolumn=80
 set cursorline
 " Disable swap files
 set noswapfile
+" Enable persistent undo (for the current session)
+let s:undoDir = "/tmp/.undodir_" . $USER
+if !isdirectory(s:undoDir)
+    call mkdir(s:undoDir, "", 0700)
+endif
+let &undodir=s:undoDir
+set undofile
 
 " Keyboard maps
 " -------------
