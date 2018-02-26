@@ -210,8 +210,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Color schemes, switch with F8
 Plug 'lifepillar/vim-solarized8'
-Plug 'romainl/flattened' | Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
-let g:colorscheme_switcher_exclude_builtins = 1
 
 call plug#end()
 
