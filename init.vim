@@ -115,6 +115,8 @@ let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-x': 'split',
     \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
+" Otherwise, nvim terminal has problems with fzf
+let $FZF_DEFAULT_OPTS .= ' --no-height'
 
 " Format
 Plug 'sbdchd/neoformat'
