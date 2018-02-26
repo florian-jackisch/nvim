@@ -64,12 +64,15 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Plugins without settings
-Plug 'airblade/vim-rooter'   " `cwd` to project dir
 Plug 'tpope/vim-eunuch'      " :Delete etc.
 Plug 'tpope/vim-repeat'      " Repeat surround etc.
 Plug 'tpope/vim-sleuth'      " Detect indentation
 Plug 'tpope/vim-surround'    " Surround words
 Plug 'jiangmiao/auto-pairs'  " Insert brackets etc.
+
+" Find the root directory and `cwd` to project dir
+Plug 'airblade/vim-rooter'
+let g:rooter_patterns = ['.projections.json', '.git/', '.svn/']
 
 " Comments
 Plug 'tpope/vim-commentary'
