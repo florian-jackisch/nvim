@@ -119,7 +119,7 @@ let g:fzf_action = {
 let $FZF_DEFAULT_OPTS .= ' --no-height'
 
 " Format
-Plug 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat' | Plug 'fisadev/vim-isort'
 nnoremap <silent> <leader>f :Neoformat<CR>
 let g:neoformat_enabled_c = ['clang-format']
 let g:neoformat_c_clangformat = {
@@ -131,6 +131,7 @@ let g:neoformat_cmake_cmakeformat = {
     \ }
 let g:neoformat_enabled_cmake = ['cmakeformat']
 let g:neoformat_basic_format_trim = 1
+let g:vim_isort_python_version = 'python3'
 
 " Toggle Lists with <leader>l and <leader>g
 Plug 'Valloric/ListToggle'
