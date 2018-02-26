@@ -209,9 +209,10 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips']
 
 " Dispatch and Projectionist
-Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim' | Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-dispatch' | Plug 'tpope/vim-projectionist'
 nnoremap <leader>m :Make<cr>
 nnoremap <leader>d :Dispatch<cr>
+nnoremap <leader>s :Start<cr>
 
 " Airline
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
