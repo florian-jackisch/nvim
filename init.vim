@@ -113,11 +113,10 @@ nmap ga <Plug>(EasyAlign)  " e.g. gaip
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-nnoremap <C-p> :GFiles<CR>
-nnoremap <C-s-p> :Files<CR>
+nnoremap <C-p> :Files<CR>
 nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
-nnoremap <C-g> :Tags<CR>
+nnoremap <C-g> :BTags<CR>
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-x': 'split',
