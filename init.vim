@@ -71,11 +71,15 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Plugins without settings
+Plug 'jiangmiao/auto-pairs'  " Insert brackets etc.
 Plug 'tpope/vim-eunuch'      " :Delete etc.
 Plug 'tpope/vim-repeat'      " Repeat surround etc.
 Plug 'tpope/vim-sleuth'      " Detect indentation
 Plug 'tpope/vim-surround'    " Surround words
-Plug 'jiangmiao/auto-pairs'  " Insert brackets etc.
+
+" File explorer
+Plug 'tpope/vim-vinegar'     " Fixes for netrw
+let g:netrw_liststyle = 1
 
 " Find the root directory and `cwd` to project dir
 Plug 'airblade/vim-rooter'
@@ -143,13 +147,6 @@ let g:vim_isort_python_version = 'python3'
 Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
-
-" NERDTree
-Plug 'scrooloose/nerdtree' | Plug 'ivalkeen/nerdtree-execute' | Plug 'Xuyuanp/nerdtree-git-plugin'
-nnoremap <leader>e :NERDTreeToggle<CR>
-nnoremap <c-e> :NERDTreeFind<CR>
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMinimalUI = 1
 
 " Tags
 Plug 'majutsushi/tagbar' | Plug 'ludovicchabant/vim-gutentags'
