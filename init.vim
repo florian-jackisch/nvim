@@ -110,6 +110,9 @@ omap ä ]
 xmap ö [
 xmap ä ]noremap <silent> <leader>ge :Gedit<CR>
 
+" EasyMotion
+Plug 'easymotion/vim-easymotion'
+
 " Align with ga, e.g.
 Plug 'junegunn/vim-easy-align'
 xmap ga <Plug>(EasyAlign)  " e.g. vipga
