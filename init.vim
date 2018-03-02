@@ -91,7 +91,7 @@ autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
 
 " Git
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' | Plug 'mhinz/vim-signify'
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -100,6 +100,7 @@ nnoremap <silent> <leader>gl :Glog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
+let g:signify_vcs_list = [ 'git', 'svn' ]
 
 " Unimpaired settings
 Plug 'tpope/vim-unimpaired'
