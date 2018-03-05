@@ -46,8 +46,6 @@ vnoremap . :normal .<CR>
 " Quickly open/reload vim
 nnoremap <leader>ve :edit $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
-" Disable search highlight after search with <CR>
-nnoremap <CR> :noh<CR><CR>
 nnoremap <silent> <up> :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <down> :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
@@ -84,6 +82,11 @@ let g:netrw_liststyle = 1
 " Find the root directory and `cwd` to project dir
 Plug 'airblade/vim-rooter'
 let g:rooter_patterns = ['.projections.json', '.git/', '.svn/']
+
+" Disable highlighting after search
+Plug 'junegunn/vim-slash'
+" Place the current match at the center
+noremap <plug>(slash-after) zz
 
 " Comments
 Plug 'tpope/vim-commentary'
