@@ -198,12 +198,6 @@ let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 
 " Autocompletion
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --clang-completer' }
-let g:ycm_complete_in_comments = 1
-let g:ycm_error_symbol = '•'
-let g:ycm_warning_symbol = '•'
-let g:ycm_global_ycm_extra_conf = '$HOME/.config/nvim/.ycm_extra_conf.py'
-let g:ycm_server_python_interpreter = 'python3'
 
 " Snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
