@@ -141,10 +141,13 @@ autocmd! FileType fzf tnoremap <buffer> <ESC> <C-c>
 Plug 'sbdchd/neoformat' | Plug 'fisadev/vim-isort'
 nnoremap <silent> <leader>f :Neoformat<CR>
 let g:neoformat_enabled_c = ['clang-format']
-let g:neoformat_c_clangformat = {
-    \ 'exe': 'clang-format',
-    \ 'args': ['-style=file'],
-    \ }
+function! FormatFile()
+  let l:lines="all"
+  py3f $HOME/.config/nvim/clang-format.py
+endfunction
+map <C-K> :py3f $HOME/.config/nvim/clang-format.py<cr>
+imap <C-K> <c-o>:py3f $HOME/.config/nvim/clang-format.py<cr>
+map <C-F> :call FormatFile()<cr>
 let g:neoformat_cmake_cmakeformat = {
     \ 'exe': 'cmake-format'
     \ }
