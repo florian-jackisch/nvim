@@ -180,7 +180,7 @@ let g:ale_linters = {
     \ 'c': ['clangtidy'],
     \ 'cpp': ['clangtidy'],
     \ 'python': ['pylint', 'pycodestyle']
-    \}
+    \ }
 let g:ale_cpp_clangtidy_checks = [
     \ 'cppcoreguidelines-*',
     \ 'misc-*',
@@ -189,7 +189,7 @@ let g:ale_cpp_clangtidy_checks = [
     \ 'readability-*',
     \ 'bugprone-*',
     \ 'clang-analyzer-'
-    \]
+    \ ]
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -198,6 +198,20 @@ let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 
 " Autocompletion
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:LanguageClient_serverCommands = {
+    \'python' : ['pyls',]
+    \ }
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+inoremap <C-Space> <C-x><C-o>
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><s-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " Snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
