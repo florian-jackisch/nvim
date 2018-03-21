@@ -209,6 +209,10 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
+nmap <leader>ld :LspDefinition<cr>
+nmap <leader>lh :LspHover<cr>
+nmap <leader>lf :LspReferences<cr>
+nmap <leader>lr :LspRename<cr>
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
