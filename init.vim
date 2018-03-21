@@ -158,8 +158,8 @@ let g:vim_isort_python_version = 'python3'
 
 " Toggle Lists with <leader>l and <leader>g
 Plug 'Valloric/ListToggle'
-let g:lt_location_list_toggle_map = '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<leader>q'
+let g:lt_location_list_toggle_map = '<leader>ll'
+let g:lt_quickfix_list_toggle_map = '<leader>qq'
 
 " Tags
 Plug 'majutsushi/tagbar' | Plug 'ludovicchabant/vim-gutentags'
