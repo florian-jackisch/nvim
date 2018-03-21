@@ -74,6 +74,8 @@ Plug 'tpope/vim-eunuch'      " :Delete etc.
 Plug 'tpope/vim-repeat'      " Repeat surround etc.
 Plug 'tpope/vim-sleuth'      " Detect indentation
 Plug 'tpope/vim-surround'    " Surround words
+Plug 'tpope/vim-obsession'   " Record session
+Plug 'mhinz/vim-startify'    " Start screen
 
 " File explorer
 Plug 'tpope/vim-vinegar'     " Fixes for netrw
