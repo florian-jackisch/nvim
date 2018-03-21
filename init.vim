@@ -69,13 +69,15 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Plugins without settings
-Plug 'jiangmiao/auto-pairs'  " Insert brackets etc.
-Plug 'tpope/vim-eunuch'      " :Delete etc.
-Plug 'tpope/vim-repeat'      " Repeat surround etc.
-Plug 'tpope/vim-sleuth'      " Detect indentation
-Plug 'tpope/vim-surround'    " Surround words
-Plug 'tpope/vim-obsession'   " Record session
-Plug 'mhinz/vim-startify'    " Start screen
+Plug 'jiangmiao/auto-pairs'      " Insert brackets etc.
+Plug 'tpope/vim-eunuch'          " :Delete etc.
+Plug 'tpope/vim-repeat'          " Repeat surround etc.
+Plug 'tpope/vim-sleuth'          " Detect indentation
+Plug 'tpope/vim-surround'        " Surround words
+Plug 'tpope/vim-obsession'       " Record session
+Plug 'mhinz/vim-startify'        " Start screen
+Plug 'easymotion/vim-easymotion' " EasyMotion
+Plug 'sheerun/vim-polyglot'      " Better syntax for many languages
 
 " File explorer
 Plug 'tpope/vim-vinegar'     " Fixes for netrw
@@ -115,9 +117,6 @@ omap ö [
 omap ä ]
 xmap ö [
 xmap ä ]noremap <silent> <leader>ge :Gedit<CR>
-
-" EasyMotion
-Plug 'easymotion/vim-easymotion'
 
 " Align with ga, e.g.
 Plug 'junegunn/vim-easy-align'
@@ -172,9 +171,6 @@ Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle = 1
 
-" Better syntax for many languages
-Plug 'sheerun/vim-polyglot'
-
 " Ale linting
 Plug 'w0rp/ale'
 nmap <silent> [W <Plug>(ale_first)
@@ -202,15 +198,18 @@ let g:ale_lint_on_file_type_changed = 0
 let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 
-" Autocompletion
+" " Autocompletion
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+" LSP
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 nmap <leader>ld :LspDefinition<cr>
 nmap <leader>lh :LspHover<cr>
 nmap <leader>lf :LspReferences<cr>
@@ -221,26 +220,9 @@ let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_signs_error = {'text': '•'}
 let g:lsp_signs_warning = {'text': '•'}
 let g:lsp_signs_hint = {'text': '•'}
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
-if executable('cquery')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-      \ })
-endif
 
 " Snippets
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
@@ -266,3 +248,35 @@ call plug#end()
 " Color scheme settings
 set termguicolors
 colorscheme solarized8
+
+" Completion sources
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ }))
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+if executable('cquery')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+      \ })
+endif
+if has('python3')
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'whitelist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+endif
+
