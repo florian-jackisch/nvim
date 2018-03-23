@@ -61,8 +61,6 @@ if has("nvim")
   tnoremap <c-v> <Esc><Esc>
   " Disable line numbers in the terminal
   au TermOpen * setlocal nonumber norelativenumber
-  " Open terminal in new tab
-  nnoremap <leader>t :tabe <bar> :term<CR>
 endif
 
 " Plugins
