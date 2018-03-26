@@ -181,8 +181,6 @@ let g:ale_linters = {
     \ 'python': ['pylint', 'isort']
     \ }
 let g:ale_fixers = {
-    \ 'c': ['clangtidy'],
-    \ 'cpp': ['clangtidy'],
     \ 'python': ['pylint', 'isort']
     \ }
 let g:ale_cpp_clangtidy_checks = [
