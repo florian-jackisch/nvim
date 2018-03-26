@@ -178,7 +178,12 @@ nmap <silent> ]W <Plug>(ale_last)
 let g:ale_linters = {
     \ 'c': ['clangtidy'],
     \ 'cpp': ['clangtidy'],
-    \ 'python': ['pylint', 'pycodestyle']
+    \ 'python': ['pylint', 'isort']
+    \ }
+let g:ale_fixers = {
+    \ 'c': ['clangtidy'],
+    \ 'cpp': ['clangtidy'],
+    \ 'python': ['pylint', 'isort']
     \ }
 let g:ale_cpp_clangtidy_checks = [
     \ 'cppcoreguidelines-*',
