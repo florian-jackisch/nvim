@@ -267,7 +267,13 @@ if executable('pyls')
         \ 'whitelist': ['python'],
         \ })
 endif
-if executable('cquery')
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+elseif executable('cquery')
    au User lsp_setup call lsp#register_server({
       \ 'name': 'cquery',
       \ 'cmd': {server_info->['cquery']},
