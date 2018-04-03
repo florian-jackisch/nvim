@@ -273,6 +273,22 @@ augroup END
 nnoremap <silent> Q gqap
 xnoremap <silent> Q gq
 nnoremap <silent> <leader>Q vapJgqap
+let g:pencil#autoformat = 1
+let g:pencil#conceallevel = 0
+
+" Markdown preview
+if executable('cargo')
+  function! BuildComposer(info)
+    if a:info.status != 'unchanged' || a:info.force
+      if has('nvim')
+        !cargo build --release
+      else
+        !cargo build --release --no-default-features --features json-rpc
+      endif
+    endif
+  endfunction
+  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+endif
 
 " Color schemes, switch with F8
 Plug 'lifepillar/vim-solarized8'
