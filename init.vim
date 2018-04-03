@@ -67,15 +67,15 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Plugins without settings
+Plug 'easymotion/vim-easymotion' " EasyMotion
 Plug 'jiangmiao/auto-pairs'      " Insert brackets etc.
+Plug 'mhinz/vim-startify'        " Start screen
+Plug 'tpope/vim-abolish'         " Better substitution
 Plug 'tpope/vim-eunuch'          " :Delete etc.
+Plug 'tpope/vim-obsession'       " Record session
 Plug 'tpope/vim-repeat'          " Repeat surround etc.
 Plug 'tpope/vim-sleuth'          " Detect indentation
 Plug 'tpope/vim-surround'        " Surround words
-Plug 'tpope/vim-obsession'       " Record session
-Plug 'mhinz/vim-startify'        " Start screen
-Plug 'easymotion/vim-easymotion' " EasyMotion
-Plug 'sheerun/vim-polyglot'      " Better syntax for many languages
 
 " File explorer
 Plug 'tpope/vim-vinegar'     " Fixes for netrw
@@ -159,11 +159,6 @@ Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>ll'
 let g:lt_quickfix_list_toggle_map = '<leader>qq'
 
-" Tags
-Plug 'majutsushi/tagbar' | Plug 'ludovicchabant/vim-gutentags'
-nnoremap <silent> <leader>g :TagbarToggle<CR>
-let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
-
 " Undotree
 Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
@@ -200,14 +195,35 @@ let g:ale_sign_warning = '•'
 let g:ale_sign_error = '•'
 let g:ale_sign_column_always = 1
 
-" " Autocompletion
+" Autocompletion
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+" Syntax
+Plug 'sheerun/vim-polyglot'
+let g:polyglot_disabled = ['latex']
+
+" Vim completion
+Plug 'Shougo/neco-vim'
+Plug 'prabirshrestha/asyncomplete-necovim.vim'
+
+" LaTeX
+Plug 'lervag/vimtex'
+
+" Tags
+if executable('ctags')
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'majutsushi/tagbar'
+  Plug 'prabirshrestha/asyncomplete-tags.vim'
+  nnoremap <silent> <leader>g :TagbarToggle<CR>
+  let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+endif
 
 " LSP
 Plug 'prabirshrestha/vim-lsp'
@@ -224,7 +240,9 @@ let g:lsp_signs_warning = {'text': '•'}
 let g:lsp_signs_hint = {'text': '•'}
 
 " Snippets
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
@@ -242,8 +260,11 @@ Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 
-" Vim pencil
+" Writer plugins
+Plug 'reedes/vim-wordy'
+Plug 'junegunn/goyo.vim'
 Plug 'reedes/vim-pencil'
+nnoremap <leader>w :NextWordy<space><cr>
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
@@ -268,6 +289,17 @@ call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options
     \ 'whitelist': ['*'],
     \ 'completor': function('asyncomplete#sources#buffer#completor'),
     \ }))
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
+    \ 'name': 'necovim',
+    \ 'whitelist': ['vim'],
+    \ 'completor': function('asyncomplete#sources#necovim#completor'),
+    \ }))
 if executable('pyls')
     " pip install python-language-server
     au User lsp_setup call lsp#register_server({
@@ -287,7 +319,7 @@ elseif executable('cquery')
       \ 'name': 'cquery',
       \ 'cmd': {server_info->['cquery']},
       \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
+          \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
       \ })
 endif
@@ -298,4 +330,13 @@ if has('python3')
         \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
         \ }))
 endif
-
+if executable('ctags')
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+    \ 'name': 'tags',
+    \ 'whitelist': ['c'],
+    \ 'completor': function('asyncomplete#sources#tags#completor'),
+    \ 'config': {
+    \    'max_file_size': 50000000,
+    \  },
+    \ }))
+endif
