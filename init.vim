@@ -277,6 +277,12 @@ nnoremap <silent> <leader>Q vapJgqap
 " Color schemes, switch with F8
 Plug 'lifepillar/vim-solarized8'
 
+" Devicons needs to be loaded last
+if !empty($DEVICONS)
+  Plug 'ryanoasis/vim-devicons'
+  let g:airline_powerline_fonts = 1
+endif
+
 call plug#end()
 
 " Color scheme settings
