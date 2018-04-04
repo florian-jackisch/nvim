@@ -137,22 +137,22 @@ let $FZF_DEFAULT_OPTS .= ' --no-height'
 autocmd! FileType fzf tnoremap <buffer> <ESC> <C-c>
 
 " Format
-Plug 'sbdchd/neoformat' | Plug 'fisadev/vim-isort'
+Plug 'sbdchd/neoformat'
 nnoremap <silent> <leader>f :Neoformat<CR>
-let g:neoformat_enabled_c = ['clang-format']
+let g:neoformat_enabled_python = ['yapf', 'isort']
+let g:neoformat_enabled_latex = ['latexindent']
+let g:neoformat_enabled_cmake = ['cmake_format']
+let g:neoformat_enabled_markdown = ['prettier']
+let g:neoformat_basic_format_trim = 1
+let g:neoformat_basic_format_align = 1
+
 function! FormatFile()
   let l:lines="all"
   py3f $HOME/.config/nvim/clang-format.py
 endfunction
-map <C-K> :py3f $HOME/.config/nvim/clang-format.py<cr>
-imap <C-K> <c-o>:py3f $HOME/.config/nvim/clang-format.py<cr>
-map <C-F> :call FormatFile()<cr>
-let g:neoformat_cmake_cmakeformat = {
-    \ 'exe': 'cmake-format'
-    \ }
-let g:neoformat_enabled_cmake = ['cmakeformat']
-let g:neoformat_basic_format_trim = 1
-let g:vim_isort_python_version = 'python3'
+autocmd FileType c,cpp vnoremap <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
+autocmd FileType c,cpp nnoremap <leader>f :call FormatFile()<cr>
+
 
 " Toggle Lists with <leader>l and <leader>g
 Plug 'Valloric/ListToggle'
@@ -263,18 +263,10 @@ let g:airline#extensions#tabline#enabled = 1
 " Writer plugins
 Plug 'reedes/vim-wordy'
 Plug 'junegunn/goyo.vim'
-Plug 'reedes/vim-pencil'
 nnoremap <leader>w :NextWordy<space><cr>
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
-augroup END
 nnoremap <silent> Q gqap
 xnoremap <silent> Q gq
 nnoremap <silent> <leader>Q vapJgqap
-let g:pencil#autoformat = 1
-let g:pencil#conceallevel = 0
 
 " Markdown preview
 if executable('cargo')
