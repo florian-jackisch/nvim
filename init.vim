@@ -143,6 +143,7 @@ let g:neoformat_enabled_python = ['yapf', 'isort']
 let g:neoformat_enabled_latex = ['latexindent']
 let g:neoformat_enabled_cmake = ['cmake_format']
 let g:neoformat_enabled_markdown = ['prettier']
+let g:neoformat_run_all_formatters = 1
 let g:neoformat_basic_format_trim = 1
 let g:neoformat_basic_format_align = 1
 
