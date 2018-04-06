@@ -209,6 +209,7 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
 " Syntax and folding
 Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/SimpylFold'
+Plug 'LucHermitte/VimFold4C'
 let g:polyglot_disabled = ['latex']
 let g:SimpylFold_docstring_preview = 1
 
