@@ -9,8 +9,6 @@ let mapleader = ' '
 " ---------------
 " Relative line numbers
 set relativenumber number
-" Search
-set ignorecase smartcase
 " Line wrapping is not the default
 set nowrap
 " Tabs shall be 4 spaces
@@ -77,6 +75,11 @@ Plug 'tpope/vim-repeat'          " Repeat surround etc.
 Plug 'tpope/vim-sleuth'          " Detect indentation
 Plug 'tpope/vim-surround'        " Surround words
 
+" Searching
+Plug 'wincent/loupe'
+Plug 'junegunn/vim-slash'
+let g:LoupeHighlightGroup='Error'
+
 " File explorer
 Plug 'tpope/vim-vinegar'     " Fixes for netrw
 let g:netrw_liststyle = 1
@@ -84,11 +87,6 @@ let g:netrw_liststyle = 1
 " Find the root directory and `cwd` to project dir
 Plug 'airblade/vim-rooter'
 let g:rooter_patterns = ['.projections.json', '.git/', '.svn/']
-
-" Disable highlighting after search
-Plug 'junegunn/vim-slash'
-" Place the current match at the center
-noremap <plug>(slash-after) zz
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -118,8 +116,10 @@ xmap ä ]noremap <silent> <leader>ge :Gedit<CR>
 
 " Align with ga, e.g.
 Plug 'junegunn/vim-easy-align'
-xmap ga <Plug>(EasyAlign)  " e.g. vipga
-nmap ga <Plug>(EasyAlign)  " e.g. gaip
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
