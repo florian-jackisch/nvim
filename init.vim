@@ -206,9 +206,11 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-" Syntax
+" Syntax and folding
 Plug 'sheerun/vim-polyglot'
+Plug 'tmhedberg/SimpylFold'
 let g:polyglot_disabled = ['latex']
+let g:SimpylFold_docstring_preview = 1
 
 " Vim completion
 Plug 'Shougo/neco-vim'
@@ -264,10 +266,16 @@ let g:airline#extensions#tabline#enabled = 1
 " Writer plugins
 Plug 'reedes/vim-wordy'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'Ron89/thesaurus_query.vim'
+Plug 'rhysd/vim-grammarous'
 nnoremap <leader>w :NextWordy<space><cr>
 nnoremap <silent> Q gqap
 xnoremap <silent> Q gq
 nnoremap <silent> <leader>Q vapJgqap
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+g:tq_language=['en', 'de']
 
 " Markdown preview
 if executable('cargo')
