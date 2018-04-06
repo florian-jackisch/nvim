@@ -275,7 +275,7 @@ xnoremap <silent> Q gq
 nnoremap <silent> <leader>Q vapJgqap
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-g:tq_language=['en', 'de']
+let g:tq_language=['en', 'de']
 
 " Markdown preview
 if executable('cargo')
