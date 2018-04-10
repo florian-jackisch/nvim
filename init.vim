@@ -228,7 +228,9 @@ Plug 'prabirshrestha/asyncomplete-file.vim'
 Plug 'Shougo/neco-vim'
 Plug 'prabirshrestha/asyncomplete-necovim.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'pdavydov108/vim-lsp-cquery'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'cquery-project/cquery', { 'do': './waf configure build' }
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_signs_error = {'text': '•'}
@@ -360,18 +362,18 @@ if executable('pyls')
         \ 'whitelist': ['python'],
         \ })
 endif
-if executable('clangd')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
-elseif executable('cquery')
+if executable('cquery')
   au User lsp_setup call lsp#register_server({
         \ 'name': 'cquery',
         \ 'cmd': {server_info->['cquery']},
         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
         \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+elseif executable('clangd')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
         \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
         \ })
 endif
