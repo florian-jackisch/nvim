@@ -121,8 +121,11 @@ Plug 'tpope/vim-obsession'
 let g:netrw_liststyle = 1
 let g:rooter_patterns = ['.projections.json', '.git/', '.svn/']
 nnoremap <leader>m :Make<cr>
+nnoremap <leader>M :Make!<cr>
 nnoremap <leader>d :Dispatch<cr>
+nnoremap <leader>D :Dispatch!<cr>
 nnoremap <leader>s :Start<cr>
+nnoremap <leader>S :Start!<cr>
 " }}}
 
 " Git {{{
