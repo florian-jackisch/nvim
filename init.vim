@@ -24,7 +24,7 @@ set noswapfile
 " Enable persistent undo (for the current session)
 let s:undoDir = "/tmp/.undodir_" . $USER
 if !isdirectory(s:undoDir)
-  call mkdir(s:undoDir, "", 0700)
+    call mkdir(s:undoDir, "", 0700)
 endif
 let &undodir=s:undoDir
 set undofile
@@ -50,13 +50,13 @@ nnoremap <silent> <right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 " Neovim Settings {{{
 if has("nvim")
-  " Incremental search and replace
-  set inccommand=nosplit
-  " terminal escape
-  tnoremap <Esc> <c-\><C-n>
-  tnoremap <c-v> <Esc><Esc>
-  " Disable line numbers in the terminal
-  au TermOpen * setlocal nonumber norelativenumber
+    " Incremental search and replace
+    set inccommand=nosplit
+    " terminal escape
+    tnoremap <Esc> <c-\><C-n>
+    tnoremap <c-v> <Esc><Esc>
+    " Disable line numbers in the terminal
+    au TermOpen * setlocal nonumber norelativenumber
 endif
 " }}}
 
@@ -148,9 +148,9 @@ nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :BTags<CR>
 let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
 " FZF ignores first keys if height is enabled
 let $FZF_DEFAULT_OPTS .= ' --no-height'
 " Close FZF with ESC even though terminal mode leaves with ESC
@@ -184,8 +184,8 @@ let g:neoformat_run_all_formatters = 1
 let g:neoformat_basic_format_trim = 1
 let g:neoformat_basic_format_align = 1
 function! FormatFile()
-  let l:lines="all"
-  py3f $HOME/.config/nvim/clang-format.py
+    let l:lines="all"
+    py3f $HOME/.config/nvim/clang-format.py
 endfunction
 autocmd FileType c,cpp vnoremap <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
 autocmd FileType c,cpp nnoremap <leader>f :call FormatFile()<cr>
@@ -198,22 +198,22 @@ nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 nmap <silent> ]W <Plug>(ale_last)
 let g:ale_linters = {
-      \ 'c': ['clangtidy'],
-      \ 'cpp': ['clangtidy'],
-      \ 'python': ['pylint', 'isort']
-      \ }
+            \ 'c': ['clangtidy'],
+            \ 'cpp': ['clangtidy'],
+            \ 'python': ['pylint', 'isort']
+            \ }
 let g:ale_fixers = {
-      \ 'python': ['pylint', 'isort']
-      \ }
+            \ 'python': ['pylint', 'isort']
+            \ }
 let g:ale_cpp_clangtidy_checks = [
-      \ 'cppcoreguidelines-*',
-      \ 'misc-*',
-      \ 'modernize-*',
-      \ 'performance-*',
-      \ 'readability-*',
-      \ 'bugprone-*',
-      \ 'clang-analyzer-'
-      \ ]
+            \ 'cppcoreguidelines-*',
+            \ 'misc-*',
+            \ 'modernize-*',
+            \ 'performance-*',
+            \ 'readability-*',
+            \ 'bugprone-*',
+            \ 'clang-analyzer-'
+            \ ]
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -224,36 +224,35 @@ let g:ale_sign_column_always = 1
 " }}}
 
 " Autocompletion {{{
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
-Plug 'prabirshrestha/asyncomplete-file.vim'
-Plug 'Shougo/neco-vim'
-Plug 'prabirshrestha/asyncomplete-necovim.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'pdavydov108/vim-lsp-cquery'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+            \ 'branch': 'next',
+            \ 'do': 'bash install.sh',
+            \ }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'cquery-project/cquery', { 'do': './waf configure build' }
-let g:lsp_signs_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_signs_error = {'text': '•'}
-let g:lsp_signs_warning = {'text': '•'}
-let g:lsp_signs_hint = {'text': '•'}
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-imap <c-space> <Plug>(asyncomplete_force_refresh)
-nmap <leader>ld :LspDefinition<cr>
-nmap <leader>lh :LspHover<cr>
-nmap <leader>lf :LspReferences<cr>
-nmap <leader>lr :LspRename<cr>
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplate#enable_refresh_always = 1
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#disable_auto_complete = 0
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:LanguageClient_serverCommands = {
+            \ 'python': ['pyls'],
+            \ }
 " }}}
 
 " Snippets {{{
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
@@ -263,11 +262,10 @@ let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips'
 
 " Tags {{{
 if executable('ctags')
-  Plug 'ludovicchabant/vim-gutentags'
-  Plug 'majutsushi/tagbar'
-  Plug 'prabirshrestha/asyncomplete-tags.vim'
-  nnoremap <silent> <leader>gg :TagbarToggle<CR>
-  let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'majutsushi/tagbar'
+    nnoremap <silent> <leader>gg :TagbarToggle<CR>
+    let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 endif
 " }}}
 
@@ -310,16 +308,16 @@ Plug 'lervag/vimtex'
 
 " Markdown {
 if executable('cargo')
-  function! BuildComposer(info)
-    if a:info.status != 'unchanged' || a:info.force
-      if has('nvim')
-        !cargo build --release
-      else
-        !cargo build --release --no-default-features --features json-rpc
-      endif
-    endif
-  endfunction
-  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+    function! BuildComposer(info)
+        if a:info.status != 'unchanged' || a:info.force
+            if has('nvim')
+                !cargo build --release
+            else
+                !cargo build --release --no-default-features --features json-rpc
+            endif
+        endif
+    endfunction
+    Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 endif
 " }
 
@@ -327,8 +325,8 @@ endif
 
 " Devicons (needs to be loaded last) {{{
 if !empty($DEVICONS)
-  Plug 'ryanoasis/vim-devicons'
-  let g:airline_powerline_fonts = 1
+    Plug 'ryanoasis/vim-devicons'
+    let g:airline_powerline_fonts = 1
 endif
 " }}}
 
@@ -340,61 +338,3 @@ set termguicolors
 colorscheme solarized8
 " }}}
 
-" Completion Sources {{{
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-      \ 'name': 'buffer',
-      \ 'whitelist': ['*'],
-      \ 'completor': function('asyncomplete#sources#buffer#completor'),
-      \ }))
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-      \ 'name': 'file',
-      \ 'whitelist': ['*'],
-      \ 'priority': 10,
-      \ 'completor': function('asyncomplete#sources#file#completor')
-      \ }))
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
-      \ 'name': 'necovim',
-      \ 'whitelist': ['vim'],
-      \ 'completor': function('asyncomplete#sources#necovim#completor'),
-      \ }))
-if executable('pyls')
-  " pip install python-language-server
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
-if executable('cquery')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'cquery',
-        \ 'cmd': {server_info->['cquery']},
-        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-        \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
-        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
-elseif executable('clangd')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
-endif
-if has('python3')
-  call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-        \ 'name': 'ultisnips',
-        \ 'whitelist': ['*'],
-        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-        \ }))
-endif
-if executable('ctags')
-  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
-        \ 'name': 'tags',
-        \ 'whitelist': ['c'],
-        \ 'completor': function('asyncomplete#sources#tags#completor'),
-        \ 'config': {
-        \    'max_file_size': 50000000,
-        \  },
-        \ }))
-endif
-" }}}
