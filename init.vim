@@ -218,8 +218,8 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_file_type_changed = 0
-let g:ale_sign_warning = '•'
-let g:ale_sign_error = '•'
+let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '✖'
 let g:ale_sign_column_always = 1
 " }}}
 
@@ -252,12 +252,6 @@ let g:LanguageClient_serverCommands = {
 nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
-let g:LanguageClient_diagnosticsDisplay = {
-            \ 1: { "name": "Error",       "texthl": "ALEError",   "signText": "•", "signTexthl": "ALEErrorSign",  },
-            \ 2: { "name": "Warning",     "texthl": "ALEWarning", "signText": "•", "signTexthl": "ALEWarningSign",},
-            \ 3: { "name": "Information", "texthl": "ALEInfo",    "signText": "•", "signTexthl": "ALEInfoSign",   },
-            \ 4: { "name": "Hint",        "texthl": "ALEInfo",    "signText": "•", "signTexthl": "ALEInfoSign",   },
-            \ }
 " }}}
 
 " Snippets {{{
