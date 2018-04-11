@@ -229,11 +229,11 @@ Plug 'autozimu/LanguageClient-neovim', {
             \ 'do': 'bash install.sh',
             \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'cquery-project/cquery', { 'do': './waf configure build' }
+Plug 'Shougo/neco-vim'
+Plug 'Shougo/neco-syntax'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
-let g:deoplate#enable_refresh_always = 1
-let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#auto_complete_start_length = 0
 let g:deoplete#disable_auto_complete = 0
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
@@ -247,6 +247,16 @@ inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:LanguageClient_serverCommands = {
             \ 'python': ['pyls'],
+            \ 'cpp': ['clangd'],
+            \ }
+nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
+let g:LanguageClient_diagnosticsDisplay = {
+            \ 1: { "name": "Error",       "texthl": "ALEError",   "signText": "•", "signTexthl": "ALEErrorSign",  },
+            \ 2: { "name": "Warning",     "texthl": "ALEWarning", "signText": "•", "signTexthl": "ALEWarningSign",},
+            \ 3: { "name": "Information", "texthl": "ALEInfo",    "signText": "•", "signTexthl": "ALEInfoSign",   },
+            \ 4: { "name": "Hint",        "texthl": "ALEInfo",    "signText": "•", "signTexthl": "ALEInfoSign",   },
             \ }
 " }}}
 
@@ -337,4 +347,3 @@ call plug#end()
 set termguicolors
 colorscheme solarized8
 " }}}
-
