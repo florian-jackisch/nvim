@@ -234,7 +234,6 @@ Plug 'Shougo/neco-syntax'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#auto_complete_start_length = 0
-let g:deoplete#disable_auto_complete = 0
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
             \ <SID>check_back_space() ? "\<TAB>" :
@@ -252,6 +251,7 @@ let g:LanguageClient_serverCommands = {
 nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> <leader>lf :call LanguageClient#textDocument_references()<CR>
 " }}}
 
 " Snippets {{{
