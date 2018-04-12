@@ -107,7 +107,6 @@ let g:lt_quickfix_list_toggle_map = '<leader>qq'
 Plug 'wincent/loupe'
 Plug 'junegunn/vim-slash'
 Plug 'tpope/vim-abolish'
-let g:LoupeHighlightGroup='Error'
 " }}}
 
 " Project Management {{{
@@ -171,6 +170,14 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Color Schemes {{{
 Plug 'lifepillar/vim-solarized8'
+Plug 'morhetz/gruvbox'
+let g:gruvbox_contrast_light='hard'
+nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 " }}}
 
 " Format {{{
@@ -286,7 +293,7 @@ Plug 'roxma/python-support.nvim'
 let g:python_support_python2_require = 0
 let g:python_support_python3_venv = 0
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'isort')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'python-language-server[all]')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'python-language-server')
 " }}}
 
 " Writing {{{
@@ -339,5 +346,6 @@ call plug#end()
 
 " Color Scheme Settings {{{
 set termguicolors
-colorscheme solarized8
+set background=dark
+colorscheme gruvbox
 " }}}
