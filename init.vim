@@ -171,6 +171,11 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Color Schemes {{{
 Plug 'lifepillar/vim-solarized8'
+Plug 'morhetz/gruvbox'
+let g:gruvbox_italic = 1
+let g:gruvbox_contrast_light = 'hard'
+let g:gruvbox_improved_strings = 1
+let g:gruvbox_improved_warnings = 1
 " }}}
 
 " Format {{{
@@ -266,10 +271,10 @@ let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips'
 
 " Tags {{{
 if executable('ctags')
-    Plug 'ludovicchabant/vim-gutentags'
+    " Plug 'ludovicchabant/vim-gutentags'
     Plug 'majutsushi/tagbar'
     nnoremap <silent> <leader>gg :TagbarToggle<CR>
-    let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+    " let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 endif
 " }}}
 
@@ -339,5 +344,6 @@ call plug#end()
 
 " Color Scheme Settings {{{
 set termguicolors
-colorscheme solarized8
+set background=dark
+colorscheme gruvbox
 " }}}
