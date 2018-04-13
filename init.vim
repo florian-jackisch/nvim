@@ -271,10 +271,10 @@ let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips'
 
 " Tags {{{
 if executable('ctags')
-    " Plug 'ludovicchabant/vim-gutentags'
+    Plug 'ludovicchabant/vim-gutentags', { 'tag': 'v1.0.0' }
     Plug 'majutsushi/tagbar'
     nnoremap <silent> <leader>gg :TagbarToggle<CR>
-    " let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+    let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 endif
 " }}}
 
