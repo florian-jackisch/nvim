@@ -172,6 +172,7 @@ let g:airline#extensions#tabline#enabled = 1
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_light='hard'
+let g:gruvbox_italic = 1
 nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
 nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
 nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
@@ -273,7 +274,7 @@ let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips'
 
 " Tags {{{
 if executable('ctags')
-    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'ludovicchabant/vim-gutentags', { 'tag': 'v1.0.0' }
     Plug 'majutsushi/tagbar'
     nnoremap <silent> <leader>gg :TagbarToggle<CR>
     let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
