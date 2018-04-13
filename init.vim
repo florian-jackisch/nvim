@@ -174,8 +174,6 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 let g:gruvbox_italic = 1
 let g:gruvbox_contrast_light = 'hard'
-let g:gruvbox_improved_strings = 1
-let g:gruvbox_improved_warnings = 1
 " }}}
 
 " Format {{{
