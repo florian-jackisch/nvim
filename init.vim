@@ -243,8 +243,7 @@ Plug 'prabirshrestha/asyncomplete-necovim.vim'
 Plug 'prabirshrestha/async.vim'                  " LSP completion
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'cquery-project/cquery',                    " C++ server cquery
-            \{ 'do': './waf configure build' }
+Plug 'cquery-project/cquery', { 'do': './waf configure build' }
 Plug 'pdavydov108/vim-lsp-cquery'
 let g:asyncomplete_remove_duplicates = 1
 let g:lsp_signs_enabled = 1
