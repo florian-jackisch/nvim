@@ -232,34 +232,31 @@ let g:ale_sign_column_always = 1
 " }}}
 
 " Autocompletion {{{
-Plug 'autozimu/LanguageClient-neovim', {
-            \ 'branch': 'next',
-            \ 'do': 'bash install.sh',
-            \ }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-vim'
-Plug 'Shougo/neco-syntax'
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_complete_start_length = 0
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ deoplete#mappings#manual_complete()
-function! s:check_back_space() abort "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:LanguageClient_serverCommands = {
-            \ 'python': ['pyls'],
-            \ 'cpp': ['clangd'],
-            \ }
-nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <leader>lf :call LanguageClient#textDocument_references()<CR>
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'    " Buffer completion
+Plug 'prabirshrestha/asyncomplete-file.vim'      " Path completion
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim' " Snippet completion
+Plug 'prabirshrestha/asyncomplete-tags.vim'      " Tag completion
+Plug 'Shougo/neco-syntax'                        " Vim completion
+Plug 'prabirshrestha/asyncomplete-necosyntax.vim'
+Plug 'prabirshrestha/asyncomplete-necovim.vim'
+Plug 'prabirshrestha/async.vim'                  " LSP completion
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'cquery-project/cquery',                    " C++ server cquery
+            \{ 'do': './waf configure build' }
+Plug 'pdavydov108/vim-lsp-cquery'
+let g:asyncomplete_remove_duplicates = 1
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+set completeopt+=preview
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:lsp_signs_error = {'text': '✗'}
+let g:lsp_signs_warning = {'text': '⚠'}
 " }}}
 
 " Snippets {{{
@@ -273,18 +270,16 @@ let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips'
 " }}}
 
 " Tags {{{
-if executable('ctags')
-    Plug 'ludovicchabant/vim-gutentags', { 'tag': 'v1.0.0' }
-    Plug 'majutsushi/tagbar'
-    nnoremap <silent> <leader>gg :TagbarToggle<CR>
-    let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
-endif
+Plug 'ludovicchabant/vim-gutentags', { 'tag': 'v1.0.0' }
+Plug 'majutsushi/tagbar'
+nnoremap <silent> <leader>gg :TagbarToggle<CR>
+let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 " }}}
 
 " Syntax and Folding {{{
 Plug 'sheerun/vim-polyglot'
-Plug 'tmhedberg/SimpylFold'
-Plug 'LucHermitte/VimFold4C'
+Plug 'tmhedberg/SimpylFold'  " Python folding
+Plug 'LucHermitte/VimFold4C' " C++ folding
 let g:polyglot_disabled = ['latex']
 let g:SimpylFold_docstring_preview = 1
 " }}}
@@ -351,4 +346,74 @@ call plug#end()
 set termguicolors
 set background=dark
 colorscheme gruvbox
+" }}}
+
+" Completion Providers {{{
+" Buffers {{{
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+            \ 'name': 'buffer',
+            \ 'whitelist': ['*'],
+            \ 'blacklist': ['go'],
+            \ 'completor': function('asyncomplete#sources#buffer#completor'),
+            \ }))
+""" }}}
+" Files {{{
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+            \ 'name': 'file',
+            \ 'whitelist': ['*'],
+            \ 'priority': 10,
+            \ 'completor': function('asyncomplete#sources#file#completor')
+            \ }))
+""" }}}
+" Snippets {{{
+if has('python3')
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+                \ 'name': 'ultisnips',
+                \ 'whitelist': ['*'],
+                \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+                \ }))
+endif
+""" }}}
+" {{{ Vim
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
+            \ 'name': 'necosyntax',
+            \ 'whitelist': ['*'],
+            \ 'completor': function('asyncomplete#sources#necosyntax#completor'),
+            \ }))
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
+            \ 'name': 'necovim',
+            \ 'whitelist': ['vim'],
+            \ 'completor': function('asyncomplete#sources#necovim#completor'),
+            \ }))
+" }}}
+" Tags {{{
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+            \ 'name': 'tags',
+            \ 'whitelist': ['c'],
+            \ 'completor': function('asyncomplete#sources#tags#completor'),
+            \ 'config': {
+            \    'max_file_size': 50000000,
+            \  },
+            \ }))
+" }}}
+" LSP {{{
+" C++ {{{
+au User lsp_setup call lsp#register_server({
+            \ 'name': 'cquery',
+            \ 'cmd': {server_info->['cquery']},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+            \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
+            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+            \ })
+" }}}
+" Python {{{
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+                \ 'name': 'pyls',
+                \ 'cmd': {server_info->['pyls']},
+                \ 'whitelist': ['python'],
+                \ })
+endif
+" }}}
+" }}}
 " }}}
