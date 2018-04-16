@@ -294,6 +294,8 @@ Plug 'roxma/python-support.nvim'
 let g:python_support_python2_require = 0
 let g:python_support_python3_venv = 0
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'isort')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'yapf')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'pylint')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'python-language-server')
 " }}}
 
