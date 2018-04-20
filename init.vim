@@ -256,6 +256,12 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:lsp_signs_error = {'text': '✗'}
 let g:lsp_signs_warning = {'text': '⚠'}
+nnoremap <leader>ld :LspDefinition<CR>
+nnoremap <leader>lf :LspReferences<CR>
+nnoremap <leader>lh :LspHover<CR>
+nnoremap <leader>li :LspImplementation<CR>
+nnoremap <leader>lr :LspRename<CR>
+nnoremap <leader>lw :LspWorkspaceSymbol<CR>
 " }}}
 
 " Snippets {{{
@@ -312,6 +318,7 @@ let g:tq_language=['en', 'de']
 
 " LaTeX {
 Plug 'lervag/vimtex'
+Plug 'matze/vim-tex-fold'
 " }
 
 " Markdown {
