@@ -1,10 +1,8 @@
 " vim:fdm=marker foldlevel=0
 
-" Leaders {{{
-let mapleader = ' '
-" }}}
-
 " Editor Settings {{{
+" Leader
+let mapleader = ' '
 " Relative line numbers
 set relativenumber number
 " Line wrapping is not the default
