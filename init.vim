@@ -12,7 +12,7 @@ set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Open new vsplit right
 set splitright
 " Enable folding by syntax
-set foldmethod=manual foldlevelstart=99
+set foldmethod=syntax foldlevelstart=99
 " 80 columns is the target width
 set colorcolumn=80
 " Highlight the current line
@@ -40,6 +40,7 @@ vnoremap . :normal .<CR>
 " Quickly open/reload vim
 nnoremap <leader>ve :edit $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
+" Resize the window easily
 nnoremap <silent> <up> :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <down> :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
@@ -61,7 +62,7 @@ endif
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
-" Core Plugins {{{
+" Plugins Without Settings {{{
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mhinz/vim-startify'
@@ -78,7 +79,7 @@ nmap ä ]
 omap ö [
 omap ä ]
 xmap ö [
-xmap ä ]noremap <silent> <leader>ge :Gedit<CR>
+xmap ä ]
 " }}}
 
 " Align {{{
@@ -108,13 +109,13 @@ Plug 'tpope/vim-abolish'
 " }}}
 
 " Project Management {{{
-Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
-Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-vinegar'
 let g:netrw_liststyle = 1
 let g:rooter_patterns = ['.projections.json', '.git/', '.svn/']
 nnoremap <leader>m :Make<cr>
@@ -126,13 +127,15 @@ nnoremap <leader>S :Start!<cr>
 " }}}
 
 " Git {{{
-Plug 'tpope/vim-fugitive' | Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gl :Glog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gu :Git pull<CR>
 nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 let g:signify_vcs_list = [ 'git', 'svn' ]
@@ -171,12 +174,6 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_light='hard'
 let g:gruvbox_italic = 1
-nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 " }}}
 
 " Format {{{
@@ -189,6 +186,7 @@ let g:neoformat_enabled_markdown = ['prettier']
 let g:neoformat_run_all_formatters = 1
 let g:neoformat_basic_format_trim = 1
 let g:neoformat_basic_format_align = 1
+" Clang format is slow when called through neoformat
 function! FormatFile()
     let l:lines="all"
     py3f $HOME/.config/nvim/clang-format.py
@@ -200,9 +198,9 @@ autocmd FileType c,cpp nnoremap <leader>f :call FormatFile()<cr>
 " Linting {{{
 Plug 'w0rp/ale'
 nmap <silent> [W <Plug>(ale_first)
+nmap <silent> ]W <Plug>(ale_last)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
-nmap <silent> ]W <Plug>(ale_last)
 let g:ale_linters = {
             \ 'c': ['clangtidy'],
             \ 'cpp': ['clangtidy'],
@@ -231,14 +229,20 @@ let g:ale_sign_column_always = 1
 
 " Autocompletion {{{
 Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'    " Buffer completion
-Plug 'prabirshrestha/asyncomplete-file.vim'      " Path completion
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim' " Snippet completion
-Plug 'prabirshrestha/asyncomplete-tags.vim'      " Tag completion
-Plug 'Shougo/neco-syntax'                        " Vim completion
+" Buffer completion
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
+" Path completion
+Plug 'prabirshrestha/asyncomplete-file.vim'
+" Snippet completion
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+" Tag completion
+Plug 'prabirshrestha/asyncomplete-tags.vim'
+" Vim completion
+Plug 'Shougo/neco-syntax'
 Plug 'prabirshrestha/asyncomplete-necosyntax.vim'
 Plug 'prabirshrestha/asyncomplete-necovim.vim'
-Plug 'prabirshrestha/async.vim'                  " LSP completion
+" LSP completion
+Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'cquery-project/cquery', { 'do': './waf configure build' }
@@ -268,7 +272,6 @@ Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips']
 " }}}
 
@@ -281,8 +284,10 @@ let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 
 " Syntax and Folding {{{
 Plug 'sheerun/vim-polyglot'
-Plug 'tmhedberg/SimpylFold'  " Python folding
-Plug 'LucHermitte/VimFold4C' " C++ folding
+" Fold python
+Plug 'tmhedberg/SimpylFold'
+" Fold C++
+Plug 'LucHermitte/VimFold4C'
 let g:SimpylFold_docstring_preview = 1
 " }}}
 
@@ -296,9 +301,7 @@ let g:python_support_python3_requirements = add(get(g:,'python_support_python3_r
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'python-language-server')
 " }}}
 
-" Writing {{{
-
-" Writing Tools {
+" Writing Tools {{{
 Plug 'reedes/vim-wordy'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -311,13 +314,15 @@ nnoremap <silent> <leader>Q vapJgqap
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 let g:tq_language=['en', 'de']
-" }
+nnoremap <Leader>tr :ThesaurusQueryReplaceCurrentWord<CR>
+vnoremap <Leader>tr y:ThesaurusQueryReplace <C-r>"<CR>
+" }}}
 
-" LaTeX {
+" LaTeX {{{
 Plug 'matze/vim-tex-fold'
-" }
+" }}}
 
-" Markdown {
+" Markdown {{{
 if executable('cargo')
     function! BuildComposer(info)
         if a:info.status != 'unchanged' || a:info.force
@@ -330,8 +335,6 @@ if executable('cargo')
     endfunction
     Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 endif
-" }
-
 " }}}
 
 " Devicons (needs to be loaded last) {{{
