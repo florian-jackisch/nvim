@@ -285,7 +285,6 @@ let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/SimpylFold'  " Python folding
 Plug 'LucHermitte/VimFold4C' " C++ folding
-let g:polyglot_disabled = ['latex']
 let g:SimpylFold_docstring_preview = 1
 " }}}
 
@@ -317,7 +316,6 @@ let g:tq_language=['en', 'de']
 " }
 
 " LaTeX {
-Plug 'lervag/vimtex'
 Plug 'matze/vim-tex-fold'
 " }
 
@@ -350,8 +348,8 @@ call plug#end()
 
 " Color Scheme Settings {{{
 set termguicolors
-set background=dark
-colorscheme gruvbox
+set background=light
+colorscheme solarized8
 " }}}
 
 " Completion Providers {{{
