@@ -113,6 +113,7 @@ Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-vinegar'
 let g:netrw_liststyle = 1
