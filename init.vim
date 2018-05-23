@@ -228,43 +228,19 @@ let g:ale_sign_column_always = 1
 " }}}
 
 " Autocompletion {{{
-Plug 'prabirshrestha/asyncomplete.vim'
-" Buffer completion
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
-" Path completion
-Plug 'prabirshrestha/asyncomplete-file.vim'
-" Snippet completion
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-" Tag completion
-Plug 'prabirshrestha/asyncomplete-tags.vim'
-" Vim completion
-Plug 'Shougo/neco-syntax'
-Plug 'prabirshrestha/asyncomplete-necosyntax.vim'
-Plug 'prabirshrestha/asyncomplete-necovim.vim'
-" LSP completion
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'cquery-project/cquery', { 'do': './waf configure build' }
-Plug 'pdavydov108/vim-lsp-cquery'
-let g:asyncomplete_remove_duplicates = 1
-let g:lsp_signs_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-set completeopt+=preview
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-imap <c-space> <Plug>(asyncomplete_force_refresh)
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:lsp_signs_error = {'text': '✗'}
-let g:lsp_signs_warning = {'text': '⚠'}
-nnoremap <leader>ld :LspDefinition<CR>
-nnoremap <leader>lf :LspReferences<CR>
-nnoremap <leader>lh :LspHover<CR>
-nnoremap <leader>li :LspImplementation<CR>
-nnoremap <leader>lr :LspRename<CR>
-nnoremap <leader>lw :LspWorkspaceSymbol<CR>
-" }}}
+Plug 'Valloric/YouCompleteMe'
+let g:ycm_python_binary_path = 'python3'
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_error_symbol = '✖'
+let g:ycm_warning_symbol = '⚠'
+let g:ycm_complete_in_comments = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_key_detailed_diagnostics = '<leader>ld'
+nnoremap <leader>lg :YcmCompleter GoTo<CR>
+nnoremap <leader>lt :YcmCompleter GetType<CR>
+nnoremap <leader>lh :YcmCompleter GetDoc<CR>
+nnoremap <leader>lf :YcmCompleter FixIt<CR>
+" }}}
 
 " Snippets {{{
 Plug 'SirVer/ultisnips'
@@ -351,74 +327,4 @@ call plug#end()
 set termguicolors
 set background=light
 colorscheme solarized8
-" }}}
-
-" Completion Providers {{{
-" Buffers {{{
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-            \ 'name': 'buffer',
-            \ 'whitelist': ['*'],
-            \ 'blacklist': ['go'],
-            \ 'completor': function('asyncomplete#sources#buffer#completor'),
-            \ }))
-""" }}}
-" Files {{{
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-            \ 'name': 'file',
-            \ 'whitelist': ['*'],
-            \ 'priority': 10,
-            \ 'completor': function('asyncomplete#sources#file#completor')
-            \ }))
-""" }}}
-" Snippets {{{
-if has('python3')
-    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-                \ 'name': 'ultisnips',
-                \ 'whitelist': ['*'],
-                \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-                \ }))
-endif
-""" }}}
-" {{{ Vim
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
-            \ 'name': 'necosyntax',
-            \ 'whitelist': ['*'],
-            \ 'completor': function('asyncomplete#sources#necosyntax#completor'),
-            \ }))
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
-            \ 'name': 'necovim',
-            \ 'whitelist': ['vim'],
-            \ 'completor': function('asyncomplete#sources#necovim#completor'),
-            \ }))
-" }}}
-" Tags {{{
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
-            \ 'name': 'tags',
-            \ 'whitelist': ['c'],
-            \ 'completor': function('asyncomplete#sources#tags#completor'),
-            \ 'config': {
-            \    'max_file_size': 50000000,
-            \  },
-            \ }))
-" }}}
-" LSP {{{
-" C++ {{{
-au User lsp_setup call lsp#register_server({
-            \ 'name': 'cquery',
-            \ 'cmd': {server_info->['cquery']},
-            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-            \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
-            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-            \ })
-" }}}
-" Python {{{
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-                \ 'name': 'pyls',
-                \ 'cmd': {server_info->['pyls']},
-                \ 'whitelist': ['python'],
-                \ })
-endif
-" }}}
-" }}}
 " }}}

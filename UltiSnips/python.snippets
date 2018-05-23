@@ -23,3 +23,10 @@ snippet init "init definitions"
 def __init__(self, $1):
     $0
 endsnippet
+
+snippet file "file path"
+import os
+
+FILE_PATH = os.path.dirname(os.path.realpath(__file__))
+$0
+endsnippet
