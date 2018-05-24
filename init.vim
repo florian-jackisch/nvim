@@ -106,6 +106,7 @@ let g:lt_quickfix_list_toggle_map = '<leader>qq'
 Plug 'wincent/loupe'
 Plug 'junegunn/vim-slash'
 Plug 'tpope/vim-abolish'
+Plug 'mhinz/vim-grepper'
 " }}}
 
 " Project Management {{{
