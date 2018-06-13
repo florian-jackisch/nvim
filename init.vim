@@ -22,7 +22,7 @@ set noswapfile
 " Enable persistent undo (for the current session)
 let s:undoDir = "/tmp/.undodir_" . $USER
 if !isdirectory(s:undoDir)
-    call mkdir(s:undoDir, "", 0700)
+  call mkdir(s:undoDir, "", 0700)
 endif
 let &undodir=s:undoDir
 set undofile
@@ -49,13 +49,13 @@ nnoremap <silent> <right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 " Neovim Settings {{{
 if has("nvim")
-    " Incremental search and replace
-    set inccommand=nosplit
-    " terminal escape
-    tnoremap <Esc> <c-\><C-n>
-    tnoremap <c-v> <Esc><Esc>
-    " Disable line numbers in the terminal
-    au TermOpen * setlocal nonumber norelativenumber
+  " Incremental search and replace
+  set inccommand=nosplit
+  " terminal escape
+  tnoremap <Esc> <c-\><C-n>
+  tnoremap <c-v> <Esc><Esc>
+  " Disable line numbers in the terminal
+  au TermOpen * setlocal nonumber norelativenumber
 endif
 " }}}
 
@@ -149,9 +149,9 @@ nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :BTags<CR>
 let g:fzf_action = {
-            \ 'ctrl-t': 'tab split',
-            \ 'ctrl-x': 'split',
-            \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
+	  \ 'ctrl-t': 'tab split',
+	  \ 'ctrl-x': 'split',
+	  \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
 " FZF ignores first keys if height is enabled
 let $FZF_DEFAULT_OPTS .= ' --no-height'
 " Close FZF with ESC even though terminal mode leaves with ESC
@@ -163,10 +163,10 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+	  \ 'ctrl-q': function('s:build_quickfix_list'),
+	  \ 'ctrl-t': 'tab split',
+	  \ 'ctrl-x': 'split',
+	  \ 'ctrl-v': 'vsplit' }
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 " }}}
 
@@ -177,9 +177,10 @@ let g:undotree_SetFocusWhenToggle = 1
 " }}}
 
 " Airline {{{
-Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
+Plug 'itchyny/lightline.vim'
+let g:lightline = {
+	  \ 'colorscheme': 'solarized',
+	  \ }
 " }}}
 
 " Color Schemes {{{
@@ -201,11 +202,11 @@ let g:neoformat_basic_format_trim = 1
 let g:neoformat_basic_format_align = 1
 " Clang format is slow when called through neoformat
 function! FormatFile()
-    let l:lines="all"
-    py3f $HOME/.config/nvim/clang-format.py
+  let l:lines="all"
+  py3f $HOME/.config/nvim/clang-format.py
 endfunction
-autocmd FileType c,cpp vnoremap <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
-autocmd FileType c,cpp nnoremap <leader>f :call FormatFile()<cr>
+autocmd FileType c,cpp vnoremap <buffer> <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
+autocmd FileType c,cpp nnoremap <buffer> <leader>f :call FormatFile()<cr>
 " }}}
 
 " Linting {{{
@@ -215,22 +216,22 @@ nmap <silent> ]W <Plug>(ale_last)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 let g:ale_linters = {
-            \ 'c': ['clangtidy'],
-            \ 'cpp': ['clangtidy'],
-            \ 'python': ['pylint', 'isort']
-            \ }
+	  \ 'c': ['clangtidy'],
+	  \ 'cpp': ['clangtidy'],
+	  \ 'python': ['pylint', 'isort']
+	  \ }
 let g:ale_fixers = {
-            \ 'python': ['pylint', 'isort']
-            \ }
+	  \ 'python': ['pylint', 'isort']
+	  \ }
 let g:ale_cpp_clangtidy_checks = [
-            \ 'cppcoreguidelines-*',
-            \ 'misc-*',
-            \ 'modernize-*',
-            \ 'performance-*',
-            \ 'readability-*',
-            \ 'bugprone-*',
-            \ 'clang-analyzer-'
-            \ ]
+	  \ 'cppcoreguidelines-*',
+	  \ 'misc-*',
+	  \ 'modernize-*',
+	  \ 'performance-*',
+	  \ 'readability-*',
+	  \ 'bugprone-*',
+	  \ 'clang-analyzer-'
+	  \ ]
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -265,7 +266,7 @@ let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips'
 " }}}
 
 " Tags {{{
-Plug 'ludovicchabant/vim-gutentags', { 'tag': 'v1.0.0' }
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 nnoremap <silent> <leader>gg :TagbarToggle<CR>
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
@@ -313,23 +314,22 @@ Plug 'matze/vim-tex-fold'
 
 " Markdown {{{
 if executable('cargo')
-    function! BuildComposer(info)
-        if a:info.status != 'unchanged' || a:info.force
-            if has('nvim')
-                !cargo build --release
-            else
-                !cargo build --release --no-default-features --features json-rpc
-            endif
-        endif
-    endfunction
-    Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+  function! BuildComposer(info)
+	if a:info.status != 'unchanged' || a:info.force
+	  if has('nvim')
+		!cargo build --release
+	  else
+		!cargo build --release --no-default-features --features json-rpc
+	  endif
+	endif
+  endfunction
+  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 endif
 " }}}
 
 " Devicons (needs to be loaded last) {{{
 if !empty($DEVICONS)
-    Plug 'ryanoasis/vim-devicons'
-    let g:airline_powerline_fonts = 1
+  Plug 'ryanoasis/vim-devicons'
 endif
 " }}}
 
