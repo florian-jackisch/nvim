@@ -149,9 +149,9 @@ nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :BTags<CR>
 let g:fzf_action = {
-	  \ 'ctrl-t': 'tab split',
-	  \ 'ctrl-x': 'split',
-	  \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
 " FZF ignores first keys if height is enabled
 let $FZF_DEFAULT_OPTS .= ' --no-height'
 " Close FZF with ESC even though terminal mode leaves with ESC
@@ -163,10 +163,10 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 let g:fzf_action = {
-	  \ 'ctrl-q': function('s:build_quickfix_list'),
-	  \ 'ctrl-t': 'tab split',
-	  \ 'ctrl-x': 'split',
-	  \ 'ctrl-v': 'vsplit' }
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 " }}}
 
@@ -179,8 +179,8 @@ let g:undotree_SetFocusWhenToggle = 1
 " Airline {{{
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-	  \ 'colorscheme': 'solarized',
-	  \ }
+      \ 'colorscheme': 'solarized',
+      \ }
 " }}}
 
 " Color Schemes {{{
@@ -193,7 +193,7 @@ let g:gruvbox_italic = 1
 " Format {{{
 Plug 'sbdchd/neoformat'
 nnoremap <silent> <leader>f :Neoformat<CR>
-let g:neoformat_enabled_python = ['yapf', 'isort']
+let g:neoformat_enabled_python = ['black', 'isort']
 let g:neoformat_enabled_latex = ['latexindent']
 let g:neoformat_enabled_cmake = ['cmake_format']
 let g:neoformat_enabled_markdown = ['prettier']
@@ -216,22 +216,22 @@ nmap <silent> ]W <Plug>(ale_last)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 let g:ale_linters = {
-	  \ 'c': ['clangtidy'],
-	  \ 'cpp': ['clangtidy'],
-	  \ 'python': ['pylint', 'isort']
-	  \ }
+      \ 'c': ['clangtidy'],
+      \ 'cpp': ['clangtidy'],
+      \ 'python': ['pylint', 'isort']
+      \ }
 let g:ale_fixers = {
-	  \ 'python': ['pylint', 'isort']
-	  \ }
+      \ 'python': ['pylint', 'isort']
+      \ }
 let g:ale_cpp_clangtidy_checks = [
-	  \ 'cppcoreguidelines-*',
-	  \ 'misc-*',
-	  \ 'modernize-*',
-	  \ 'performance-*',
-	  \ 'readability-*',
-	  \ 'bugprone-*',
-	  \ 'clang-analyzer-'
-	  \ ]
+      \ 'cppcoreguidelines-*',
+      \ 'misc-*',
+      \ 'modernize-*',
+      \ 'performance-*',
+      \ 'readability-*',
+      \ 'bugprone-*',
+      \ 'clang-analyzer-'
+      \ ]
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -315,22 +315,18 @@ Plug 'matze/vim-tex-fold'
 " Markdown {{{
 if executable('cargo')
   function! BuildComposer(info)
-	if a:info.status != 'unchanged' || a:info.force
-	  if has('nvim')
-		!cargo build --release
-	  else
-		!cargo build --release --no-default-features --features json-rpc
-	  endif
-	endif
+    if a:info.status != 'unchanged' || a:info.force
+      if has('nvim')
+	!cargo build --release
+      else
+	!cargo build --release --no-default-features --features json-rpc
+      endif
+    endif
   endfunction
   Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 endif
 " }}}
 
-" Devicons (needs to be loaded last) {{{
-if !empty($DEVICONS)
-  Plug 'ryanoasis/vim-devicons'
-endif
 " }}}
 
 call plug#end()
@@ -338,6 +334,10 @@ call plug#end()
 
 " Color Scheme Settings {{{
 set termguicolors
-set background=light
+if $VIM_BACKGROUND == "dark"
+  set background=dark
+else
+  set background=light
+endif
 colorscheme solarized8
 " }}}
