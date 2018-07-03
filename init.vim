@@ -327,8 +327,6 @@ if executable('cargo')
 endif
 " }}}
 
-" }}}
-
 call plug#end()
 " }}}
 
