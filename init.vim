@@ -70,10 +70,15 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'wincent/terminus'
+if !exists("g:gui_oni")
+  Plug 'wellle/targets.vim'
+endif
 " }}}
 
 " Unimpaired {{{
-Plug 'tpope/vim-unimpaired'
+if !exists("g:gui_oni")
+  Plug 'tpope/vim-unimpaired'
+endif
 nmap ö [
 nmap ä ]
 omap ö [
@@ -91,7 +96,9 @@ nmap ga <Plug>(EasyAlign)
 " }}}
 
 " Comments {{{
-Plug 'tpope/vim-commentary'
+if !exists("g:gui_oni")
+  Plug 'tpope/vim-commentary'
+endif
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
 " }}}
@@ -144,7 +151,10 @@ let g:signify_vcs_list = [ 'git', 'svn' ]
 
 " FZF {{{
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-nnoremap <C-p> :Files<CR>
+if !exists("g:gui_oni")
+
+  nnoremap <C-p> :Files<CR>
+endif
 nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :BTags<CR>
@@ -177,17 +187,16 @@ let g:undotree_SetFocusWhenToggle = 1
 " }}}
 
 " Airline {{{
-Plug 'itchyny/lightline.vim'
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }
+if !exists("g:gui_oni")
+  Plug 'itchyny/lightline.vim'
+  let g:lightline = {
+	\ 'colorscheme': 'solarized',
+	\ }
+endif
 " }}}
 
 " Color Schemes {{{
 Plug 'lifepillar/vim-solarized8'
-Plug 'morhetz/gruvbox'
-let g:gruvbox_contrast_light='hard'
-let g:gruvbox_italic = 1
 " }}}
 
 " Format {{{
@@ -242,18 +251,20 @@ let g:ale_sign_column_always = 1
 " }}}
 
 " Autocompletion {{{
-Plug 'Valloric/YouCompleteMe'
-let g:ycm_python_binary_path = 'python3'
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_error_symbol = '✖'
-let g:ycm_warning_symbol = '⚠'
-let g:ycm_complete_in_comments = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_key_detailed_diagnostics = '<leader>ld'
-nnoremap <leader>lg :YcmCompleter GoTo<CR>
-nnoremap <leader>lt :YcmCompleter GetType<CR>
-nnoremap <leader>lh :YcmCompleter GetDoc<CR>
-nnoremap <leader>lf :YcmCompleter FixIt<CR>
+if !exists("g:gui_oni")
+  Plug 'Valloric/YouCompleteMe'
+  let g:ycm_python_binary_path = 'python3'
+  let g:ycm_min_num_of_chars_for_completion = 1
+  let g:ycm_error_symbol = '✖'
+  let g:ycm_warning_symbol = '⚠'
+  let g:ycm_complete_in_comments = 1
+  let g:ycm_autoclose_preview_window_after_completion = 1
+  let g:ycm_key_detailed_diagnostics = '<leader>ld'
+  nnoremap <leader>lg :YcmCompleter GoTo<CR>
+  nnoremap <leader>lt :YcmCompleter GetType<CR>
+  nnoremap <leader>lh :YcmCompleter GetDoc<CR>
+  nnoremap <leader>lf :YcmCompleter FixIt<CR>
+endif
 " }}}
 
 " Snippets {{{
@@ -331,11 +342,13 @@ call plug#end()
 " }}}
 
 " Color Scheme Settings {{{
-set termguicolors
-if $VIM_BACKGROUND == "dark"
-  set background=dark
-else
-  set background=light
+if !exists("g:gui_oni")
+  set termguicolors
+  if $VIM_BACKGROUND == "dark"
+    set background=dark
+  else
+    set background=light
+  endif
+  colorscheme solarized8
 endif
-colorscheme solarized8
 " }}}

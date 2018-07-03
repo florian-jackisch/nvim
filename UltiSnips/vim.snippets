@@ -30,4 +30,9 @@ CompilerSet errorformat=
       \%X%*\\a:\ Leaving\ directory\ [`']%f',
       \%DMaking\ %*\\a\ in\ %f
 endsnippet
-	
+
+snippet oni "if oni"
+if !exists("g:gui_oni")
+  $0
+endif
+endsnippet
