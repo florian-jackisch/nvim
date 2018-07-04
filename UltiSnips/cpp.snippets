@@ -33,3 +33,9 @@ namespace $1 {
 $0
 }  // namespace $1
 endsnippet
+
+snippet ignored "ignore diagnostic"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-W${1:uninitialized}"
+#pragma GCC diagnostic pop$0
+endsnippet
