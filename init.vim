@@ -22,7 +22,7 @@ set noswapfile
 " Enable persistent undo (for the current session)
 let s:undoDir = "/tmp/.undodir_" . $USER
 if !isdirectory(s:undoDir)
-  call mkdir(s:undoDir, "", 0700)
+    call mkdir(s:undoDir, "", 0700)
 endif
 let &undodir=s:undoDir
 set undofile
@@ -49,13 +49,13 @@ nnoremap <silent> <right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 " Neovim Settings {{{
 if has("nvim")
-  " Incremental search and replace
-  set inccommand=nosplit
-  " terminal escape
-  tnoremap <Esc> <c-\><C-n>
-  tnoremap <c-v> <Esc><Esc>
-  " Disable line numbers in the terminal
-  au TermOpen * setlocal nonumber norelativenumber
+    " Incremental search and replace
+    set inccommand=nosplit
+    " terminal escape
+    tnoremap <Esc> <c-\><C-n>
+    tnoremap <c-v> <Esc><Esc>
+    " Disable line numbers in the terminal
+    au TermOpen * setlocal nonumber norelativenumber
 endif
 " }}}
 
@@ -63,9 +63,8 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Plugins Without Settings {{{
-Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'jiangmiao/auto-pairs'
-Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
@@ -77,7 +76,7 @@ endif
 
 " Unimpaired {{{
 if !exists("g:gui_oni")
-  Plug 'tpope/vim-unimpaired'
+    Plug 'tpope/vim-unimpaired'
 endif
 nmap ö [
 nmap ä ]
@@ -97,7 +96,7 @@ nmap ga <Plug>(EasyAlign)
 
 " Comments {{{
 if !exists("g:gui_oni")
-  Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-commentary'
 endif
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
@@ -117,15 +116,14 @@ Plug 'mhinz/vim-grepper'
 " }}}
 
 " Project Management {{{
-Plug 'airblade/vim-rooter'
+Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-vinegar'
-let g:netrw_liststyle = 1
-let g:rooter_patterns = ['.projections.json', '.git/', '.svn/']
+Plug 'justinmk/vim-dirvish'
+let g:startify_change_to_dir = 0
 nnoremap <leader>m :Make<cr>
 nnoremap <leader>M :Make!<cr>
 nnoremap <leader>d :Dispatch<cr>
@@ -153,31 +151,29 @@ let g:signify_vcs_list = [ 'git', 'svn' ]
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 if !exists("g:gui_oni")
 
-  nnoremap <C-p> :Files<CR>
+    nnoremap <C-p> :Files<CR>
 endif
 nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :BTags<CR>
 let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
-" FZF ignores first keys if height is enabled
-let $FZF_DEFAULT_OPTS .= ' --no-height'
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-s': 'vsplit' } " default ctrl-v conflicts with visual block mode
 " Close FZF with ESC even though terminal mode leaves with ESC
 autocmd! FileType fzf tnoremap <buffer> <ESC> <C-c>
 " CTRL-A CTRL-Q to select all and build quickfix list
 function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
 endfunction
 let g:fzf_action = {
-      \ 'ctrl-q': function('s:build_quickfix_list'),
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
-let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+            \ 'ctrl-q': function('s:build_quickfix_list'),
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
+let $FZF_DEFAULT_OPTS .= ' --no-height --bind ctrl-a:select-all'
 " }}}
 
 " Undotree {{{
@@ -188,10 +184,10 @@ let g:undotree_SetFocusWhenToggle = 1
 
 " Airline {{{
 if !exists("g:gui_oni")
-  Plug 'itchyny/lightline.vim'
-  let g:lightline = {
-	\ 'colorscheme': 'solarized',
-	\ }
+    Plug 'itchyny/lightline.vim'
+    let g:lightline = {
+                \ 'colorscheme': 'solarized',
+                \ }
 endif
 " }}}
 
@@ -211,8 +207,8 @@ let g:neoformat_basic_format_trim = 1
 let g:neoformat_basic_format_align = 1
 " Clang format is slow when called through neoformat
 function! FormatFile()
-  let l:lines="all"
-  py3f $HOME/.config/nvim/clang-format.py
+    let l:lines="all"
+    py3f $HOME/.config/nvim/clang-format.py
 endfunction
 autocmd FileType c,cpp vnoremap <buffer> <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
 autocmd FileType c,cpp nnoremap <buffer> <leader>f :call FormatFile()<cr>
@@ -225,22 +221,22 @@ nmap <silent> ]W <Plug>(ale_last)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 let g:ale_linters = {
-      \ 'c': ['clangtidy'],
-      \ 'cpp': ['clangtidy'],
-      \ 'python': ['pylint', 'isort']
-      \ }
+            \ 'c': ['clangtidy'],
+            \ 'cpp': ['clangtidy'],
+            \ 'python': ['pylint', 'isort']
+            \ }
 let g:ale_fixers = {
-      \ 'python': ['pylint', 'isort']
-      \ }
+            \ 'python': ['pylint', 'isort']
+            \ }
 let g:ale_cpp_clangtidy_checks = [
-      \ 'cppcoreguidelines-*',
-      \ 'misc-*',
-      \ 'modernize-*',
-      \ 'performance-*',
-      \ 'readability-*',
-      \ 'bugprone-*',
-      \ 'clang-analyzer-'
-      \ ]
+            \ 'cppcoreguidelines-*',
+            \ 'misc-*',
+            \ 'modernize-*',
+            \ 'performance-*',
+            \ 'readability-*',
+            \ 'bugprone-*',
+            \ 'clang-analyzer-'
+            \ ]
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -252,18 +248,18 @@ let g:ale_sign_column_always = 1
 
 " Autocompletion {{{
 if !exists("g:gui_oni")
-  Plug 'Valloric/YouCompleteMe'
-  let g:ycm_python_binary_path = 'python3'
-  let g:ycm_min_num_of_chars_for_completion = 1
-  let g:ycm_error_symbol = '✖'
-  let g:ycm_warning_symbol = '⚠'
-  let g:ycm_complete_in_comments = 1
-  let g:ycm_autoclose_preview_window_after_completion = 1
-  let g:ycm_key_detailed_diagnostics = '<leader>ld'
-  nnoremap <leader>lg :YcmCompleter GoTo<CR>
-  nnoremap <leader>lt :YcmCompleter GetType<CR>
-  nnoremap <leader>lh :YcmCompleter GetDoc<CR>
-  nnoremap <leader>lf :YcmCompleter FixIt<CR>
+    Plug 'Valloric/YouCompleteMe'
+    let g:ycm_python_binary_path = 'python3'
+    let g:ycm_min_num_of_chars_for_completion = 1
+    let g:ycm_error_symbol = '✖'
+    let g:ycm_warning_symbol = '⚠'
+    let g:ycm_complete_in_comments = 1
+    let g:ycm_autoclose_preview_window_after_completion = 1
+    let g:ycm_key_detailed_diagnostics = '<leader>ld'
+    nnoremap <leader>lg :YcmCompleter GoTo<CR>
+    nnoremap <leader>lt :YcmCompleter GetType<CR>
+    nnoremap <leader>lh :YcmCompleter GetDoc<CR>
+    nnoremap <leader>lf :YcmCompleter FixIt<CR>
 endif
 " }}}
 
@@ -297,7 +293,7 @@ Plug 'roxma/python-support.nvim'
 let g:python_support_python2_require = 0
 let g:python_support_python3_venv = 0
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'isort')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'yapf')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'black')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'pylint')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'python-language-server')
 " }}}
@@ -325,16 +321,16 @@ Plug 'matze/vim-tex-fold'
 
 " Markdown {{{
 if executable('cargo')
-  function! BuildComposer(info)
-    if a:info.status != 'unchanged' || a:info.force
-      if has('nvim')
-	!cargo build --release
-      else
-	!cargo build --release --no-default-features --features json-rpc
-      endif
-    endif
-  endfunction
-  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+    function! BuildComposer(info)
+        if a:info.status != 'unchanged' || a:info.force
+            if has('nvim')
+                !cargo build --release
+            else
+                !cargo build --release --no-default-features --features json-rpc
+            endif
+        endif
+    endfunction
+    Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 endif
 " }}}
 
@@ -343,12 +339,12 @@ call plug#end()
 
 " Color Scheme Settings {{{
 if !exists("g:gui_oni")
-  set termguicolors
-  if $VIM_BACKGROUND == "dark"
-    set background=dark
-  else
-    set background=light
-  endif
-  colorscheme solarized8
+    set termguicolors
+    if $VIM_BACKGROUND == "dark"
+        set background=dark
+    else
+        set background=light
+    endif
+    colorscheme solarized8
 endif
 " }}}
