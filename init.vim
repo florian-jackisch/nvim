@@ -70,7 +70,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'wincent/terminus'
 if !exists("g:gui_oni")
-  Plug 'wellle/targets.vim'
+    Plug 'wellle/targets.vim'
 endif
 " }}}
 
@@ -248,18 +248,37 @@ let g:ale_sign_column_always = 1
 
 " Autocompletion {{{
 if !exists("g:gui_oni")
-    Plug 'Valloric/YouCompleteMe'
-    let g:ycm_python_binary_path = 'python3'
-    let g:ycm_min_num_of_chars_for_completion = 1
-    let g:ycm_error_symbol = '✖'
-    let g:ycm_warning_symbol = '⚠'
-    let g:ycm_complete_in_comments = 1
-    let g:ycm_autoclose_preview_window_after_completion = 1
-    let g:ycm_key_detailed_diagnostics = '<leader>ld'
-    nnoremap <leader>lg :YcmCompleter GoTo<CR>
-    nnoremap <leader>lt :YcmCompleter GetType<CR>
-    nnoremap <leader>lh :YcmCompleter GetDoc<CR>
-    nnoremap <leader>lf :YcmCompleter FixIt<CR>
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'autozimu/LanguageClient-neovim', {
+                \ 'branch': 'next',
+                \ 'do': 'bash install.sh',
+                \ }
+    Plug 'Shougo/neco-syntax'
+    Plug 'Shougo/neco-vim'
+    let g:deoplete#enable_at_startup = 1
+    inoremap <silent><expr> <TAB>
+                \ pumvisible() ? "\<C-n>" :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ deoplete#mappings#manual_complete()
+    inoremap <silent><expr> <s-TAB>
+                \ pumvisible() ? "\<C-p>" :
+                \ <SID>check_back_space() ? "\<s-TAB>" :
+                \ deoplete#mappings#manual_complete()
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction"
+    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+    " Required for operations modifying multiple buffers like rename.
+    set hidden
+    let g:LanguageClient_serverCommands = {
+                \ 'python': ['pyls'],
+                \ 'cpp': ['clangd'],
+                \ }
+    nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 endif
 " }}}
 
