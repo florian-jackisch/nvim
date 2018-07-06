@@ -1,0 +1,8 @@
+snippet pandoc "pandoc projections"
+{
+    "*.md": {
+        "make": "pandoc {}.md -o {}.pdf",
+        "start": "pandoc {}.md -o {}.pdf && evince {}.pdf"
+    }
+}
+endsnippet
