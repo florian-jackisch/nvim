@@ -51,11 +51,13 @@ nnoremap <silent> <right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 if has("nvim")
     " Incremental search and replace
     set inccommand=nosplit
-    " terminal escape
+    " Terminal escape
     tnoremap <Esc> <c-\><C-n>
     tnoremap <c-v> <Esc><Esc>
     " Disable line numbers in the terminal
     au TermOpen * setlocal nonumber norelativenumber
+    " Terminal tab
+    nnoremap <leader>tt :tabedit <bar> terminal<CR>
 endif
 " }}}
 
@@ -63,7 +65,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Plugins Without Settings {{{
-Plug 'justinmk/vim-sneak'
+Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
@@ -77,13 +79,21 @@ endif
 " Unimpaired {{{
 if !exists("g:gui_oni")
     Plug 'tpope/vim-unimpaired'
+    let g:nremap = {"[": "<", "]": ">"}
+    let g:xremap = {"[": "<", "]": ">"}
+    let g:oremap = {"[": "<", "]": ">"}
+    nnoremap < [
+    nnoremap > ]
+    xnoremap < [
+    xnoremap > ]
+    onoremap < [
+    onoremap > ]
+    nnoremap <Tab> >>_
+    nnoremap <S-Tab> <<_
+    inoremap <S-Tab> <C-D>
+    vnoremap <Tab> >gv
+    vnoremap <S-Tab> <gv
 endif
-nmap ö [
-nmap ä ]
-omap ö [
-omap ä ]
-xmap ö [
-xmap ä ]
 " }}}
 
 " Align {{{
@@ -274,6 +284,7 @@ if !exists("g:gui_oni")
     let g:LanguageClient_serverCommands = {
                 \ 'python': ['pyls'],
                 \ 'cpp': ['clangd'],
+                \ 'c': ['clangd'],
                 \ }
     nnoremap <F5> :call LanguageClient_contextMenu()<CR>
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
