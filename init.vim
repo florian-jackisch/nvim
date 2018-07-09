@@ -79,15 +79,15 @@ endif
 " Unimpaired {{{
 if !exists("g:gui_oni")
     Plug 'tpope/vim-unimpaired'
-    let g:nremap = {"[": "<", "]": ">"}
-    let g:xremap = {"[": "<", "]": ">"}
-    let g:oremap = {"[": "<", "]": ">"}
-    nnoremap < [
-    nnoremap > ]
-    xnoremap < [
-    xnoremap > ]
-    onoremap < [
-    onoremap > ]
+    let g:nremap = {"[": "ö", "]": "ä"}
+    let g:xremap = {"[": "ö", "]": "ä"}
+    let g:oremap = {"[": "ö", "]": "ä"}
+    nnoremap ö [
+    nnoremap ä ]
+    xnoremap ö [
+    xnoremap ä ]
+    onoremap ö [
+    onoremap ä ]
     nnoremap <Tab> >>_
     nnoremap <S-Tab> <<_
     inoremap <S-Tab> <C-D>
