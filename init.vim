@@ -65,7 +65,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Plugins Without Settings {{{
-Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
