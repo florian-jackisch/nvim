@@ -259,13 +259,8 @@ let g:ale_sign_column_always = 1
 " Autocompletion {{{
 if !exists("g:gui_oni")
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'autozimu/LanguageClient-neovim', {
-                \ 'branch': 'next',
-                \ 'do': 'bash install.sh',
-                \ }
     Plug 'Shougo/neco-syntax'
     Plug 'Shougo/neco-vim'
-    Plug 'cquery-project/cquery', { 'do': '$HOME/.config/nvim/build-cquery' }
     let g:deoplete#enable_at_startup = 1
     inoremap <silent><expr> <TAB>
                 \ pumvisible() ? "\<C-n>" :
@@ -280,6 +275,16 @@ if !exists("g:gui_oni")
         return !col || getline('.')[col - 1]  =~ '\s'
     endfunction"
     autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+endif
+" }}}
+
+" Language client {{{
+if !exists("g:gui_oni")
+    Plug 'autozimu/LanguageClient-neovim', {
+                \ 'branch': 'next',
+                \ 'do': 'bash install.sh',
+                \ }
+    Plug 'cquery-project/cquery', { 'do': '$HOME/.config/nvim/build-cquery' }
     " Required for operations modifying multiple buffers like rename.
     set hidden
     let g:LanguageClient_serverCommands = {
