@@ -265,6 +265,7 @@ if !exists("g:gui_oni")
                 \ }
     Plug 'Shougo/neco-syntax'
     Plug 'Shougo/neco-vim'
+    Plug 'cquery-project/cquery', { 'do': '$HOME/.config/nvim/build-cquery' }
     let g:deoplete#enable_at_startup = 1
     inoremap <silent><expr> <TAB>
                 \ pumvisible() ? "\<C-n>" :
@@ -283,8 +284,8 @@ if !exists("g:gui_oni")
     set hidden
     let g:LanguageClient_serverCommands = {
                 \ 'python': ['pyls'],
-                \ 'cpp': ['clangd'],
-                \ 'c': ['clangd'],
+                \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"~/.config/nvim/cquery-cache", "completion":{"enableSnippets":false}}'],
+                \ 'c': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"~/.config/nvim/cquery-cache",  "completion":{"enableSnippets":false}}'],
                 \ }
     nnoremap <F5> :call LanguageClient_contextMenu()<CR>
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
