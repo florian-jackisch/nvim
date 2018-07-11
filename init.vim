@@ -132,7 +132,7 @@ Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
-Plug 'justinmk/vim-dirvish'
+Plug 'tpope/vim-vinegar'
 let g:startify_change_to_dir = 0
 nnoremap <leader>m :Make<cr>
 nnoremap <leader>M :Make!<cr>
@@ -284,8 +284,8 @@ if !exists("g:gui_oni")
     set hidden
     let g:LanguageClient_serverCommands = {
                 \ 'python': ['pyls'],
-                \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"~/.config/nvim/cquery-cache", "completion":{"enableSnippets":false}}'],
-                \ 'c': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"~/.config/nvim/cquery-cache",  "completion":{"enableSnippets":false}}'],
+                \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery", "completion":{"enableSnippets":false}}'],
+                \ 'c': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery",  "completion":{"enableSnippets":false}}'],
                 \ }
     nnoremap <F5> :call LanguageClient_contextMenu()<CR>
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
