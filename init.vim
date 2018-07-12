@@ -26,6 +26,7 @@ if !isdirectory(s:undoDir)
 endif
 let &undodir=s:undoDir
 set undofile
+set hidden
 " }}}
 
 " Keyboard Mappings {{{
@@ -45,6 +46,16 @@ nnoremap <silent> <up> :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <down> :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
 nnoremap <silent> <right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+" Move quickfix list to arglist (for :argdo)
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+    " Building a hash ensures we get each buffer only once
+    let buffer_numbers = {}
+    for quickfix_item in getqflist()
+        let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+    endfor
+    return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
 " }}}
 
 " Neovim Settings {{{
@@ -285,8 +296,6 @@ if !exists("g:gui_oni")
                 \ 'do': 'bash install.sh',
                 \ }
     Plug 'cquery-project/cquery', { 'do': '$HOME/.config/nvim/build-cquery' }
-    " Required for operations modifying multiple buffers like rename.
-    set hidden
     let g:LanguageClient_serverCommands = {
                 \ 'python': ['pyls'],
                 \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery", "completion":{"enableSnippets":false}}'],
