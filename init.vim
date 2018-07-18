@@ -56,6 +56,10 @@ function! QuickfixFilenames()
     endfor
     return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
+" Format paragraph
+nnoremap <silent> Q gqap
+xnoremap <silent> Q gq
+nnoremap <silent> <leader>Q vapJgqap
 " }}}
 
 " Neovim Settings {{{
@@ -74,7 +78,6 @@ endif
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
-
 " Plugins Without Settings {{{
 Plug 'justinmk/vim-sneak'
 Plug 'jiangmiao/auto-pairs'
@@ -137,20 +140,50 @@ Plug 'mhinz/vim-grepper'
 " }}}
 
 " Project Management {{{
-Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
+Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-vinegar'
 let g:startify_change_to_dir = 0
-nnoremap <leader>m :Make<cr>
-nnoremap <leader>M :Make!<cr>
-nnoremap <leader>d :Dispatch<cr>
-nnoremap <leader>D :Dispatch!<cr>
-nnoremap <leader>s :Start<cr>
-nnoremap <leader>S :Start!<cr>
+
+" Create custom projections {{{
+augroup configure_projects
+    autocmd!
+    autocmd User ProjectionistActivate call s:custom_projections()
+augroup END
+function! s:custom_projections() abort
+    let b:projections_linters = projectionist#query('lint')
+    if len(b:projections_linters) > 0
+        nnoremap <leader>ml :execute "Dispatch ". b:projections_linters[0][1]<cr>
+        nnoremap <leader>mL :execute "Dispatch! ". b:projections_linters[0][1]<cr>
+    endif
+    let b:projections_fixers = projectionist#query('fix')
+    if len(b:projections_fixers) > 0
+        nnoremap <leader>mf :execute "Dispatch ". b:projections_fixers[0][1]<cr>
+        nnoremap <leader>mF :execute "Dispatch! ". b:projections_fixers[0][1]<cr>
+    endif
+    let b:projections_testers = projectionist#query('test')
+    if len(b:projections_testers) > 0
+        nnoremap <leader>mt :execute "Dispatch ". b:projections_testers[0][1]<cr>
+        nnoremap <leader>mT :execute "Dispatch! ". b:projections_testers[0][1]<cr>
+    endif
+    let b:projections_runners = projectionist#query('run')
+    if len(b:projections_runners) > 0
+        nnoremap <leader>mt :execute "Dispatch ". b:projections_runners[0][1]<cr>
+        nnoremap <leader>mT :execute "Dispatch! ". b:projections_runners[0][1]<cr>
+    endif
+endfunction
+" }}}
+
+nnoremap <leader>mm :Make<cr>
+nnoremap <leader>mM :Make!<cr>
+nnoremap <leader>md :Dispatch<cr>
+nnoremap <leader>mD :Dispatch!<cr>
+nnoremap <leader>ms :Start<cr>
+nnoremap <leader>mS :Start!<cr>
 " }}}
 
 " Git {{{
@@ -203,7 +236,7 @@ nnoremap <leader>u :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle = 1
 " }}}
 
-" Airline {{{
+" Lightline {{{
 if !exists("g:gui_oni")
     Plug 'itchyny/lightline.vim'
     let g:lightline = {
@@ -296,6 +329,7 @@ if !exists("g:gui_oni")
                 \ 'do': 'bash install.sh',
                 \ }
     Plug 'cquery-project/cquery', { 'do': '$HOME/.config/nvim/build-cquery' }
+    let g:LanguageClient_diagnosticsList = "Disabled"
     let g:LanguageClient_serverCommands = {
                 \ 'python': ['pyls'],
                 \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery", "completion":{"enableSnippets":false}}'],
@@ -345,19 +379,14 @@ let g:python_support_python3_requirements = add(get(g:,'python_support_python3_r
 
 " Writing Tools {{{
 Plug 'reedes/vim-wordy'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'Ron89/thesaurus_query.vim'
 Plug 'rhysd/vim-grammarous'
+Plug 'reedes/vim-pencil'
 nnoremap <leader>w :NextWordy<space><cr>
-nnoremap <silent> Q gqap
-xnoremap <silent> Q gq
-nnoremap <silent> <leader>Q vapJgqap
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
 let g:tq_language=['en', 'de']
 nnoremap <Leader>tr :ThesaurusQueryReplaceCurrentWord<CR>
 vnoremap <Leader>tr y:ThesaurusQueryReplace <C-r>"<CR>
+let g:vim_markdown_conceal = 0
 " }}}
 
 " LaTeX {{{
