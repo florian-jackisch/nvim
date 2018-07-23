@@ -239,6 +239,11 @@ let g:undotree_SetFocusWhenToggle = 1
 " Lightline {{{
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+let g:airline#extensions#tabline#enabled = 1
+if $VIM_POWERLINE == 1
+    Plug 'edkolev/promptline.vim'
+    let g:airline_powerline_fonts = 1
+endif
 " }}}
 
 " Color Schemes {{{
