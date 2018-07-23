@@ -155,25 +155,33 @@ augroup configure_projects
     autocmd User ProjectionistActivate call s:custom_projections()
 augroup END
 function! s:custom_projections() abort
-    let b:projections_linters = projectionist#query('lint')
+    let b:projections_lint = projectionist#query('lint')
+    if len(b:projections_lint) > 0
+        nnoremap <leader>ml :execute "Dispatch ". b:projections_lint[0][1]<cr>
+        nnoremap <leader>mL :execute "Dispatch! ". b:projections_lint[0][1]<cr>
+    endif
+    let b:projections_fix = projectionist#query('fix')
+    if len(b:projections_fix) > 0
+        nnoremap <leader>mf :execute "Dispatch ". b:projections_fix[0][1]<cr>
+        nnoremap <leader>mF :execute "Dispatch! ". b:projections_fix[0][1]<cr>
+    endif
+    let b:projections_test = projectionist#query('test')
+    if len(b:projections_test) > 0
+        nnoremap <leader>mt :execute "Dispatch ". b:projections_test[0][1]<cr>
+        nnoremap <leader>mT :execute "Dispatch! ". b:projections_test[0][1]<cr>
+    endif
+    let b:projections_run = projectionist#query('run')
+    if len(b:projections_run) > 0
+        nnoremap <leader>mt :execute "Dispatch ". b:projections_run[0][1]<cr>
+        nnoremap <leader>mT :execute "Dispatch! ". b:projections_run[0][1]<cr>
+    endif
+    let b:projections_linters = projectionist#query('linters')
     if len(b:projections_linters) > 0
-        nnoremap <leader>ml :execute "Dispatch ". b:projections_linters[0][1]<cr>
-        nnoremap <leader>mL :execute "Dispatch! ". b:projections_linters[0][1]<cr>
+        let b:ale_linters = {&filetype: b:projections_linters[0][1]}
     endif
-    let b:projections_fixers = projectionist#query('fix')
+    let b:projections_fixers = projectionist#query('fixers')
     if len(b:projections_fixers) > 0
-        nnoremap <leader>mf :execute "Dispatch ". b:projections_fixers[0][1]<cr>
-        nnoremap <leader>mF :execute "Dispatch! ". b:projections_fixers[0][1]<cr>
-    endif
-    let b:projections_testers = projectionist#query('test')
-    if len(b:projections_testers) > 0
-        nnoremap <leader>mt :execute "Dispatch ". b:projections_testers[0][1]<cr>
-        nnoremap <leader>mT :execute "Dispatch! ". b:projections_testers[0][1]<cr>
-    endif
-    let b:projections_runners = projectionist#query('run')
-    if len(b:projections_runners) > 0
-        nnoremap <leader>mt :execute "Dispatch ". b:projections_runners[0][1]<cr>
-        nnoremap <leader>mT :execute "Dispatch! ". b:projections_runners[0][1]<cr>
+        let b:ale_fixers = {&filetype: b:projections_fixers[0][1]}
     endif
 endfunction
 " }}}
@@ -253,24 +261,24 @@ Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/base16-shell'
 " }}}
 
-" Format {{{
-Plug 'sbdchd/neoformat'
-nnoremap <silent> <leader>f :Neoformat<CR>
-let g:neoformat_enabled_python = ['black', 'isort']
-let g:neoformat_enabled_latex = ['latexindent']
-let g:neoformat_enabled_cmake = ['cmake_format']
-let g:neoformat_enabled_markdown = ['prettier']
-let g:neoformat_run_all_formatters = 1
-let g:neoformat_basic_format_trim = 1
-let g:neoformat_basic_format_align = 1
-" Clang format is slow when called through neoformat
-function! FormatFile()
-    let l:lines="all"
-    py3f $HOME/.config/nvim/clang-format.py
-endfunction
-autocmd FileType c,cpp vnoremap <buffer> <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
-autocmd FileType c,cpp nnoremap <buffer> <leader>f :call FormatFile()<cr>
-" }}}
+" " Format {{{
+" Plug 'sbdchd/neoformat'
+" nnoremap <silent> <leader>f :Neoformat<CR>
+" let g:neoformat_enabled_python = ['black', 'isort']
+" let g:neoformat_enabled_latex = ['latexindent']
+" let g:neoformat_enabled_cmake = ['cmake_format']
+" let g:neoformat_enabled_markdown = ['prettier']
+" let g:neoformat_run_all_formatters = 1
+" let g:neoformat_basic_format_trim = 1
+" let g:neoformat_basic_format_align = 1
+" " Clang format is slow when called through neoformat
+" function! FormatFile()
+"     let l:lines="all"
+"     py3f $HOME/.config/nvim/clang-format.py
+" endfunction
+" autocmd FileType c,cpp vnoremap <buffer> <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
+" autocmd FileType c,cpp nnoremap <buffer> <leader>f :call FormatFile()<cr>
+" " }}}
 
 " Linting {{{
 Plug 'w0rp/ale'
@@ -278,23 +286,22 @@ nmap <silent> [W <Plug>(ale_first)
 nmap <silent> ]W <Plug>(ale_last)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
+nmap <leader>f :ALEFix<cr>
 let g:ale_linters = {
             \ 'c': ['clangtidy'],
             \ 'cpp': ['clangtidy'],
-            \ 'python': ['pylint', 'isort']
+            \ 'markdown': ['markdownlint', 'write-good'],
+            \ 'tex': ['lacheck', 'chktex', 'proselint', 'write-good'],
+            \ 'python': ['pylint']
             \ }
 let g:ale_fixers = {
-            \ 'python': ['pylint', 'isort']
+            \ 'c': ['clang-format'],
+            \ 'cpp': ['clang-format'],
+            \ 'markdown': ['prettier'],
+            \ 'tex': ['trim_whitespace'],
+            \ 'python': ['black', 'isort']
             \ }
-let g:ale_cpp_clangtidy_checks = [
-            \ 'cppcoreguidelines-*',
-            \ 'misc-*',
-            \ 'modernize-*',
-            \ 'performance-*',
-            \ 'readability-*',
-            \ 'bugprone-*',
-            \ 'clang-analyzer-'
-            \ ]
+let g:ale_cpp_clangtidy_checks = []
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -302,6 +309,7 @@ let g:ale_lint_on_file_type_changed = 0
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_error = '✖'
 let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
 " }}}
 
 " Autocompletion {{{
@@ -385,11 +393,8 @@ let g:python_support_python3_requirements = add(get(g:,'python_support_python3_r
 " }}}
 
 " Writing Tools {{{
-Plug 'reedes/vim-wordy'
 Plug 'Ron89/thesaurus_query.vim'
-Plug 'rhysd/vim-grammarous'
 Plug 'reedes/vim-pencil'
-nnoremap <leader>w :NextWordy<space><cr>
 let g:tq_language=['en', 'de']
 nnoremap <Leader>tr :ThesaurusQueryReplaceCurrentWord<CR>
 vnoremap <Leader>tr y:ThesaurusQueryReplace <C-r>"<CR>
