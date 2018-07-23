@@ -409,5 +409,7 @@ if !exists("g:gui_oni")
         let base16colorspace=256
         source ~/.vimrc_background
     endif
+    hi clear SpellBad
+    hi SpellBad cterm=underline
 endif
 " }}}
