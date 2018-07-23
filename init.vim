@@ -366,6 +366,7 @@ let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
 
 " Syntax and Folding {{{
 Plug 'sheerun/vim-polyglot'
+let g:polyglot_disabled = ['markdown']
 " Fold python
 Plug 'tmhedberg/SimpylFold'
 " Fold C++
