@@ -237,16 +237,14 @@ let g:undotree_SetFocusWhenToggle = 1
 " }}}
 
 " Lightline {{{
-if !exists("g:gui_oni")
-    Plug 'itchyny/lightline.vim'
-    let g:lightline = {
-                \ 'colorscheme': 'solarized',
-                \ }
-endif
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " }}}
 
 " Color Schemes {{{
 Plug 'lifepillar/vim-solarized8'
+Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-shell'
 " }}}
 
 " Format {{{
@@ -413,12 +411,9 @@ call plug#end()
 
 " Color Scheme Settings {{{
 if !exists("g:gui_oni")
-    set termguicolors
-    if $VIM_BACKGROUND == "dark"
-        set background=dark
-    else
-        set background=light
+    if filereadable(expand("~/.vimrc_background"))
+        let base16colorspace=256
+        source ~/.vimrc_background
     endif
-    colorscheme solarized8
 endif
 " }}}
