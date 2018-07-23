@@ -240,7 +240,8 @@ let g:undotree_SetFocusWhenToggle = 1
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
-if $VIM_POWERLINE == 1
+if $VIM_DEVICONS == 1
+    Plug 'ryanoasis/vim-devicons'
     Plug 'edkolev/promptline.vim'
     let g:airline_powerline_fonts = 1
 endif
