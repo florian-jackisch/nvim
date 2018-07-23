@@ -349,10 +349,12 @@ endif
 " Snippets {{{
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'gisphm/vim-gitignore'
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsEnableSnipMate = 0
 " }}}
 
 " Tags {{{
