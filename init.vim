@@ -90,23 +90,21 @@ Plug 'wellle/targets.vim'
 " }}}
 
 " Unimpaired {{{
-if !exists("g:gui_oni")
-    Plug 'tpope/vim-unimpaired'
-    let g:nremap = {"[": "ö", "]": "ä"}
-    let g:xremap = {"[": "ö", "]": "ä"}
-    let g:oremap = {"[": "ö", "]": "ä"}
-    nnoremap ö [
-    nnoremap ä ]
-    xnoremap ö [
-    xnoremap ä ]
-    onoremap ö [
-    onoremap ä ]
-    nnoremap <Tab> >>_
-    nnoremap <S-Tab> <<_
-    inoremap <S-Tab> <C-D>
-    vnoremap <Tab> >gv
-    vnoremap <S-Tab> <gv
-endif
+Plug 'tpope/vim-unimpaired'
+let g:nremap = {"[": "ö", "]": "ä"}
+let g:xremap = {"[": "ö", "]": "ä"}
+let g:oremap = {"[": "ö", "]": "ä"}
+nnoremap ö [
+nnoremap ä ]
+xnoremap ö [
+xnoremap ä ]
+onoremap ö [
+onoremap ä ]
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
 " }}}
 
 " Align {{{
@@ -339,10 +337,10 @@ let g:UltiSnipsEnableSnipMate = 0
 " }}}
 
 " Tags {{{
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
+" let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache'
 Plug 'majutsushi/tagbar'
 nnoremap <silent> <leader>gg :TagbarToggle<CR>
-let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache'
 " }}}
 
 " Syntax and Folding {{{
@@ -367,19 +365,17 @@ call plug#end()
 " }}}
 
 " Color Scheme Settings {{{
-if !exists("g:gui_oni")
-    hi clear SpellBad
-    hi SpellBad cterm=underline
-    if filereadable(expand("~/.vimrc_background"))
-        let base16colorspace=256
-        source ~/.vimrc_background
-        if g:colors_name == 'base16-solarized-light'
-            set termguicolors
-            set background=light
-        elseif g:colors_name == 'base16-solarized-dark'
-            set termguicolors
-            set background=dark
-        endif
+hi clear SpellBad
+hi SpellBad cterm=underline
+if filereadable(expand("~/.vimrc_background"))
+    let base16colorspace=256
+    source ~/.vimrc_background
+    if g:colors_name == 'base16-solarized-light'
+        set termguicolors
+        set background=light
+    elseif g:colors_name == 'base16-solarized-dark'
+        set termguicolors
+        set background=dark
     endif
 endif
 " }}}
