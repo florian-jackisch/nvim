@@ -259,7 +259,6 @@ if $VIM_DEVICONS == 1
     Plug 'ryanoasis/vim-devicons'
     let g:airline_powerline_fonts = 1
     Plug 'edkolev/promptline.vim'
-    nmap <leader>p :PromptlineSnapshot! ~/.config/nvim/promptline.sh airline clear<cr>
 endif
 " }}}
 
