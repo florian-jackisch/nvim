@@ -15,4 +15,6 @@ alias darkbg="base16_onedark"
 alias lightbg="base16_one-light"
 
 # Promptline
-source $HOME/.config/nvim/promptline.sh
+if [[ -v VIM_DEVICONS ]]; then
+    source $HOME/.config/nvim/promptline.sh
+fi
