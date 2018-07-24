@@ -418,11 +418,18 @@ call plug#end()
 
 " Color Scheme Settings {{{
 if !exists("g:gui_oni")
+    hi clear SpellBad
+    hi SpellBad cterm=underline
     if filereadable(expand("~/.vimrc_background"))
         let base16colorspace=256
         source ~/.vimrc_background
+        if g:colors_name == 'base16-solarized-light'
+            set termguicolors
+            set background=light
+        elseif g:colors_name == 'base16-solarized-dark'
+            set termguicolors
+            set background=dark
+        endif
     endif
-    hi clear SpellBad
-    hi SpellBad cterm=underline
 endif
 " }}}
