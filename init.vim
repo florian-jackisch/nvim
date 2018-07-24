@@ -78,6 +78,7 @@ endif
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
+
 " Plugins Without Settings {{{
 Plug 'justinmk/vim-sneak'
 Plug 'jiangmiao/auto-pairs'
@@ -85,9 +86,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'wincent/terminus'
-if !exists("g:gui_oni")
-    Plug 'wellle/targets.vim'
-endif
+Plug 'wellle/targets.vim'
 " }}}
 
 " Unimpaired {{{
@@ -119,9 +118,7 @@ nmap ga <Plug>(EasyAlign)
 " }}}
 
 " Comments {{{
-if !exists("g:gui_oni")
-    Plug 'tpope/vim-commentary'
-endif
+Plug 'tpope/vim-commentary'
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
 " }}}
@@ -134,9 +131,7 @@ let g:lt_quickfix_list_toggle_map = '<leader>qq'
 
 " Searching {{{
 Plug 'wincent/loupe'
-Plug 'junegunn/vim-slash'
 Plug 'tpope/vim-abolish'
-Plug 'mhinz/vim-grepper'
 " }}}
 
 " Project Management {{{
@@ -144,7 +139,6 @@ Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-vinegar'
 let g:startify_change_to_dir = 0
@@ -211,10 +205,7 @@ let g:signify_vcs_list = [ 'git', 'svn' ]
 
 " FZF {{{
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-if !exists("g:gui_oni")
-
-    nnoremap <C-p> :Files<CR>
-endif
+nnoremap <C-p> :Files<CR>
 nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :BTags<CR>
@@ -247,7 +238,7 @@ command! -bang -nargs=* Rg
 
 " Undotree {{{
 Plug 'mbbill/undotree'
-nnoremap <leader>u :UndotreeToggle<cr>
+nnoremap <leader>uu :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle = 1
 " }}}
 
@@ -262,29 +253,9 @@ endif
 " }}}
 
 " Color Schemes {{{
-Plug 'lifepillar/vim-solarized8'
 Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/base16-shell'
 " }}}
-
-" " Format {{{
-" Plug 'sbdchd/neoformat'
-" nnoremap <silent> <leader>f :Neoformat<CR>
-" let g:neoformat_enabled_python = ['black', 'isort']
-" let g:neoformat_enabled_latex = ['latexindent']
-" let g:neoformat_enabled_cmake = ['cmake_format']
-" let g:neoformat_enabled_markdown = ['prettier']
-" let g:neoformat_run_all_formatters = 1
-" let g:neoformat_basic_format_trim = 1
-" let g:neoformat_basic_format_align = 1
-" " Clang format is slow when called through neoformat
-" function! FormatFile()
-"     let l:lines="all"
-"     py3f $HOME/.config/nvim/clang-format.py
-" endfunction
-" autocmd FileType c,cpp vnoremap <buffer> <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
-" autocmd FileType c,cpp nnoremap <buffer> <leader>f :call FormatFile()<cr>
-" " }}}
 
 " Linting {{{
 Plug 'w0rp/ale'
@@ -298,14 +269,14 @@ let g:ale_linters = {
             \ 'cpp': ['clangtidy'],
             \ 'markdown': ['markdownlint', 'write-good'],
             \ 'tex': ['lacheck', 'chktex', 'proselint', 'write-good'],
-            \ 'python': ['pylint']
+            \ 'python': ['pylint'],
             \ }
 let g:ale_fixers = {
             \ 'c': ['clang-format'],
             \ 'cpp': ['clang-format'],
             \ 'markdown': ['prettier'],
             \ 'tex': ['trim_whitespace'],
-            \ 'python': ['black', 'isort']
+            \ 'python': ['black', 'isort'],
             \ }
 let g:ale_cpp_clangtidy_checks = []
 let g:ale_lint_on_text_changed = 'never'
@@ -319,45 +290,41 @@ let g:ale_set_highlights = 0
 " }}}
 
 " Autocompletion {{{
-if !exists("g:gui_oni")
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/neco-syntax'
-    Plug 'Shougo/neco-vim'
-    let g:deoplete#enable_at_startup = 1
-    inoremap <silent><expr> <TAB>
-                \ pumvisible() ? "\<C-n>" :
-                \ <SID>check_back_space() ? "\<TAB>" :
-                \ deoplete#mappings#manual_complete()
-    inoremap <silent><expr> <s-TAB>
-                \ pumvisible() ? "\<C-p>" :
-                \ <SID>check_back_space() ? "\<s-TAB>" :
-                \ deoplete#mappings#manual_complete()
-    function! s:check_back_space() abort
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~ '\s'
-    endfunction"
-    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-endif
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim'
+let g:deoplete#enable_at_startup = 1
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ deoplete#mappings#manual_complete()
+inoremap <silent><expr> <s-TAB>
+            \ pumvisible() ? "\<C-p>" :
+            \ <SID>check_back_space() ? "\<s-TAB>" :
+            \ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " }}}
 
 " Language client {{{
-if !exists("g:gui_oni")
-    Plug 'autozimu/LanguageClient-neovim', {
-                \ 'branch': 'next',
-                \ 'do': 'bash install.sh',
-                \ }
-    Plug 'cquery-project/cquery', { 'do': '$HOME/.config/nvim/build-cquery' }
-    let g:LanguageClient_diagnosticsList = "Disabled"
-    let g:LanguageClient_serverCommands = {
-                \ 'python': ['pyls'],
-                \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery", "completion":{"enableSnippets":false}}'],
-                \ 'c': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery",  "completion":{"enableSnippets":false}}'],
-                \ }
-    nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-endif
+Plug 'autozimu/LanguageClient-neovim', {
+            \ 'branch': 'next',
+            \ 'do': 'bash install.sh',
+            \ }
+Plug 'cquery-project/cquery', { 'do': '$HOME/.config/nvim/build-cquery' }
+let g:LanguageClient_diagnosticsList = "Disabled"
+let g:LanguageClient_serverCommands = {
+            \ 'python': ['pyls'],
+            \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery", "completion":{"enableSnippets":false}}'],
+            \ 'c': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery",  "completion":{"enableSnippets":false}}'],
+            \ }
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " }}}
 
 " Snippets {{{
@@ -386,29 +353,14 @@ Plug 'tmhedberg/SimpylFold'
 " Fold C++
 Plug 'LucHermitte/VimFold4C'
 let g:SimpylFold_docstring_preview = 1
-" }}}
-
-" Python {{{
-Plug 'roxma/python-support.nvim'
-let g:python_support_python2_require = 0
-let g:python_support_python3_venv = 0
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'isort')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'black')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'pylint')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]), 'python-language-server')
+Plug 'matze/vim-tex-fold'
 " }}}
 
 " Writing Tools {{{
 Plug 'Ron89/thesaurus_query.vim'
-Plug 'reedes/vim-pencil'
 let g:tq_language=['en', 'de']
 nnoremap <Leader>tr :ThesaurusQueryReplaceCurrentWord<CR>
 vnoremap <Leader>tr y:ThesaurusQueryReplace <C-r>"<CR>
-let g:vim_markdown_conceal = 0
-" }}}
-
-" LaTeX {{{
-Plug 'matze/vim-tex-fold'
 " }}}
 
 call plug#end()
