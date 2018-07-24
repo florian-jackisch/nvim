@@ -13,8 +13,3 @@ BASE16_SHELL=$HOME/.config/nvim/plugged/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 alias darkbg="base16_onedark"
 alias lightbg="base16_one-light"
-
-# Promptline
-if [[ -v VIM_DEVICONS ]]; then
-    source $HOME/.config/nvim/promptline.sh
-fi
