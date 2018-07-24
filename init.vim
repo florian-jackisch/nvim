@@ -342,7 +342,7 @@ let g:UltiSnipsEnableSnipMate = 0
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 nnoremap <silent> <leader>gg :TagbarToggle<CR>
-let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache_dir'
+let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache'
 " }}}
 
 " Syntax and Folding {{{
