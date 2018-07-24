@@ -257,8 +257,9 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
 if $VIM_DEVICONS == 1
     Plug 'ryanoasis/vim-devicons'
-    Plug 'edkolev/promptline.vim'
     let g:airline_powerline_fonts = 1
+    Plug 'edkolev/promptline.vim'
+    nmap <leader>p :PromptlineSnapshot! ~/.promptline.sh airline clear<cr>
 endif
 " }}}
 
