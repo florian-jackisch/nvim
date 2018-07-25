@@ -337,8 +337,8 @@ let g:UltiSnipsEnableSnipMate = 0
 " }}}
 
 " Tags {{{
-" Plug 'ludovicchabant/vim-gutentags'
-" let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache'
+Plug 'ludovicchabant/vim-gutentags'
+let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache'
 Plug 'majutsushi/tagbar'
 nnoremap <silent> <leader>gg :TagbarToggle<CR>
 " }}}
