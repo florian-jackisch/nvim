@@ -11,5 +11,5 @@ set keymap vi-command
 # Color scheme
 BASE16_SHELL=$HOME/.config/nvim/plugged/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-alias darkbg="base16_gruvbox-dark-medium"
-alias lightbg="base16_solarized-light"
+alias darkbg="base16_tomorrow-night"
+alias lightbg="base16_tomorrow"
