@@ -1,5 +1,3 @@
-" vim:fdm=marker foldlevel=0
-
 " Editor Settings {{{
 " Leader
 let mapleader = ' '
@@ -288,23 +286,21 @@ let g:ale_set_highlights = 0
 " }}}
 
 " Autocompletion {{{
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim'
-let g:deoplete#enable_at_startup = 1
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ deoplete#mappings#manual_complete()
-inoremap <silent><expr> <s-TAB>
-            \ pumvisible() ? "\<C-p>" :
-            \ <SID>check_back_space() ? "\<s-TAB>" :
-            \ deoplete#mappings#manual_complete()
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-tagprefix'
+Plug 'filipekiss/ncm2-look.vim'
+Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'ncm2/ncm2-markdown-subscope'
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+set shortmess+=c
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:ncm2#complete_length = [[1,2],[7,1]]
 " }}}
 
 " Language client {{{
@@ -316,8 +312,8 @@ Plug 'cquery-project/cquery', { 'do': '$HOME/.config/nvim/build-cquery' }
 let g:LanguageClient_diagnosticsList = "Disabled"
 let g:LanguageClient_serverCommands = {
             \ 'python': ['pyls'],
-            \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery", "completion":{"enableSnippets":false}}'],
-            \ 'c': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery",  "completion":{"enableSnippets":false}}'],
+            \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery"}'],
+            \ 'c': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery"}'],
             \ }
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
