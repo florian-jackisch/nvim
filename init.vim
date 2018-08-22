@@ -1,3 +1,5 @@
+" vim: fdm=marker
+
 " Editor Settings {{{
 " Leader
 let mapleader = ' '
@@ -225,11 +227,11 @@ let g:fzf_action = {
 let $FZF_DEFAULT_OPTS .= ' --no-height --bind ctrl-a:select-all'
 " Get a Rg command to call ripgrep
 command! -bang -nargs=* Rg
-          \ call fzf#vim#grep(
-          \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-          \   <bang>0 ? fzf#vim#with_preview('up:60%')
-          \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-          \   <bang>0)
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+            \   <bang>0 ? fzf#vim#with_preview('up:60%')
+            \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+            \   <bang>0)
 " }}}
 
 " Undotree {{{
@@ -254,26 +256,37 @@ Plug 'chriskempson/base16-shell'
 Plug 'lifepillar/vim-solarized8'
 " }}}
 
+" Format {{{
+Plug 'sbdchd/neoformat'
+nnoremap <silent> <leader>f :Neoformat<CR>
+let g:neoformat_enabled_python = ['black', 'isort']
+let g:neoformat_enabled_latex = ['latexindent']
+let g:neoformat_enabled_cmake = ['cmake_format']
+let g:neoformat_enabled_markdown = ['prettier']
+let g:neoformat_run_all_formatters = 1
+let g:neoformat_basic_format_trim = 1
+let g:neoformat_basic_format_align = 1
+" Clang format is slow when called through neoformat
+function! FormatFile()
+    let l:lines="all"
+    py3f $HOME/.config/nvim/clang-format.py
+endfunction
+autocmd FileType c,cpp vnoremap <buffer> <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
+autocmd FileType c,cpp nnoremap <buffer> <leader>f :call FormatFile()<cr>
+" }}}
+
 " Linting {{{
 Plug 'w0rp/ale'
 nmap <silent> [W <Plug>(ale_first)
 nmap <silent> ]W <Plug>(ale_last)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
-nmap <leader>f :ALEFix<cr>
 let g:ale_linters = {
             \ 'c': ['clangtidy'],
             \ 'cpp': ['clangtidy'],
             \ 'markdown': ['markdownlint', 'write-good'],
             \ 'tex': ['lacheck', 'chktex', 'proselint', 'write-good'],
             \ 'python': ['pylint'],
-            \ }
-let g:ale_fixers = {
-            \ 'c': ['clang-format'],
-            \ 'cpp': ['clang-format'],
-            \ 'markdown': ['prettier'],
-            \ 'tex': ['trim_whitespace'],
-            \ 'python': ['black', 'isort'],
             \ }
 let g:ale_cpp_clangtidy_checks = []
 let g:ale_lint_on_text_changed = 'never'
