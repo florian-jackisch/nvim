@@ -251,6 +251,7 @@ endif
 " Color Schemes {{{
 Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/base16-shell'
+Plug 'lifepillar/vim-solarized8'
 " }}}
 
 " Linting {{{
@@ -369,9 +370,11 @@ if filereadable(expand("~/.vimrc_background"))
     if g:colors_name == 'base16-solarized-light'
         set termguicolors
         set background=light
+        colorscheme solarized8
     elseif g:colors_name == 'base16-solarized-dark'
         set termguicolors
         set background=dark
+        colorscheme solarized8
     endif
 endif
 " }}}
