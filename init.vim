@@ -147,25 +147,11 @@ augroup configure_projects
     autocmd User ProjectionistActivate call s:custom_projections()
 augroup END
 function! s:custom_projections() abort
-    let b:projections_lint = projectionist#query('lint')
-    if len(b:projections_lint) > 0
-        nnoremap <leader>ml :execute "Dispatch ". b:projections_lint[0][1]<cr>
-        nnoremap <leader>mL :execute "Dispatch! ". b:projections_lint[0][1]<cr>
-    endif
-    let b:projections_fix = projectionist#query('fix')
-    if len(b:projections_fix) > 0
-        nnoremap <leader>mf :execute "Dispatch ". b:projections_fix[0][1]<cr>
-        nnoremap <leader>mF :execute "Dispatch! ". b:projections_fix[0][1]<cr>
-    endif
     let b:projections_test = projectionist#query('test')
     if len(b:projections_test) > 0
-        nnoremap <leader>mt :execute "Dispatch ". b:projections_test[0][1]<cr>
-        nnoremap <leader>mT :execute "Dispatch! ". b:projections_test[0][1]<cr>
-    endif
-    let b:projections_run = projectionist#query('run')
-    if len(b:projections_run) > 0
-        nnoremap <leader>mt :execute "Dispatch ". b:projections_run[0][1]<cr>
-        nnoremap <leader>mT :execute "Dispatch! ". b:projections_run[0][1]<cr>
+        nnoremap mt<CR> :execute "Dispatch ". b:projections_test[0][1]<CR>
+        nnoremap mt<Space> :execute "Dispatch ". b:projections_test[0][1]
+        nnoremap mt! :execute "Dispatch! ". b:projections_test[0][1]<CR>
     endif
     let b:projections_linters = projectionist#query('linters')
     if len(b:projections_linters) > 0
@@ -178,12 +164,12 @@ function! s:custom_projections() abort
 endfunction
 " }}}
 
-nnoremap <leader>mm :Make<cr>
-nnoremap <leader>mM :Make!<cr>
-nnoremap <leader>md :Dispatch<cr>
-nnoremap <leader>mD :Dispatch!<cr>
-nnoremap <leader>ms :Start<cr>
-nnoremap <leader>mS :Start!<cr>
+nnoremap md<CR> :Dispatch<CR>
+nnoremap md<Space> :Dispatch<Space>
+nnoremap md! :Dispatch!<CR>
+nnoremap ms<CR> :Start<CR>
+nnoremap ms<Space> :Start<Space>
+nnoremap ms! :Start!<CR>
 " }}}
 
 " Git {{{
