@@ -1,25 +1,15 @@
 " vim: fdm=marker
 
 " Editor Settings {{{
-" Leader
 let mapleader = ' '
-" Relative line numbers
 set relativenumber number
-" Line wrapping is not the default
 set nowrap
-" Tabs shall be 4 spaces
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
-" Open new vsplit right
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab  " 4 space tabs
 set splitright
-" Enable folding by syntax
 set foldmethod=syntax foldlevelstart=99
-" 80 columns is the target width
 set colorcolumn=80
-" Highlight the current line
 set cursorline
-" Disable swap files
 set noswapfile
-" Enable persistent undo (for the current session)
 let s:undoDir = "/tmp/.undodir_" . $USER
 if !isdirectory(s:undoDir)
     call mkdir(s:undoDir, "", 0700)
