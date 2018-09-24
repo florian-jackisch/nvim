@@ -8,3 +8,7 @@ nnoremap <silent> <leader>gu :Git pull<CR>
 nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 let g:signify_vcs_list = [ 'git', 'svn' ]
+
+if has('nvim')
+  let $VISUAL = 'nvr -cc split --remote-wait'
+endif
