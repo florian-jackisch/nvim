@@ -3,8 +3,6 @@ if $VIM_DEVICONS == 1
     let g:airline_powerline_fonts = 1
 endif
 
-hi clear SpellBad
-hi SpellBad cterm=underline
 if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
     source ~/.vimrc_background
@@ -18,3 +16,5 @@ if filereadable(expand("~/.vimrc_background"))
         colorscheme solarized8
     endif
 endif
+hi clear SpellBad
+hi SpellBad cterm=underline

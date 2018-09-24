@@ -82,7 +82,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'justinmk/vim-sneak'         " Search with s
 Plug 'jiangmiao/auto-pairs'       " Auto close pairs
 Plug 'tpope/vim-repeat'           " Enable more repetitions
-Plug 'tpope/vim-sleuth'           " Heuristically set buffer options
 Plug 'tpope/vim-surround'         " Surround with s
 Plug 'wincent/terminus'           " Enhanced terminal integration
 Plug 'wellle/targets.vim'         " Targets like a for arguments
@@ -129,6 +128,7 @@ Plug 'ludovicchabant/vim-gutentags' | Plug 'majutsushi/tagbar'
                                   " Tags
 Plug 'sheerun/vim-polyglot'       " Multiple languages
 Plug 'lervag/vimtex'              " LaTeX
+Plug 'matze/vim-tex-fold'         " LaTeX folding
 Plug 'Ron89/thesaurus_query.vim'  " Thesaurus
 if $VIM_DEVICONS == 1
     Plug 'ryanoasis/vim-devicons' " Pretty icons
