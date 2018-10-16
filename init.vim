@@ -50,6 +50,8 @@ endfunction
 nnoremap <silent> Q gqap
 xnoremap <silent> Q gq
 nnoremap <silent> <leader>Q vapJgqap
+" Clear highlight with ESC
+nnoremap <esc> :noh<return><esc>
 " }}}
 
 " Neovim Settings {{{
@@ -69,7 +71,6 @@ endif
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'justinmk/vim-sneak'         " Search with s
 Plug 'jiangmiao/auto-pairs'       " Auto close pairs
 Plug 'tpope/vim-repeat'           " Enable more repetitions
 Plug 'tpope/vim-surround'         " Surround with s
@@ -116,7 +117,6 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'gisphm/vim-gitignore
                                   " Snippets
 Plug 'ludovicchabant/vim-gutentags' | Plug 'majutsushi/tagbar'
                                   " Tags
-Plug 'sheerun/vim-polyglot'       " Multiple languages
 Plug 'lervag/vimtex'              " LaTeX
 Plug 'matze/vim-tex-fold'         " LaTeX folding
 Plug 'Ron89/thesaurus_query.vim'  " Thesaurus
