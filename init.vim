@@ -134,7 +134,6 @@ source ~/.config/nvim/config/format.vim
 source ~/.config/nvim/config/fzf.vim
 source ~/.config/nvim/config/git.vim
 source ~/.config/nvim/config/languages.vim
-source ~/.config/nvim/config/languages.vim
 source ~/.config/nvim/config/lint.vim
 source ~/.config/nvim/config/lists.vim
 source ~/.config/nvim/config/projects.vim
