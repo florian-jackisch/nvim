@@ -50,6 +50,8 @@ endfunction
 nnoremap <silent> Q gqap
 xnoremap <silent> Q gq
 nnoremap <silent> <leader>Q vapJgqap
+" Clear highlight with ESC
+nnoremap <esc> :noh<return><esc>
 " }}}
 
 " Neovim Settings {{{
@@ -69,7 +71,6 @@ endif
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'justinmk/vim-sneak'         " Search with s
 Plug 'jiangmiao/auto-pairs'       " Auto close pairs
 Plug 'tpope/vim-repeat'           " Enable more repetitions
 Plug 'tpope/vim-surround'         " Surround with s
