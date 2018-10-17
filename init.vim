@@ -116,9 +116,9 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'gisphm/vim-gitignore
                                   " Snippets
 Plug 'ludovicchabant/vim-gutentags' | Plug 'majutsushi/tagbar'
                                   " Tags
-Plug 'sheerun/vim-polyglot'       " Multiple languages
 Plug 'lervag/vimtex'              " LaTeX
 Plug 'matze/vim-tex-fold'         " LaTeX folding
+Plug 'tmhedberg/SimpylFold'       " Python folding
 Plug 'Ron89/thesaurus_query.vim'  " Thesaurus
 if $VIM_DEVICONS == 1
     Plug 'ryanoasis/vim-devicons' " Pretty icons

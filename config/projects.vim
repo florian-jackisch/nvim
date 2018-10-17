@@ -22,10 +22,3 @@ function! s:custom_projections() abort
     endif
 endfunction
 " }}}
-
-nnoremap md<CR> :Dispatch<CR>
-nnoremap md<Space> :Dispatch<Space>
-nnoremap md! :Dispatch!<CR>
-nnoremap ms<CR> :Start<CR>
-nnoremap ms<Space> :Start<Space>
-nnoremap ms! :Start!<CR>
