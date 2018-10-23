@@ -22,3 +22,5 @@ function! s:custom_projections() abort
     endif
 endfunction
 " }}}
+
+autocmd FileType python let b:dispatch = 'python %'
