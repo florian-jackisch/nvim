@@ -8,9 +8,7 @@ augroup END
 function! s:custom_projections() abort
     let b:projections_test = projectionist#query('test')
     if len(b:projections_test) > 0
-        nnoremap mt<CR> :execute "Dispatch ". b:projections_test[0][1]<CR>
-        nnoremap mt<Space> :execute "Dispatch ". b:projections_test[0][1]
-        nnoremap mt! :execute "Dispatch! ". b:projections_test[0][1]<CR>
+        nnoremap mt :execute "Dispatch ". b:projections_test[0][1]<CR>
     endif
     let b:projections_linters = projectionist#query('linters')
     if len(b:projections_linters) > 0
@@ -24,3 +22,9 @@ endfunction
 " }}}
 
 autocmd FileType python let b:dispatch = 'python %'
+
+" Mappings
+nnoremap mm :Make<CR>
+nnoremap md :Dispatch<CR>
+nnoremap ms :Start<CR>
+nnoremap mg :Spawn<CR>
