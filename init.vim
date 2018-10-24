@@ -54,6 +54,8 @@ nnoremap <S-Tab> <<_
 inoremap <S-Tab> <C-D>
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+" cd to current file
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Neovim Settings
 if has("nvim")
