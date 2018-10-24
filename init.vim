@@ -351,3 +351,5 @@ xnoremap ö [
 xnoremap ä ]
 onoremap ö [
 onoremap ä ]
+nmap äc <plug>(signify-next-hunk)
+nmap öc <plug>(signify-prev-hunk)
