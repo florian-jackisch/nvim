@@ -84,6 +84,7 @@ Plug 'Valloric/ListToggle'
 Plug 'wincent/loupe'              " Enhanced search
 Plug 'tpope/vim-abolish'          " Enhanced search and replace
 Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
+Plug 'jpalardy/vim-slime'         " Send to repl with C-c, C-c
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-eunuch'           " UNIX helpers
 Plug 'tpope/vim-projectionist'
@@ -303,6 +304,13 @@ nnoremap mm :Make<CR>
 nnoremap md :Dispatch<CR>
 nnoremap ms :Start<CR>
 nnoremap mg :Spawn<CR>
+let g:slime_target = "neovim"
+let g:slime_dont_ask_default = 1
+let g:slime_no_mappings = 1
+xmap <leader>s <Plug>SlimeRegionSend
+nmap <leader>s <Plug>SlimeMotionSend
+nmap <leader>ss <Plug>SlimeLineSend
+nmap <leader>st :let g:slime_default_config = {"jobid": b:terminal_job_id}<CR>
 
 " Snippets
 let g:UltiSnipsExpandTrigger="<C-j>"
