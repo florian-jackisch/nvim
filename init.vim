@@ -105,7 +105,7 @@ Plug 'filipekiss/ncm2-look.vim'   " Complete with look dictionary
 Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-Plug 'cquery-project/cquery', { 'do': '$HOME/.config/nvim/build-cquery' }
+Plug 'cquery-project/cquery'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'gisphm/vim-gitignore'
 Plug 'ludovicchabant/vim-gutentags' | Plug 'majutsushi/tagbar'
 Plug 'lervag/vimtex'
