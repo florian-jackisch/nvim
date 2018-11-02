@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+
+import os
+import subprocess
+
+
+def main():
+    home_dir = os.path.expanduser("~")
+    plug_dir = os.path.join(home_dir, ".local/share/nvim/site/autoload/plug.vim")
+
+    cmd = [
+        "curl",
+        "-fLo",
+        plug_dir,
+        "--create-dirs",
+        "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim",
+    ]
+    subprocess.check_call(cmd, cwd=home_dir)
+
+
+if __name__ == "__main__":
+    main()

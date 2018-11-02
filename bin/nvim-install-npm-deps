@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+import shutil
+import subprocess
+
+
+def main():
+    subprocess.check_call(
+        ["npm", "install", "--global", "prettier", "markdownlint-cli", "write-good"]
+    )
+    subprocess.check_call(["npm", "update", "--global"])
+if __name__ == "__main__":
+    main()

@@ -14,5 +14,5 @@ BASE16_SHELL=$HOME/.config/nvim/plugged/base16-shell/
 alias darkbg="base16_gruvbox-dark-hard"
 alias lightbg="base16_solarized-light"
 
-# Export cquery
-export PATH="$PATH:$HOME/.config/nvim/plugged/cquery/build"
+# Export bin and cquery
+export PATH="$PATH:$HOME/.config/nvim/bin:$HOME/.config/nvim/plugged/cquery/build"

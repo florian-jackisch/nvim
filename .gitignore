@@ -3,3 +3,4 @@ plugged
 .ropeproject
 .netrwhist
 spell
+bin/.mypy_cache

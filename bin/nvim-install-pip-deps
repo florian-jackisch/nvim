@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+import subprocess
+
+
+def main():
+    libs = [
+        "black",
+        "cmake_format",
+        "ipython",
+        "isort",
+        "mypy",
+        "neovim",
+        "proselint",
+        "prospector",
+        "python-language-server",
+    ]
+    command = ["pip3", "install", "--upgrade", "--user"] + libs
+    subprocess.check_call(command)
+
+
+if __name__ == "__main__":
+    main()
