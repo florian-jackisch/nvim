@@ -16,6 +16,7 @@ endif
 let &undodir=s:undoDir
 set undofile
 set hidden
+set wildmode=longest,list,full
 
 " Keyboard Mappings
 noremap j gj
