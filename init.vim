@@ -305,6 +305,7 @@ nnoremap mm :Make<CR>
 nnoremap md :Dispatch<CR>
 nnoremap ms :Start<CR>
 nnoremap mg :Spawn<CR>
+nnoremap <leader>sp :SendHere ipy<CR>
 
 " Snippets
 let g:UltiSnipsExpandTrigger="<C-j>"

@@ -15,11 +15,7 @@ def main():
         "prospector",
         "python-language-server",
     ]
-    # virtual environment
-    if hasattr(sys, "real_prefix"):
-        command = ["pip3", "install", "--upgrade"] + libs
-    else:
-        command = ["pip3", "install", "--upgrade", "--user"] + libs
+    command = ["pip3", "install"] + libs
     subprocess.check_call(command)
 
 
