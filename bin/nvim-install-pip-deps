@@ -11,7 +11,6 @@ def main():
         "ipython",
         "isort",
         "neovim",
-        "pip",
         "proselint",
         "prospector",
         "python-language-server",
