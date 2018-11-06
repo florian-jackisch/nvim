@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import subprocess
+import sys
 
 
 def main():
@@ -9,13 +10,16 @@ def main():
         "cmake_format",
         "ipython",
         "isort",
-        "mypy",
         "neovim",
         "proselint",
         "prospector",
         "python-language-server",
     ]
-    command = ["pip3", "install", "--upgrade", "--user"] + libs
+    # virtual environment
+    if hasattr(sys, "real_prefix"):
+        command = ["pip3", "install", "--upgrade"] + libs
+    else:
+        command = ["pip3", "install", "--upgrade", "--user"] + libs
     subprocess.check_call(command)
 
 

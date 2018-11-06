@@ -126,7 +126,7 @@ let g:ale_linters = {
             \ 'cpp': ['clangtidy'],
             \ 'markdown': ['markdownlint', 'write-good'],
             \ 'tex': ['lacheck', 'chktex', 'proselint', 'write-good'],
-            \ 'python': ['prospector', 'mypy'],
+            \ 'python': ['prospector'],
             \ }
 let g:ale_cpp_clangtidy_checks = []
 let g:ale_lint_on_text_changed = 'never'
