@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 
+import argparse
 import subprocess
-import sys
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="Install python dependencies to use with neovim"
+    )
+    parser.add_argument("--user", dest="user", default=False, action="store_true")
+    args = parser.parse_args()
+
     libs = [
         "black",
         "cmake_format",
@@ -15,7 +21,10 @@ def main():
         "prospector",
         "python-language-server",
     ]
-    command = ["pip3", "install"] + libs
+    if args.user:
+        command = ["pip3", "install"] + libs + ["--update"]
+    else:
+        command = ["pip3", "install"] + libs
     subprocess.check_call(command)
 
 

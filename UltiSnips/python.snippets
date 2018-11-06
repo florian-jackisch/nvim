@@ -34,3 +34,9 @@ endsnippet
 snippet ignorelint "ignore pylint"
 # pylint: disable=$0
 endsnippet
+
+snippet args
+parser = argparse.ArgumentParser(description="$1")
+parser.add_argument("--$2", dest="$2", default=False, action="store_true")
+args = parser.parse_args()$0
+endsnippet
