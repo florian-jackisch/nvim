@@ -30,7 +30,7 @@ import os
 try:
 	FILEDIR = os.path.dirname(os.path.realpath(__file__))
 except NameError:
-	FILEDIR = os.path.dirname("./")
+	FILEDIR = os.getcwd()
 $0
 endsnippet
 
