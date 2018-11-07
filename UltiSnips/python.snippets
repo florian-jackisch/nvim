@@ -27,7 +27,10 @@ endsnippet
 snippet file "file path"
 import os
 
-FILE_PATH = os.path.dirname(os.path.realpath(__file__))
+try:
+	FILEDIR = os.path.dirname(os.path.realpath(__file__))
+except NameError:
+	FILEDIR = os.path.dirname("./")
 $0
 endsnippet
 

@@ -208,6 +208,7 @@ let g:LanguageClient_serverCommands = {
             \ 'cpp': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery"}'],
             \ 'c': ['~/.config/nvim/plugged/cquery/build/cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery"}'],
             \ }
+let g:LanguageClient_diagnosticsEnable = 0 " Use ALE for linting
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -270,7 +271,7 @@ nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 let g:signify_vcs_list = [ 'git', 'svn' ]
 if has('nvim')
-  let $VISUAL = 'nvr -cc split --remote-wait'
+    let $VISUAL = 'nvr -cc split --remote-wait'
 endif
 
 " Lists
