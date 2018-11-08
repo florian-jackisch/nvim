@@ -69,6 +69,8 @@ if has("nvim")
     au TermOpen * setlocal nonumber norelativenumber
     " Terminal tab
     nnoremap <leader>tt :tabedit <bar> terminal<CR>
+    nnoremap <leader>tv :vsplit <bar> terminal<CR>
+    nnoremap <leader>ts :split <bar> terminal<CR>
 endif
 
 " Plugins
@@ -306,6 +308,7 @@ nnoremap mm :Make<CR>
 nnoremap md :Dispatch<CR>
 nnoremap ms :Start<CR>
 nnoremap mg :Spawn<CR>
+nnoremap <leader>ss :SendHere<CR>
 nnoremap <leader>sp :SendHere ipy<CR>
 
 " Snippets
