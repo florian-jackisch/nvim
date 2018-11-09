@@ -11,8 +11,8 @@ set keymap vi-command
 # Color scheme
 BASE16_SHELL=$HOME/.config/nvim/plugged/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-alias darkbg="base16_onedark"
-alias lightbg="base16_one-light"
+alias darkbg="base16_solarized-dark"
+alias lightbg="base16_solarized-light"
 
 # Export bin and cquery
 export PATH="$PATH:$HOME/.config/nvim/bin:$HOME/.config/nvim/plugged/cquery/build"
