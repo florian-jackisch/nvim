@@ -7,7 +7,7 @@ set splitright
 set foldmethod=indent
 set foldlevelstart=99
 set colorcolumn=80
-set cursorline
+" set cursorline
 set noswapfile
 let s:undoDir = "/tmp/.undodir_" . $USER
 if !isdirectory(s:undoDir)
@@ -97,7 +97,7 @@ Plug 'mhinz/vim-signify'          " Gutter with VCS infos
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim' | Plug 'chriskempson/base16-shell' | Plug 'lifepillar/vim-solarized8'
+Plug 'chriskempson/base16-shell' | Plug 'NLKNguyen/papercolor-theme'
 Plug 'sbdchd/neoformat'
 Plug 'w0rp/ale'
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
@@ -327,9 +327,21 @@ let g:airline#extensions#tabline#enabled = 1
 if $VIM_DEVICONS == 1
     let g:airline_powerline_fonts = 1
 endif
-set termguicolors
 set background=light
-colorscheme solarized8
+let g:PaperColor_Theme_Options = {
+            \   'language': {
+            \     'python': {
+            \       'highlight_builtins' : 1
+            \     },
+            \     'cpp': {
+            \       'highlight_standard_library': 1
+            \     },
+            \     'c': {
+            \       'highlight_builtins' : 1
+            \     }
+            \   }
+            \ }
+colorscheme PaperColor
 
 " Thesaurus
 let g:tq_language=['en', 'de']
