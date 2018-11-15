@@ -1,81 +1,20 @@
-" Editor Settings
-let mapleader = ' '
-set relativenumber number
-set nowrap
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab  " 4 space tabs
-set splitright
-set foldmethod=indent
-set foldlevelstart=99
-set colorcolumn=80
-" set cursorline
-set noswapfile
-let s:undoDir = "/tmp/.undodir_" . $USER
-if !isdirectory(s:undoDir)
-    call mkdir(s:undoDir, "", 0700)
+" vim: fdm=marker fdl=99
+
+" Plugins {{{
+let vimplug_exists=expand('~/.local/share/nvim/site/autoload/plug.vim')
+if !filereadable(vimplug_exists)
+    if !executable("curl")
+        echoerr "You have to install curl or first install vim-plug yourself!"
+        execute "q!"
+    endif
+    echo "Installing Vim-Plug..."
+    echo ""
+    silent !\curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    let g:not_finish_vimplug = "yes"
+    autocmd VimEnter * PlugInstall
 endif
-let &undodir=s:undoDir
-set undofile
-set hidden
-set wildmode=longest,list,full
-
-" Keyboard Mappings
-noremap j gj
-noremap k gk
-" Allow using the repeat operator with a visual selection (!)
-vnoremap . :normal .<CR>
-" Quickly open/reload vim
-nnoremap <leader>ve :edit $MYVIMRC<CR>
-nnoremap <leader>vs :source $MYVIMRC<CR>
-" Resize the window easily
-nnoremap <silent> <up> :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <down> :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <silent> <left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <silent> <right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
-" Move quickfix list to arglist (for :argdo)
-command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
-function! QuickfixFilenames()
-    " Building a hash ensures we get each buffer only once
-    let buffer_numbers = {}
-    for quickfix_item in getqflist()
-        let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-    endfor
-    return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
-endfunction
-" Format paragraph
-nnoremap <silent> Q gqap
-xnoremap <silent> Q gq
-nnoremap <silent> <leader>Q vapJgqap
-" Clear highlight with ESC
-nnoremap <esc> :noh<return><esc>
-" Indentation with Tab and Shift-Tab
-vnoremap < <gv
-vnoremap > >gv
-nnoremap <Tab> >>_
-nnoremap <S-Tab> <<_
-inoremap <S-Tab> <C-D>
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-" cd to current file
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-
-" Neovim Settings
-if has("nvim")
-    " Incremental search and replace
-    set inccommand=nosplit
-    " Terminal escape
-    tnoremap <Esc> <c-\><C-n>
-    tnoremap <c-v> <Esc><Esc>
-    " Disable line numbers in the terminal
-    au TermOpen * setlocal nonumber norelativenumber
-    " Terminal tab
-    nnoremap <leader>tt :tabedit <bar> terminal<CR>
-    nnoremap <leader>tv :vsplit <bar> terminal<CR>
-    nnoremap <leader>ts :split <bar> terminal<CR>
-endif
-
-" Plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'          " Auto close brackets
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wincent/terminus'           " Enhanced terminal integration
@@ -117,8 +56,86 @@ if $VIM_DEVICONS == 1
     Plug 'ryanoasis/vim-devicons'
 endif
 call plug#end()
+" }}}
 
-" ALE
+" Editor Settings {{{
+let mapleader = ' '
+set relativenumber number
+set nowrap
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab  " 4 space tabs
+set splitright
+set foldmethod=indent
+set foldlevelstart=99
+set colorcolumn=80
+set noswapfile
+let s:undoDir = "/tmp/.undodir_" . $USER
+if !isdirectory(s:undoDir)
+    call mkdir(s:undoDir, "", 0700)
+endif
+let &undodir=s:undoDir
+set undofile
+set hidden
+set wildmode=longest,list,full
+" }}}
+
+" Keyboard Mappings {{{
+noremap j gj
+noremap k gk
+" Allow using the repeat operator with a visual selection (!)
+vnoremap . :normal .<CR>
+" Quickly open/reload vim
+nnoremap <leader>ve :edit $MYVIMRC<CR>
+nnoremap <leader>vs :source $MYVIMRC<CR>
+" Resize the window easily
+nnoremap <silent> <up> :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <down> :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+" Move quickfix list to arglist (for :argdo)
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+    " Building a hash ensures we get each buffer only once
+    let buffer_numbers = {}
+    for quickfix_item in getqflist()
+        let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+    endfor
+    return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
+" Format paragraph
+nnoremap <silent> Q gqap
+xnoremap <silent> Q gq
+nnoremap <silent> <leader>Q vapJgqap
+" Clear highlight with ESC
+nnoremap <esc> :noh<return><esc>
+" Indentation with Tab and Shift-Tab
+vnoremap < <gv
+vnoremap > >gv
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+" cd to current file
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+" }}}
+
+" Neovim Settings {{{
+if has("nvim")
+    " Incremental search and replace
+    set inccommand=nosplit
+    " Terminal escape
+    tnoremap <Esc> <c-\><C-n>
+    tnoremap <c-v> <Esc><Esc>
+    " Disable line numbers in the terminal
+    au TermOpen * setlocal nonumber norelativenumber
+    " Terminal tab
+    nnoremap <leader>tt :tabedit <bar> terminal<CR>
+    nnoremap <leader>tv :vsplit <bar> terminal<CR>
+    nnoremap <leader>ts :split <bar> terminal<CR>
+endif
+" }}}
+
+" ALE {{{
 nmap <silent> [W <Plug>(ale_first)
 nmap <silent> ]W <Plug>(ale_last)
 nmap <silent> [w <Plug>(ale_previous)
@@ -139,12 +156,14 @@ let g:ale_sign_warning = '⚠'
 let g:ale_sign_error = '✖'
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
+" }}}
 
-" Align
+" Align {{{
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+" }}}
 
-" Autocomplete
+" Autocomplete {{{
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
@@ -215,12 +234,14 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+" }}}
 
-" Comments
+" Comments {{{
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 autocmd FileType cmake set commentstring=#\ %s
+" }}}
 
-" Format
+" Format {{{
 nnoremap <silent> <leader>f :Neoformat<CR>
 let g:neoformat_enabled_python = ['black', 'isort']
 let g:neoformat_enabled_latex = ['latexindent']
@@ -236,8 +257,9 @@ function! FormatFile()
 endfunction
 autocmd FileType c,cpp vnoremap <buffer> <leader>f :py3f $HOME/.config/nvim/clang-format.py<cr>
 autocmd FileType c,cpp nnoremap <buffer> <leader>f :call FormatFile()<cr>
+" }}}
 
-" FZF
+" FZF {{{
 nnoremap <C-p> :Files<CR>
 nnoremap <C-h> :History<CR>
 nnoremap <C-b> :Buffers<CR>
@@ -260,8 +282,9 @@ let g:fzf_action = {
             \ 'ctrl-x': 'split',
             \ 'ctrl-v': 'vsplit' }
 let $FZF_DEFAULT_OPTS .= ' --no-height --bind ctrl-a:select-all'
+" }}}
 
-" Git
+" Git {{{
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -275,14 +298,16 @@ let g:signify_vcs_list = [ 'git', 'svn' ]
 if has('nvim')
     let $VISUAL = 'nvr -cc split --remote-wait'
 endif
+" }}}
 
-" Lists
+" Lists {{{
 let g:lt_location_list_toggle_map = '<leader>ll'
 let g:lt_quickfix_list_toggle_map = '<leader>qq'
 nnoremap <leader>uu :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle = 1
+" }}}
 
-" Projects
+" Projects {{{
 let g:startify_change_to_dir = 0
 " Create custom projections
 augroup configure_projects
@@ -310,19 +335,22 @@ nnoremap ms :Start<CR>
 nnoremap mg :Spawn<CR>
 nnoremap <leader>ss :SendHere<CR>
 nnoremap <leader>sp :SendHere ipy<CR>
+" }}}
 
-" Snippets
+" Snippets {{{
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/UltiSnips', 'UltiSnips']
 let g:UltiSnipsEnableSnipMate = 0
+" }}}
 
-" Tags
+" Tags {{{
 let g:gutentags_cache_dir = '~/.config/nvim/gutentags_cache'
 nnoremap <silent> <leader>gg :TagbarToggle<CR>
+" }}}
 
-" Themes
+" Themes {{{
 let g:airline#extensions#tabline#enabled = 1
 if $VIM_DEVICONS == 1
     let g:airline_powerline_fonts = 1
@@ -342,13 +370,15 @@ let g:PaperColor_Theme_Options = {
             \   }
             \ }
 colorscheme PaperColor
+" }}}
 
-" Thesaurus
+" Thesaurus {{{
 let g:tq_language=['en', 'de']
 nnoremap <Leader>tr :ThesaurusQueryReplaceCurrentWord<CR>
 vnoremap <Leader>tr y:ThesaurusQueryReplace <C-r>"<CR>
+" }}}
 
-" Unimpaired
+" Unimpaired {{{
 let g:nremap = {"[": "ö", "]": "ä"}
 let g:xremap = {"[": "ö", "]": "ä"}
 let g:oremap = {"[": "ö", "]": "ä"}
@@ -360,3 +390,4 @@ onoremap ö [
 onoremap ä ]
 nmap äc <plug>(signify-next-hunk)
 nmap öc <plug>(signify-prev-hunk)
+" }}}
