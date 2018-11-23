@@ -117,6 +117,9 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 " cd to current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+" Create a PDF out of the current clipboard markdown
+let @p='mP:e /tmp/tmp.mdggdG"+p:w:! pandoc /tmp/tmp.md -o /tmp/tmp.pdf-jx`P'
+nnoremap <leader>pp @p
 " }}}
 
 " Neovim Settings {{{
